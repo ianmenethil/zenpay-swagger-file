@@ -1,0 +1,209 @@
+{
+  "get": {
+    "tags": [
+      "Payments"
+    ],
+    "operationId": "Payments_Get",
+    "consumes": [],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "customerReference",
+        "in": "query",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "fromProcessedDate",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "format": "date-time"
+      },
+      {
+        "name": "toProcessedDate",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "format": "date-time"
+      },
+      {
+        "name": "settlementDate",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "format": "date-time"
+      },
+      {
+        "name": "paymentSettlement",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int32",
+        "default": 0,
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "PaymentSettlement": "All: 0; Settled: 1; NotSettled: 2"
+      },
+      {
+        "name": "transactionTypes",
+        "in": "query",
+        "required": false,
+        "items": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+        },
+        "collectionFormat": "multi",
+        "type": "array"
+      },
+      {
+        "name": "isRecalled",
+        "in": "query",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isRefunded",
+        "in": "query",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "offset",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int32",
+        "default": 0
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int32",
+        "default": 20
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Return all the payments satisfies the filters.",
+        "schema": {
+          "items": {
+            "$ref": "#/definitions/PaymentResponse"
+          },
+          "xml": {
+            "name": "PaymentResponse",
+            "wrapped": true
+          },
+          "type": "array"
+        }
+      },
+      "400": {
+        "description": "Invalid get request.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "404": {
+        "description": "Unable to find the payments by the filters provided.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Something went wrong. Please try again.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  },
+  "post": {
+    "tags": [
+      "Payments"
+    ],
+    "summary": "Perform OneOff payment for a registered customer with customer reference and payment amount",
+    "operationId": "Payments_Post",
+    "consumes": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml",
+      "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "request",
+        "in": "body",
+        "description": "For making payment for existing customer, use Customer Reference and Payment Amount\r\nFor making card proxy based, use all the fields in the request",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/PaymentRequest"
+        }
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Payment is processed.",
+        "schema": {
+          "$ref": "#/definitions/PaymentResponse"
+        }
+      },
+      "300": {
+        "description": "Duplicate merchant unique id.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "400": {
+        "description": "Invalid input detail.",
+        "schema": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelState"
+          },
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Something went wrong. Payment may or may not be created.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

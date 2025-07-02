@@ -1,0 +1,173 @@
+{
+  "description": "Batch entry item",
+  "properties": {
+    "customerReference": {
+      "description": "Reference of the Customer who paid the payment",
+      "type": "string"
+    },
+    "customerName": {
+      "description": "Customer who paid the payment.",
+      "type": "string"
+    },
+    "companyName": {
+      "description": "Customer company name",
+      "type": "string"
+    },
+    "paymentAmount": {
+      "description": "Total payment amount including the fees",
+      "type": "number",
+      "format": "double"
+    },
+    "paymentDate": {
+      "description": "Payment date",
+      "type": "string",
+      "format": "date-time"
+    },
+    "entryStatus": {
+      "description": " Below are the expected output values:\r\n 1) BatchPay Entry Pending : This Entry is waiting to be processed.\r\n 2) BatchPay Entry Processed : Payment for this Entry has been successfully processed.\r\n 3) Customer not found : This Customer is not found in system. Create the Customer using POST - /v2/customers API.\r\n 4) Duplicate entry : There is a duplicate entry in the batch. Remove duplicate entry.\r\n 5) Multiple customers found : The System has detected that there is Multiple Customers that have the same Reference setup. Check Customers and update reference.\r\n 6) Customer status is not open : Corresponding customer for batchpay entry is not in open state. Update Customer Status to Open.\r\n 7) Payment end date has expired : Payment End Date for BatchPay Entry has expired. Update Date to a future date.\r\n 8) Payment option is not BatchPay : Customer's Payment Option needs to be BatchPay in order to be processed. Update Customer Payment Option to BatchPay.\r\n 9) Customer status does not allow payment processing : Customer Status is invalid. Customer Status must be Open to process payments. Check Status of Customer.\r\n10) Invalid payment amount : Payment amount is not valid. Check amount and resubmit.\r\n11) Error during payment processing : There was an error while processing payment. Please contact Zenith Payments.\r\n12) Technical Error : This Entry has encountered an unhandled error. Please contact Zenith Payments.\r\n13) Cancelled : Batch is cancelled.\r\n14) DuplicatePaymentUniqueId : Duplicate payment unique id.",
+      "type": "string"
+    },
+    "paymentResource": {
+      "description": "Link to the actual payment",
+      "type": "string"
+    },
+    "paymentStatus": {
+      "description": " Below are the expected output values:\r\n 1) Pending : This Payment is waiting be to processed.\r\n 2) Error : This Payment has encountered an Error.\r\n 3) Submitted : This Payment was successfully submitted.\r\n 4) Successful : This Payment was successful.\r\n 5) Successful (Recalled) : This Payment was Recalled. The System has detected that this Entry potentially has been submitted in another Batch. \r\n 6) Successful (Refunded) : This Payment was Refunded.\r\n 7) Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n 8) Failed : This Payment has Failed.\r\n 9) Cancelled : This Payment was Cancelled.\r\n10) Suppressed : This Payment was Suppressed.\r\n11) InProgress : This Payment is being processed.",
+      "type": "string"
+    },
+    "failureCode": {
+      "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+      "type": "string"
+    },
+    "failureReason": {
+      "description": "return failure reason if a payment is failed. (Conditional)",
+      "type": "string"
+    },
+    "processorReference": {
+      "description": "Processor reference for the payment done",
+      "type": "string"
+    },
+    "paymentReference": {
+      "description": "Unique Payment Reference for the payment done.",
+      "type": "string"
+    },
+    "baseAmount": {
+      "description": "Base amount of the payment is done",
+      "type": "number",
+      "format": "double"
+    },
+    "customerFee": {
+      "description": "Fee charged on customer card",
+      "type": "number",
+      "format": "double"
+    },
+    "processedAmount": {
+      "description": "Total payment amount including the fees",
+      "type": "number",
+      "format": "double"
+    },
+    "merchantFee": {
+      "description": "Fee charged on Merchant",
+      "type": "number",
+      "format": "double"
+    },
+    "merchantWithheldAmount": {
+      "description": "Funds to Merchant",
+      "type": "number",
+      "format": "double"
+    },
+    "lastDigits": {
+      "description": "Payment Card No",
+      "type": "string"
+    },
+    "paymentMethod": {
+      "description": "Method was used to process the transaction. ie: Bank Account, Credit Card, etc",
+      "type": "string"
+    },
+    "processingDate": {
+      "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST",
+      "type": "string",
+      "format": "date-time"
+    },
+    "settlementDate": {
+      "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST",
+      "type": "string",
+      "format": "date-time"
+    },
+    "paymentCard": {
+      "description": "return Payment card used",
+      "type": "string"
+    },
+    "additionalReference": {
+      "description": "Additional reference. (Conditional)",
+      "type": "string"
+    },
+    "retryPaymentResource": {
+      "description": "Link to the retry payment",
+      "type": "string"
+    },
+    "isPaymentRetryScheduled": {
+      "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+      "type": "boolean"
+    },
+    "retryScheduledOn": {
+      "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "retryPaymentReference": {
+      "description": "Retry payment reference. (Conditional)",
+      "type": "string"
+    },
+    "retryPaymentStatus": {
+      "description": "Retry payment status",
+      "type": "string"
+    },
+    "isPaymentRecalled": {
+      "description": "Payment recalled.",
+      "type": "boolean"
+    },
+    "recalledOn": {
+      "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "recalledReason": {
+      "description": "Reason. (Conditional)",
+      "type": "string"
+    },
+    "merchantName": {
+      "description": "returns Merchant Trading Name",
+      "type": "string"
+    },
+    "merchantCode": {
+      "description": "returns Merchant Code",
+      "type": "string"
+    },
+    "isPaymentRefunded": {
+      "description": "Payment refunded.",
+      "type": "boolean"
+    },
+    "refundedOn": {
+      "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "refundedReason": {
+      "description": "Reason. (Conditional)",
+      "type": "string"
+    },
+    "merchantUniquePaymentId": {
+      "description": "Unique payment id provided by the merchant. (Conditional)",
+      "type": "string"
+    },
+    "cardCategory": {
+      "description": "Card category",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "ApiBatchPayEntry"
+  },
+  "type": "object"
+}

@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "payId": {
+      "description": "PayID",
+      "type": "string"
+    },
+    "payIdName": {
+      "description": "PayID Name",
+      "type": "string"
+    },
+    "reference": {
+      "description": "Reference",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "PayIdDetail"
+  },
+  "type": "object"
+}

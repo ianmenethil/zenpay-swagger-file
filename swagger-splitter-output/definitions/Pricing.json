@@ -1,0 +1,29 @@
+{
+  "description": "Applicable fee for the card used.",
+  "properties": {
+    "customerFee": {
+      "description": "Fee paid by the customer.",
+      "type": "number",
+      "format": "double"
+    },
+    "merchantFee": {
+      "description": "Fee paid by the merchant.",
+      "type": "number",
+      "format": "double"
+    },
+    "processingAmount": {
+      "description": "Total amount that we be charged to the card.",
+      "type": "number",
+      "format": "double"
+    },
+    "paymentAmount": {
+      "description": "Payment amount i.e. base amount excluding any fee.",
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "xml": {
+    "name": "Pricing"
+  },
+  "type": "object"
+}

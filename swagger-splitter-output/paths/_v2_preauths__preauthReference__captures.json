@@ -1,0 +1,83 @@
+{
+  "post": {
+    "tags": [
+      "Preauths"
+    ],
+    "operationId": "Preauths_CapturePreauth",
+    "consumes": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml",
+      "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "preauthReference",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "request",
+        "in": "body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/CaptureCardRequest"
+        }
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Preauth has been captured.",
+        "schema": {
+          "$ref": "#/definitions/CaptureCardResponse"
+        }
+      },
+      "300": {
+        "description": "The merchant unique id already exists.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "400": {
+        "description": "Invalid preauth reference.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "403": {
+        "description": "Invalid permission.",
+        "schema": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelState"
+          },
+          "type": "object"
+        }
+      },
+      "404": {
+        "description": "Unable to find the preauth by the preauth reference provided.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Something went wrong. Preauth may or may not be captured.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

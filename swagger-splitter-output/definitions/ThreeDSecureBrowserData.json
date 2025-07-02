@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "acceptHeader": {
+      "description": "Exact content of the HTTP accept headers as sent to the 3DS Requestor from the Cardholder's browser",
+      "type": "string"
+    },
+    "ipAddress": {
+      "description": "IP address of the browser as returned by the HTTP headers to the 3DS Requestor.",
+      "type": "string"
+    },
+    "language": {
+      "description": "Value representing the browser language as defined in IETF BCP47. The value is limited to 1-8 characters. Value is returned from navigator.language property.",
+      "type": "string"
+    },
+    "colorDepth": {
+      "description": "Value representing the bit depth of the colour palette for displaying images, in bits per pixel. Obtained from Cardholder browser using the screen.colorDepth property.\r\nPossible values: 1, 4, 8, 15, 16, 24, 32, 48",
+      "type": "integer",
+      "format": "int32"
+    },
+    "screenHeight": {
+      "description": "Total height of the Cardholder's screen in pixels. Value is returned from the screen.height property.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "screenWidth": {
+      "description": "Total width of the Cardholder's screen in pixels. Value is returned from the screen.width property.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "timezone": {
+      "description": "Time difference between UTC time and the Cardholder browser local time, in minutes. The field is limited to 1-5 characters where the value is returned from the getTimezoneOffset() method.",
+      "type": "string"
+    },
+    "userAgent": {
+      "description": "Exact content of the HTTP user-agent header. The field is limited to maximum 2048 characters. Obtained from Cardholder browser using the navigator.userAgent property.",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "ThreeDSecureBrowserData"
+  },
+  "type": "object"
+}

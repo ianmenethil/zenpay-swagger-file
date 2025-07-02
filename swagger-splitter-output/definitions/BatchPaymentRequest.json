@@ -1,0 +1,28 @@
+{
+  "description": "Container for batch payment entries\r\nRoot element containing a collection of BatchPaymentEntry",
+  "required": [
+    "batchPaymentEntries"
+  ],
+  "properties": {
+    "batchPaymentEntries": {
+      "description": "Collection of BatchPayment entry",
+      "items": {
+        "$ref": "#/definitions/BatchPaymentDataRecord"
+      },
+      "xml": {
+        "name": "BatchPaymentDataRecord",
+        "wrapped": true
+      },
+      "type": "array"
+    },
+    "merchantUniqueBatchId": {
+      "description": "Unique batch id provided by the merchant.",
+      "type": "string",
+      "maxLength": 50
+    }
+  },
+  "xml": {
+    "name": "BatchPaymentRequest"
+  },
+  "type": "object"
+}

@@ -1,0 +1,39 @@
+{
+  "description": "Credit/Debit Card details.",
+  "required": [
+    "cardNumber",
+    "expiry"
+  ],
+  "properties": {
+    "customerUniqueId": {
+      "description": "Customer unique identifier.",
+      "type": "string"
+    },
+    "cardNumber": {
+      "description": "Credit/Debit Card number",
+      "type": "string"
+    },
+    "expiry": {
+      "description": "Card expiry in MM/yy format.",
+      "example": "MM/yy",
+      "type": "string"
+    },
+    "cardHolderName": {
+      "description": "Card holder name.",
+      "type": "string"
+    },
+    "paymentAmount": {
+      "description": "Amount is optional. If provided, the applicable pricing will be returned in the result.",
+      "type": "number",
+      "format": "double"
+    },
+    "threeDSecureData": {
+      "$ref": "#/definitions/ThreeDSecureData",
+      "description": "Conditional. Pass the values if 3DSecure is required"
+    }
+  },
+  "xml": {
+    "name": "CardProxyRequest"
+  },
+  "type": "object"
+}

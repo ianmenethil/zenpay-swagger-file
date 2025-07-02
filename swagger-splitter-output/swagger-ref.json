@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V2",
+    "title": "Payments API v2.0",
+    "description": "Payments Web Api.",
+    "x-swagger-net-version": "8.4.19.001"
+  },
+  "host": "apiuat.travelpay.com.au",
+  "basePath": null,
+  "schemes": [
+    "https"
+  ],
+  "consumes": null,
+  "produces": null,
+  "paths": {
+    "/v2/batchpayments/{batchPaymentId}": {
+      "$ref": "paths/_v2_batchpayments__batchPaymentId_.json"
+    },
+    "/v2/batchpayments/{batchPaymentId}/entries": {
+      "$ref": "paths/_v2_batchpayments__batchPaymentId__entries.json"
+    },
+    "/v2/batchpayments": {
+      "$ref": "paths/_v2_batchpayments.json"
+    },
+    "/v2/cardproxies/{cardProxy}": {
+      "$ref": "paths/_v2_cardproxies__cardProxy_.json"
+    },
+    "/v2/cardproxies/{cardProxy}/pricing": {
+      "$ref": "paths/_v2_cardproxies__cardProxy__pricing.json"
+    },
+    "/v2/cardproxies": {
+      "$ref": "paths/_v2_cardproxies.json"
+    },
+    "/v2/customers/{customerReference}": {
+      "$ref": "paths/_v2_customers__customerReference_.json"
+    },
+    "/v2/customers/{customerReference}/status": {
+      "$ref": "paths/_v2_customers__customerReference__status.json"
+    },
+    "/v2/customers/{customerReference}/account": {
+      "$ref": "paths/_v2_customers__customerReference__account.json"
+    },
+    "/v2/customers/{customerReference}/profile": {
+      "$ref": "paths/_v2_customers__customerReference__profile.json"
+    },
+    "/v2/customers/{customerReference}/paymentOption": {
+      "$ref": "paths/_v2_customers__customerReference__paymentOption.json"
+    },
+    "/v2/customers": {
+      "$ref": "paths/_v2_customers.json"
+    },
+    "/v2/customers/{customerReference}/customerReference": {
+      "$ref": "paths/_v2_customers__customerReference__customerReference.json"
+    },
+    "/v2/diagnostics/ping": {
+      "$ref": "paths/_v2_diagnostics_ping.json"
+    },
+    "/v2/payments/{paymentReference}": {
+      "$ref": "paths/_v2_payments__paymentReference_.json"
+    },
+    "/v2/payments/uniqueId/{merchantUniqueId}": {
+      "$ref": "paths/_v2_payments_uniqueId__merchantUniqueId_.json"
+    },
+    "/v2/payments/{paymentReference}/refundrequests": {
+      "$ref": "paths/_v2_payments__paymentReference__refundrequests.json"
+    },
+    "/v2/payments/uniqueId/{paymentReference}/refundrequests/{refundRequestUniqueId}": {
+      "$ref": "paths/_v2_payments_uniqueId__paymentReference__refundrequests__refundRequestUniqueId_.json"
+    },
+    "/v2/payments": {
+      "$ref": "paths/_v2_payments.json"
+    },
+    "/v2/preauths/{preauthReference}": {
+      "$ref": "paths/_v2_preauths__preauthReference_.json"
+    },
+    "/v2/preauths": {
+      "$ref": "paths/_v2_preauths.json"
+    },
+    "/v2/preauths/{preauthReference}/voids": {
+      "$ref": "paths/_v2_preauths__preauthReference__voids.json"
+    },
+    "/v2/preauths/{preauthReference}/captures": {
+      "$ref": "paths/_v2_preauths__preauthReference__captures.json"
+    },
+    "/v2/proxies/{proxy}/pricing": {
+      "$ref": "paths/_v2_proxies__proxy__pricing.json"
+    },
+    "/v2/requestpays/{requestPayId}": {
+      "$ref": "paths/_v2_requestpays__requestPayId_.json"
+    },
+    "/v2/requestpays/{requestPayId}/entries": {
+      "$ref": "paths/_v2_requestpays__requestPayId__entries.json"
+    },
+    "/v2/requestpays": {
+      "$ref": "paths/_v2_requestpays.json"
+    }
+  },
+  "definitions": {
+    "ApiBatchPaySummary": {
+      "$ref": "definitions/ApiBatchPaySummary.json"
+    },
+    "ApiBatchPayEntry": {
+      "$ref": "definitions/ApiBatchPayEntry.json"
+    },
+    "BatchPaymentRequest": {
+      "$ref": "definitions/BatchPaymentRequest.json"
+    },
+    "BatchPaymentDataRecord": {
+      "$ref": "definitions/BatchPaymentDataRecord.json"
+    },
+    "BatchPaymentResponse": {
+      "$ref": "definitions/BatchPaymentResponse.json"
+    },
+    "AmbiguousResult": {
+      "$ref": "definitions/AmbiguousResult.json"
+    },
+    "ModelState": {
+      "$ref": "definitions/ModelState.json"
+    },
+    "ValueProviderResult": {
+      "$ref": "definitions/ValueProviderResult.json"
+    },
+    "ModelError": {
+      "$ref": "definitions/ModelError.json"
+    },
+    "InternalServerErrorResult": {
+      "$ref": "definitions/InternalServerErrorResult.json"
+    },
+    "TokenResponse": {
+      "$ref": "definitions/TokenResponse.json"
+    },
+    "PricingResponse": {
+      "$ref": "definitions/PricingResponse.json"
+    },
+    "Pricing": {
+      "$ref": "definitions/Pricing.json"
+    },
+    "CardProxyRequest": {
+      "$ref": "definitions/CardProxyRequest.json"
+    },
+    "ThreeDSecureData": {
+      "$ref": "definitions/ThreeDSecureData.json"
+    },
+    "ThreeDSecureBrowserData": {
+      "$ref": "definitions/ThreeDSecureBrowserData.json"
+    },
+    "CardProxyResponse": {
+      "$ref": "definitions/CardProxyResponse.json"
+    },
+    "PreconditionFailedResponse": {
+      "$ref": "definitions/PreconditionFailedResponse.json"
+    },
+    "CustomerResponse": {
+      "$ref": "definitions/CustomerResponse.json"
+    },
+    "CustomerProfile": {
+      "$ref": "definitions/CustomerProfile.json"
+    },
+    "CustomerAccountResponse": {
+      "$ref": "definitions/CustomerAccountResponse.json"
+    },
+    "CustomerPaymentOption": {
+      "$ref": "definitions/CustomerPaymentOption.json"
+    },
+    "CustomerAddress": {
+      "$ref": "definitions/CustomerAddress.json"
+    },
+    "BankAccount": {
+      "$ref": "definitions/BankAccount.json"
+    },
+    "CreditCard": {
+      "$ref": "definitions/CreditCard.json"
+    },
+    "PayIdDetail": {
+      "$ref": "definitions/PayIdDetail.json"
+    },
+    "BPayDetail": {
+      "$ref": "definitions/BPayDetail.json"
+    },
+    "CustomerStatusRequest": {
+      "$ref": "definitions/CustomerStatusRequest.json"
+    },
+    "CustomerAccountRequest": {
+      "$ref": "definitions/CustomerAccountRequest.json"
+    },
+    "CreditCardProxy": {
+      "$ref": "definitions/CreditCardProxy.json"
+    },
+    "AccountProxy": {
+      "$ref": "definitions/AccountProxy.json"
+    },
+    "ICustomerProfie": {
+      "$ref": "definitions/ICustomerProfie.json"
+    },
+    "CustomerProfileRequest": {
+      "$ref": "definitions/CustomerProfileRequest.json"
+    },
+    "NewCustomer": {
+      "$ref": "definitions/NewCustomer.json"
+    },
+    "AdditionalReference": {
+      "$ref": "definitions/AdditionalReference.json"
+    },
+    "NewCustomerResponse": {
+      "$ref": "definitions/NewCustomerResponse.json"
+    },
+    "PingResponse": {
+      "$ref": "definitions/PingResponse.json"
+    },
+    "PaymentResponse": {
+      "$ref": "definitions/PaymentResponse.json"
+    },
+    "SettlementPayment": {
+      "$ref": "definitions/SettlementPayment.json"
+    },
+    "SubPayment": {
+      "$ref": "definitions/SubPayment.json"
+    },
+    "RefundResponse": {
+      "$ref": "definitions/RefundResponse.json"
+    },
+    "RefundRequest": {
+      "$ref": "definitions/RefundRequest.json"
+    },
+    "PaymentRequest": {
+      "$ref": "definitions/PaymentRequest.json"
+    },
+    "PaymentCard": {
+      "$ref": "definitions/PaymentCard.json"
+    },
+    "PreauthResponse": {
+      "$ref": "definitions/PreauthResponse.json"
+    },
+    "PreauthRequest": {
+      "$ref": "definitions/PreauthRequest.json"
+    },
+    "VoidCardResponse": {
+      "$ref": "definitions/VoidCardResponse.json"
+    },
+    "CaptureCardRequest": {
+      "$ref": "definitions/CaptureCardRequest.json"
+    },
+    "CaptureCardResponse": {
+      "$ref": "definitions/CaptureCardResponse.json"
+    },
+    "ApiRequestPaySummary": {
+      "$ref": "definitions/ApiRequestPaySummary.json"
+    },
+    "ApiRequestPayEntry": {
+      "$ref": "definitions/ApiRequestPayEntry.json"
+    },
+    "RequestPayRequest": {
+      "$ref": "definitions/RequestPayRequest.json"
+    },
+    "RequestPayRequestRecord": {
+      "$ref": "definitions/RequestPayRequestRecord.json"
+    },
+    "RequestPayResponse": {
+      "$ref": "definitions/RequestPayResponse.json"
+    }
+  }
+}

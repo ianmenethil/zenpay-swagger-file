@@ -1,0 +1,145 @@
+{
+  "get": {
+    "tags": [
+      "Preauths"
+    ],
+    "operationId": "Preauths_GetV2Preauths",
+    "consumes": [],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "customerReference",
+        "in": "query",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "fromProcessedDate",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "format": "date-time"
+      },
+      {
+        "name": "toProcessedDate",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "format": "date-time"
+      },
+      {
+        "name": "offset",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int32",
+        "default": 0
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int32",
+        "default": 20
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Found preauths.",
+        "schema": {
+          "items": {
+            "$ref": "#/definitions/PreauthResponse"
+          },
+          "xml": {
+            "name": "PreauthResponse",
+            "wrapped": true
+          },
+          "type": "array"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  },
+  "post": {
+    "tags": [
+      "Preauths"
+    ],
+    "operationId": "Preauths_Post",
+    "consumes": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml",
+      "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "request",
+        "in": "body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/PreauthRequest"
+        }
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Preauth is created.",
+        "schema": {
+          "$ref": "#/definitions/PreauthResponse"
+        }
+      },
+      "300": {
+        "description": "Duplicate merchant unique id.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "400": {
+        "description": "Invalid input detail.",
+        "schema": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelState"
+          },
+          "type": "object"
+        }
+      },
+      "403": {
+        "description": "Invalid permission.",
+        "schema": {
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelState"
+          },
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Something went wrong. Preauth may or may not be created.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

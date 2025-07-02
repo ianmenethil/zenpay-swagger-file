@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "label": {
+      "description": "Label for the card",
+      "type": "string"
+    },
+    "cardNumber": {
+      "description": "Card number.",
+      "type": "string"
+    },
+    "cardType": {
+      "description": "Card Type",
+      "type": "string"
+    },
+    "expiry": {
+      "description": "Expiry",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "CreditCard"
+  },
+  "type": "object"
+}

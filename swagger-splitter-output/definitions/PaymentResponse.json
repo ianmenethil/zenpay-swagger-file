@@ -1,0 +1,249 @@
+{
+  "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+  "properties": {
+    "paymentReference": {
+      "description": "Unique Payment Reference for the payment done.",
+      "type": "string"
+    },
+    "customerName": {
+      "description": "Customer who paid the payment.",
+      "type": "string"
+    },
+    "customerReference": {
+      "description": "Reference of the Customer who paid the payment",
+      "type": "string"
+    },
+    "paymentStatus": {
+      "description": "Current Status of the payment.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+      "type": "string"
+    },
+    "baseAmount": {
+      "description": "Base amount of the payment is done",
+      "type": "number",
+      "format": "double"
+    },
+    "fundsToMerchant": {
+      "description": "Funds to Merchant",
+      "type": "number",
+      "format": "double"
+    },
+    "customerFee": {
+      "description": "Fee charged on customer card",
+      "type": "number",
+      "format": "double"
+    },
+    "merchantFee": {
+      "description": "Fee charged on Merchant",
+      "type": "number",
+      "format": "double"
+    },
+    "paymentAmount": {
+      "description": "Total payment amount including the fees",
+      "type": "number",
+      "format": "double"
+    },
+    "accountOrCardNo": {
+      "description": "Payment Card No",
+      "type": "string"
+    },
+    "paymentAccount": {
+      "description": "Payment Account by which the payment is done.",
+      "type": "string"
+    },
+    "processingDate": {
+      "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+      "type": "string",
+      "format": "date-time"
+    },
+    "settlementDate": {
+      "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+      "type": "string",
+      "format": "date-time"
+    },
+    "processorReference": {
+      "description": "Processor reference for the payment done",
+      "type": "string"
+    },
+    "isPaymentSettledToMerchant": {
+      "description": "return true if payment is settled to merchant",
+      "type": "boolean"
+    },
+    "failureCode": {
+      "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+      "type": "string"
+    },
+    "failureReason": {
+      "description": "return failure reason if a payment is failed. (Conditional)",
+      "type": "string"
+    },
+    "paymentCard": {
+      "description": "return Payment card used",
+      "type": "string"
+    },
+    "subCardType": {
+      "description": "return SubCardType",
+      "type": "string"
+    },
+    "additionalReference": {
+      "description": "Additional reference. (Conditional)",
+      "type": "string"
+    },
+    "merchantName": {
+      "description": "returns Merchant Trading Name",
+      "type": "string"
+    },
+    "merchantCode": {
+      "description": "returns Merchant Code",
+      "type": "string"
+    },
+    "merchantUniquePaymentId": {
+      "description": "Unique payment id provided by the merchant. (Conditional)",
+      "type": "string"
+    },
+    "isPaymentRetryScheduled": {
+      "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+      "type": "boolean"
+    },
+    "retryScheduledOn": {
+      "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "retryPaymentReference": {
+      "description": "Retry payment reference. (Conditional)",
+      "type": "string"
+    },
+    "isPaymentRecalled": {
+      "description": "Payment recalled.",
+      "type": "boolean"
+    },
+    "recalledOn": {
+      "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "recalledReason": {
+      "description": "Reason. (Conditional)",
+      "type": "string"
+    },
+    "recalledTransactionReference": {
+      "description": "RecalledTransactionReference : If a charge transaction is recalled then this is transaction reference of recall transaction.(Conditional)",
+      "type": "string"
+    },
+    "isPaymentRefunded": {
+      "description": "Payment refunded.",
+      "type": "boolean"
+    },
+    "refundedOn": {
+      "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "refundedReason": {
+      "description": "Reason. (Conditional)",
+      "type": "string"
+    },
+    "refundedTransactionReference": {
+      "description": "RefundedTransactionReference : If a charge transaction is refunded then this is transaction reference of refunded transaction.(Conditional)",
+      "type": "string"
+    },
+    "cardCategory": {
+      "description": "Card category",
+      "type": "string"
+    },
+    "transactionType": {
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+    },
+    "transactionTypeDisplay": {
+      "description": "Transaction Type. Possible values:\r\n1. Charge\r\n2. Invoice\r\n3. Refund\r\n4. Chargeback\r\n5. Recall\r\n6. Fixed Term Settlement",
+      "type": "string"
+    },
+    "originalTransactionReference": {
+      "description": "OriginalTransactionReference : For a Recall / Refund transaction, it is the transaction reference of original transaction.",
+      "type": "string"
+    },
+    "isPaymentChargeBacked": {
+      "description": "Payment Charge Backed.",
+      "type": "boolean"
+    },
+    "chargeBackedOn": {
+      "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "chargeBackedReason": {
+      "description": "Reason. (Conditional)",
+      "type": "string"
+    },
+    "chargeBackedTransactionReference": {
+      "description": "ChargedBackedTransactionReference : If a charge transaction is charged back then this is transaction reference of charged back transaction.(Conditional)",
+      "type": "string"
+    },
+    "paymentSourceDisplay": {
+      "description": "Payment source of transaction",
+      "type": "string"
+    },
+    "oneOffPaymentReference": {
+      "description": "One Off Payment Reference",
+      "type": "string"
+    },
+    "abn": {
+      "description": "ABN for the transaction",
+      "type": "string"
+    },
+    "preauthExpiryAt": {
+      "description": "Preauth expiry in minutes",
+      "type": "string",
+      "format": "date-time"
+    },
+    "remainingPreauthAmount": {
+      "description": "Remaining preauth amount",
+      "type": "number",
+      "format": "double"
+    },
+    "settlementPostPartialRefund": {
+      "$ref": "#/definitions/SettlementPayment",
+      "description": "Balance Payment if any is available"
+    },
+    "refunds": {
+      "description": "All refunds processed on this payment",
+      "items": {
+        "$ref": "#/definitions/SubPayment"
+      },
+      "xml": {
+        "name": "SubPayment",
+        "wrapped": true
+      },
+      "type": "array"
+    },
+    "recalls": {
+      "description": "All recalls processed on this payment",
+      "items": {
+        "$ref": "#/definitions/SubPayment"
+      },
+      "xml": {
+        "name": "SubPayment",
+        "wrapped": true
+      },
+      "type": "array"
+    },
+    "redirectUrl": {
+      "description": "3DSecure redirect url to complete the 3DSecure challege if required by the scheme",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "PaymentResponse"
+  },
+  "type": "object"
+}

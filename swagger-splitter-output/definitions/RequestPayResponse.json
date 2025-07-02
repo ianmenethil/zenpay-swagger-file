@@ -1,0 +1,30 @@
+{
+  "description": "Request pay response",
+  "properties": {
+    "requestPayId": {
+      "description": "Id of RequestPay for call to Uploading",
+      "type": "integer",
+      "format": "int32"
+    },
+    "warningMessages": {
+      "description": "WarningMessages after processing batch",
+      "type": "string"
+    },
+    "merchantName": {
+      "description": "returns Merchant Trading Name",
+      "type": "string"
+    },
+    "merchantCode": {
+      "description": "returns Merchant Code",
+      "type": "string"
+    },
+    "merchantUniqueRequestBatchId": {
+      "description": "Unique request pay batch id provided by the merchant.",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "RequestPayResponse"
+  },
+  "type": "object"
+}

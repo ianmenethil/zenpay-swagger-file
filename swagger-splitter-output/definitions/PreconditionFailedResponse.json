@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "errorCode": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "errorMessage": {
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "PreconditionFailedResponse"
+  },
+  "type": "object"
+}
