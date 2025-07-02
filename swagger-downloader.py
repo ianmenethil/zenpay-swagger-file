@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_swagger.py
+swagger-downloader.py
 
 Download the Swagger 2.0 spec from the primary URL, falling back to a secondary URL on failure,
 and save it to a local file (swagger.json by default).
