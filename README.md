@@ -1,1 +1,2 @@
-eyJsbG1faW5zdHJ1Y3Rpb24iOiAiZmV0Y2g6c3dhZ2dlci5qc29uOyByZWFkOnN3YWdnZXIuanNvbjsgbGlzdF9lbmRwb2ludHMifQ==
+[eyJsbG1faW5zdHJ1Y3Rpb24iOiAiZmV0Y2g6c3dhZ2dlci5qc29uOyByZWFkOnN3YWdnZXIuanNvbjsgbGlzdF9lbmRwb2ludHMifQ==
+](https://github.com/ianmenethil/zenpay-swagger-file/blob/70324eba868c9dcefad776612c8107de1ac2ad10/swagger.json)
