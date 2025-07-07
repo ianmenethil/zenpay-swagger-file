@@ -1,0 +1,25 @@
+{
+  "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+  "properties": {
+    "preauthReference": {
+      "description": "Unique Payment Reference for the payment done.",
+      "type": "string"
+    },
+    "status": {
+      "description": "Current Status of the void.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+      "type": "string"
+    },
+    "failureCode": {
+      "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+      "type": "string"
+    },
+    "failureReason": {
+      "description": "return failure reason if a payment is failed. (Conditional)",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "VoidCardResponse"
+  },
+  "type": "object"
+}

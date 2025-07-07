@@ -1,0 +1,65 @@
+{
+  "properties": {
+    "enableBPayOption": {
+      "type": "boolean"
+    },
+    "title": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "customerReference": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "abn": {
+      "type": "string"
+    },
+    "merchantStaffMember": {
+      "type": "string"
+    },
+    "address": {
+      "$ref": "#/definitions/CustomerAddress"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "fax": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "openDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateClosed": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bPayReference": {
+      "type": "string"
+    },
+    "customerStatus": {
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "CustomerProfile"
+  },
+  "type": "object"
+}

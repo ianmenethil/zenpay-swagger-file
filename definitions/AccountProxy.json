@@ -1,0 +1,22 @@
+{
+  "description": "Account proxy. Recommended to use instead of CardProxy.",
+  "required": [
+    "proxy"
+  ],
+  "properties": {
+    "proxy": {
+      "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies api for card.",
+      "type": "string",
+      "maxLength": 40
+    },
+    "label": {
+      "description": "Label for the account",
+      "type": "string",
+      "maxLength": 80
+    }
+  },
+  "xml": {
+    "name": "AccountProxy"
+  },
+  "type": "object"
+}

@@ -1,0 +1,39 @@
+{
+  "description": "Refund request object",
+  "required": [
+    "refundValue",
+    "refundRequestReason"
+  ],
+  "properties": {
+    "refundValue": {
+      "description": "Refund value - Defaults to 'BaseAmount' (1) if not passed.",
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "RefundValue": "Base: 1; Partial: 2; Full: 3"
+    },
+    "refundAmount": {
+      "description": "Refund Amount (Conditional). Amount is required when Refund Value is 'Partial' (2)",
+      "type": "number",
+      "format": "double"
+    },
+    "refundRequestReason": {
+      "description": "Reason for the refund request",
+      "type": "string",
+      "maxLength": 50
+    },
+    "refundRequestUniqueId": {
+      "description": "Refund Request Unique Id",
+      "type": "string",
+      "maxLength": 50
+    }
+  },
+  "xml": {
+    "name": "RefundRequest"
+  },
+  "type": "object"
+}

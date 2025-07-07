@@ -1,0 +1,29 @@
+{
+  "description": "Customer information",
+  "properties": {
+    "profile": {
+      "$ref": "#/definitions/CustomerProfile",
+      "description": "Customer profile"
+    },
+    "account": {
+      "$ref": "#/definitions/CustomerAccountResponse",
+      "description": "Customer Payment account"
+    },
+    "paymentOption": {
+      "$ref": "#/definitions/CustomerPaymentOption",
+      "description": "Customer payment option"
+    },
+    "merchantName": {
+      "description": "returns Merchant Trading Name",
+      "type": "string"
+    },
+    "merchantCode": {
+      "description": "returns Merchant Code",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "CustomerResponse"
+  },
+  "type": "object"
+}

@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "billerCode": {
+      "description": "BPAY Biller Code",
+      "type": "string"
+    },
+    "billerReference": {
+      "description": "BPAY Biller Reference",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "BPayDetail"
+  },
+  "type": "object"
+}

@@ -1,0 +1,25 @@
+{
+  "description": "Encapsulates the state of model binding to a property of an action-method argument, or to the argument itself.",
+  "properties": {
+    "value": {
+      "$ref": "#/definitions/ValueProviderResult",
+      "description": "Gets a {System.Web.Http.ValueProviders.ValueProviderResult} object that encapsulates the value that was being bound during model binding."
+    },
+    "errors": {
+      "description": "Gets a {System.Web.Http.ModelBinding.ModelErrorCollection} object that contains any errors that occurred during model binding.",
+      "items": {
+        "$ref": "#/definitions/ModelError"
+      },
+      "readOnly": true,
+      "xml": {
+        "name": "ModelError",
+        "wrapped": true
+      },
+      "type": "array"
+    }
+  },
+  "xml": {
+    "name": "ModelState"
+  },
+  "type": "object"
+}

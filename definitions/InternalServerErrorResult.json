@@ -1,0 +1,14 @@
+{
+  "description": "Represents an action result that returns an empty {System.Net.HttpStatusCode.InternalServerError} response.",
+  "properties": {
+    "request": {
+      "description": "Gets the request message which led to this result.",
+      "readOnly": true,
+      "type": "object"
+    }
+  },
+  "xml": {
+    "name": "InternalServerErrorResult"
+  },
+  "type": "object"
+}

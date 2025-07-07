@@ -1,0 +1,34 @@
+{
+  "description": "Represent one batch payment entry sent from the client\r\nFormat can either be in the form of Json or XML",
+  "required": [
+    "customerReference",
+    "paymentAmount"
+  ],
+  "properties": {
+    "customerReference": {
+      "description": "customer reference in individual payment batch entry",
+      "type": "string"
+    },
+    "paymentAmount": {
+      "description": "Payment amount in individual payment batch entry",
+      "type": "number",
+      "format": "double",
+      "maximum": 1.7976931348623157e+308,
+      "minimum": 0.01
+    },
+    "merchantUniquePaymentId": {
+      "description": "Unique payment id provided by the merchant. Can be used when Proxy payment is performed. (Optional)",
+      "type": "string",
+      "maxLength": 50
+    },
+    "paymentAccountProxy": {
+      "description": "Pass an alternative Proxy if required (Optional). If no Proxy is passed, the nominated card / bank account is used.",
+      "type": "string",
+      "maxLength": 40
+    }
+  },
+  "xml": {
+    "name": "BatchPaymentDataRecord"
+  },
+  "type": "object"
+}

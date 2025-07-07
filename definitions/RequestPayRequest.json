@@ -1,0 +1,28 @@
+{
+  "description": "Container for request to pay entries\r\nRoot element containing a collection of RequestPayEntry",
+  "required": [
+    "requestPaymentEntries"
+  ],
+  "properties": {
+    "requestPaymentEntries": {
+      "description": "Collection of RequestPayment entry",
+      "items": {
+        "$ref": "#/definitions/RequestPayRequestRecord"
+      },
+      "xml": {
+        "name": "RequestPayRequestRecord",
+        "wrapped": true
+      },
+      "type": "array"
+    },
+    "merchantUniqueRequestBatchId": {
+      "description": "Unique batch id provided by the merchant.",
+      "type": "string",
+      "maxLength": 50
+    }
+  },
+  "xml": {
+    "name": "RequestPayRequest"
+  },
+  "type": "object"
+}

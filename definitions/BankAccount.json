@@ -1,0 +1,66 @@
+{
+  "description": "Bank Account",
+  "required": [
+    "bsb",
+    "accountNumber",
+    "accountName"
+  ],
+  "properties": {
+    "bsb": {
+      "description": "BSB Number. Format: 000000",
+      "type": "string",
+      "maxLength": 6
+    },
+    "accountNumber": {
+      "description": "Bank Account number",
+      "type": "string",
+      "pattern": "^([0-9]{4,10})"
+    },
+    "accountName": {
+      "description": "Account Holder name",
+      "type": "string",
+      "maxLength": 32,
+      "pattern": "[\\u0020-\\u007E]*"
+    },
+    "bankBranch": {
+      "description": "Bank branch",
+      "type": "string",
+      "maxLength": 50
+    },
+    "bankName": {
+      "description": "Bank Name",
+      "type": "string",
+      "maxLength": 50
+    },
+    "label": {
+      "description": "Label for the account",
+      "type": "string",
+      "maxLength": 50
+    },
+    "isPayTo": {
+      "description": "Bank account is PayTo if true",
+      "type": "boolean"
+    },
+    "payToStatus": {
+      "description": "If PayTo account, this field will let you know the status of the Mandate.",
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  },
+  "xml": {
+    "name": "BankAccount"
+  },
+  "type": "object"
+}

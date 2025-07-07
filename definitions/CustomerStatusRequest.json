@@ -1,0 +1,17 @@
+{
+  "description": "Status request",
+  "properties": {
+    "reason": {
+      "description": "Reason if the customer is closed.",
+      "type": "string"
+    },
+    "closeCustomer": {
+      "description": "True to close, false to open.",
+      "type": "boolean"
+    }
+  },
+  "xml": {
+    "name": "CustomerStatusRequest"
+  },
+  "type": "object"
+}

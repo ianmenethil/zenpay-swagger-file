@@ -1,0 +1,58 @@
+{
+  "get": {
+    "tags": [
+      "RequestPays"
+    ],
+    "summary": "Api to get the request pay entries",
+    "operationId": "RequestPays_GetRequestPayEntries",
+    "consumes": [],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "requestPayId",
+        "in": "path",
+        "description": "Request pay identifier",
+        "required": true,
+        "type": "integer",
+        "format": "int32"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "List of request pay entries",
+        "schema": {
+          "items": {
+            "$ref": "#/definitions/ApiRequestPayEntry"
+          },
+          "xml": {
+            "name": "ApiRequestPayEntry",
+            "wrapped": true
+          },
+          "type": "array"
+        }
+      },
+      "404": {
+        "description": "Request pay not found.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Unable to get the request to pay.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

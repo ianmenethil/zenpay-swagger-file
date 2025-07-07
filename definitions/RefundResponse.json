@@ -1,0 +1,67 @@
+{
+  "description": "Refund request response.",
+  "properties": {
+    "merchantName": {
+      "description": "returns Merchant Trading Name",
+      "type": "string"
+    },
+    "merchantCode": {
+      "description": "returns Merchant Code",
+      "type": "string"
+    },
+    "paymentReference": {
+      "description": "Payment Reference",
+      "type": "string"
+    },
+    "refundValue": {
+      "description": "Refund value",
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "RefundValue": "Base: 1; Partial: 2; Full: 3"
+    },
+    "refundValueString": {
+      "description": "Refund value (Human readable)",
+      "readOnly": true,
+      "type": "string"
+    },
+    "refundAmount": {
+      "description": "Refund Amount.",
+      "type": "number",
+      "format": "double"
+    },
+    "requestStatus": {
+      "description": "Refund request status",
+      "type": "integer",
+      "format": "int32"
+    },
+    "requestStatusString": {
+      "description": "Refund request status (Human readable)",
+      "type": "string"
+    },
+    "requestReason": {
+      "description": "Reason for the refund request",
+      "type": "string"
+    },
+    "cancelReason": {
+      "description": "Reason for the refund request cancellation. This field will returned only if the status is 'Canceled'",
+      "type": "string"
+    },
+    "rejectReason": {
+      "description": "Reason for the refund request rejected. This field will returned only if the status is 'Rejected'",
+      "type": "string"
+    },
+    "refundRequestUniqueId": {
+      "description": "Refund Request Unique Id",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "RefundResponse"
+  },
+  "type": "object"
+}

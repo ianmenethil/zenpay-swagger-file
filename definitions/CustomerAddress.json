@@ -1,0 +1,43 @@
+{
+  "description": "Customer address model",
+  "required": [
+    "address1",
+    "suburb",
+    "state",
+    "country",
+    "postcode"
+  ],
+  "properties": {
+    "address1": {
+      "description": "Address line 1",
+      "type": "string"
+    },
+    "address2": {
+      "description": "Address line 2",
+      "type": "string"
+    },
+    "suburb": {
+      "description": "Suburb / city",
+      "type": "string",
+      "maxLength": 50
+    },
+    "state": {
+      "description": "State / province",
+      "type": "string",
+      "maxLength": 50
+    },
+    "country": {
+      "description": "Country",
+      "type": "string",
+      "maxLength": 100
+    },
+    "postcode": {
+      "description": "Postcode",
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "CustomerAddress"
+  },
+  "type": "object"
+}

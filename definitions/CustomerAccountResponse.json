@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "bankAccount": {
+      "$ref": "#/definitions/BankAccount"
+    },
+    "creditCard": {
+      "$ref": "#/definitions/CreditCard"
+    }
+  },
+  "xml": {
+    "name": "CustomerAccountResponse"
+  },
+  "type": "object"
+}

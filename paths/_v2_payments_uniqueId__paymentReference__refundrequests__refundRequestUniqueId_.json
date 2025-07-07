@@ -1,0 +1,61 @@
+{
+  "get": {
+    "tags": [
+      "Payments"
+    ],
+    "summary": "",
+    "operationId": "Payments_GetV2PaymentsUniqueIdByPaymentReferenceRefundrequestsByRefundRequestUniqueId",
+    "consumes": [],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "parameters": [
+      {
+        "name": "paymentReference",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "refundRequestUniqueId",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Return refund request for the provided payment reference.",
+        "schema": {
+          "$ref": "#/definitions/RefundResponse"
+        }
+      },
+      "400": {
+        "description": "Invalid input detail.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "404": {
+        "description": "Unable to find the refund request by the reference provided.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "500": {
+        "description": "Something went wrong. Please try again.",
+        "schema": {
+          "type": "object"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

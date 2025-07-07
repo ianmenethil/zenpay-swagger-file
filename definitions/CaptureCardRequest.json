@@ -1,0 +1,33 @@
+{
+  "required": [
+    "paymentAmount"
+  ],
+  "properties": {
+    "paymentAmount": {
+      "description": "Amount to capture",
+      "type": "number",
+      "format": "double"
+    },
+    "oneOffPaymentReference": {
+      "description": "One Off Payment reference. This field is returned in reconciliation reports.",
+      "type": "string"
+    },
+    "additionalReference": {
+      "description": "Additional reference. This field is returned in reconciliation reports.",
+      "type": "string"
+    },
+    "merchantUniquePaymentId": {
+      "description": "Unique payment id provided by the merchant.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "sendPaymentConfirmation": {
+      "description": "Flag to send the customer invoice.",
+      "type": "boolean"
+    }
+  },
+  "xml": {
+    "name": "CaptureCardRequest"
+  },
+  "type": "object"
+}

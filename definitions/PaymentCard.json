@@ -1,0 +1,32 @@
+{
+  "required": [
+    "cardHolder",
+    "cardNumber",
+    "expiryMonth",
+    "expiryYear",
+    "cvv"
+  ],
+  "properties": {
+    "cardHolder": {
+      "type": "string"
+    },
+    "cardNumber": {
+      "type": "string"
+    },
+    "expiryMonth": {
+      "type": "string"
+    },
+    "expiryYear": {
+      "type": "string",
+      "maxLength": 4,
+      "minLength": 4
+    },
+    "cvv": {
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "PaymentCard"
+  },
+  "type": "object"
+}

@@ -1,0 +1,29 @@
+{
+  "get": {
+    "tags": [
+      "Diagnostics"
+    ],
+    "summary": "Ping method to get the server date time and version information",
+    "operationId": "Diagnostics_Ping",
+    "consumes": [],
+    "produces": [
+      "application/json",
+      "text/json",
+      "application/xml",
+      "text/xml"
+    ],
+    "responses": {
+      "200": {
+        "description": "Batch Payment summary",
+        "schema": {
+          "$ref": "#/definitions/PingResponse"
+        }
+      }
+    },
+    "security": [
+      {
+        "Api-Key": []
+      }
+    ]
+  }
+}

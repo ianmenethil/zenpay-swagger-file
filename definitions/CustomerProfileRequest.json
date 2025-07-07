@@ -1,0 +1,61 @@
+{
+  "required": [
+    "firstName",
+    "lastName",
+    "address",
+    "email",
+    "dateOfBirth"
+  ],
+  "properties": {
+    "enableBPayOption": {
+      "type": "boolean"
+    },
+    "title": {
+      "description": "Provide the salutation. Eg: Mr or Mrs",
+      "type": "string",
+      "maxLength": 10
+    },
+    "firstName": {
+      "description": "First name",
+      "type": "string",
+      "maxLength": 30
+    },
+    "lastName": {
+      "description": "Last name",
+      "type": "string",
+      "maxLength": 30
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "abn": {
+      "type": "string"
+    },
+    "merchantStaffMember": {
+      "type": "string"
+    },
+    "address": {
+      "$ref": "#/definitions/CustomerAddress"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "fax": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "xml": {
+    "name": "CustomerProfileRequest"
+  },
+  "type": "object"
+}

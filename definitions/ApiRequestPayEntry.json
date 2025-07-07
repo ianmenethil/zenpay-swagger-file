@@ -1,0 +1,141 @@
+{
+  "description": "Api request pay entry",
+  "properties": {
+    "customerReference": {
+      "type": "string"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "paymentAmount": {
+      "type": "number",
+      "format": "double"
+    },
+    "paymentDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entryStatus": {
+      "type": "string"
+    },
+    "paymentResource": {
+      "type": "string"
+    },
+    "paymentStatus": {
+      "type": "string"
+    },
+    "failureReason": {
+      "type": "string"
+    },
+    "failureCode": {
+      "type": "string"
+    },
+    "processorReference": {
+      "type": "string"
+    },
+    "paymentReference": {
+      "type": "string"
+    },
+    "baseAmount": {
+      "type": "number",
+      "format": "double"
+    },
+    "customerFee": {
+      "type": "number",
+      "format": "double"
+    },
+    "processedAmount": {
+      "type": "number",
+      "format": "double"
+    },
+    "merchantFee": {
+      "type": "number",
+      "format": "double"
+    },
+    "merchantWithheldAmount": {
+      "type": "number",
+      "format": "double"
+    },
+    "lastDigits": {
+      "type": "string"
+    },
+    "paymentMethod": {
+      "type": "string"
+    },
+    "processingDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "settlementDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "paymentCard": {
+      "type": "string"
+    },
+    "additionalReference": {
+      "type": "string"
+    },
+    "oneOffPaymentReference": {
+      "type": "string"
+    },
+    "retryPaymentResource": {
+      "type": "string"
+    },
+    "isPaymentRetryScheduled": {
+      "type": "boolean"
+    },
+    "retryScheduledOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "retryPaymentReference": {
+      "type": "string"
+    },
+    "retryPaymentStatus": {
+      "type": "string"
+    },
+    "isPaymentRecalled": {
+      "type": "boolean"
+    },
+    "recalledOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recalledReason": {
+      "type": "string"
+    },
+    "merchantCode": {
+      "type": "string"
+    },
+    "merchantName": {
+      "type": "string"
+    },
+    "isPaymentRefunded": {
+      "type": "boolean"
+    },
+    "refundedOn": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "refundedReason": {
+      "type": "string"
+    },
+    "requestReference": {
+      "type": "string"
+    }
+  },
+  "xml": {
+    "name": "ApiRequestPayEntry"
+  },
+  "type": "object"
+}
