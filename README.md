@@ -8,8 +8,9 @@ Complete toolkit for managing, analyzing, and enhancing TravelPay Payments API d
 - 📊 **Quality Analysis**: Comprehensive reports on documentation completeness
 - ✏️ **Auto-Enhancement**: Systematically improve docs with standardized language
 - 🔍 **Diff Viewer**: See exactly what changes before applying
-- 📦 **Spec Splitting**: Organize by route for easier management
-- ✅ **Validation**: Ensure no data loss during transformations
+- ✅ **Validation**: OpenAPI 3.1 schema validation with Scalar
+- 🚀 **SDK Generation**: Generate TypeScript and Python SDKs
+- 📚 **Interactive Docs**: Serve beautiful API documentation with Scalar
 
 ## 🚀 Quick Start
 
@@ -35,15 +36,13 @@ bun run help
 ### Spec Management
 ```bash
 bun run getspec          # Download & convert latest spec from API
-bun run split            # Split spec into separate files by route
-bun run bundle           # Bundle split specs (coming soon)
-bun run deref            # Dereference $ref pointers (coming soon)
+bun run validate         # Validate OpenAPI 3.1 specification with Scalar
+bun run docs             # Serve interactive API documentation
 ```
 
 ### Quality Analysis
 ```bash
 bun run analyze          # Generate quality reports for all routes
-bun run verify           # Verify no data loss during conversion
 ```
 
 ### Documentation Enhancement
@@ -54,6 +53,11 @@ bun run enhance:all                    # Enhance all routes
 bun run diff --route <name>            # Show before/after diff
 bun run diff --path "/v2/payments"    # Diff specific path
 bun run diff --detailed                # Side-by-side view
+```
+
+### SDK Generation
+```bash
+bun run sdk              # Generate TypeScript and Python SDKs
 ```
 
 ### Utilities
@@ -107,8 +111,10 @@ git push
 ├── openapi.json              # OpenAPI 3.1 spec (converted)
 ├── swagger.json              # Swagger 2.0 spec (original)
 ├── db.json                   # Download cache metadata
-├── split-specs/              # Per-route OpenAPI specs
 ├── reports/                  # Quality analysis reports
+├── sdk/                      # Generated SDKs (TypeScript, Python)
+│   ├── typescript/          # TypeScript SDK
+│   └── python/              # Python SDK
 ├── API-STYLE-GUIDE.md       # Documentation standards
 ├── ENHANCEMENT-WORKFLOW.md  # Step-by-step guide
 └── package.json             # Bun scripts & commands
@@ -120,28 +126,45 @@ git push
 - Fetches from 3 endpoints with automatic fallback
 - SHA-256 hash comparison for caching
 - Only downloads when spec changes
-- Converts Swagger 2.0 → OpenAPI 3.1
-- Validates no data loss
+- Converts Swagger 2.0 → OpenAPI 3.1 using Scalar
 
-### 2. Quality Analysis (`analyze`)
+### 2. Validation (`validate`)
+- Validates against OpenAPI 3.1 schema using Scalar
+- Checks all $ref reference integrity
+- Reports schema errors and warnings
+- Ensures spec compliance
+
+### 3. Quality Analysis (`analyze`)
 - Scans all endpoints for completeness
 - Checks summaries, descriptions, examples
 - Validates parameter documentation
 - Generates detailed reports by route
 - Scores quality (0-100)
 
-### 3. Auto-Enhancement (`enhance`)
+### 4. Auto-Enhancement (`enhance`)
 - Detects endpoint patterns automatically
 - Generates standardized descriptions
 - Adds realistic examples
 - Non-destructive (preview mode)
 - Follows style guide
 
-### 4. Diff Viewer (`diff`)
+### 5. Diff Viewer (`diff`)
 - Shows before/after changes
 - Color-coded additions/modifications
 - Route or path-specific views
 - Side-by-side comparison mode
+
+### 6. SDK Generation (`sdk`)
+- Generates TypeScript SDK with types and API client
+- Generates Python SDK with type hints
+- Uses OpenAPI Generator under the hood
+- Output to `sdk/typescript/` and `sdk/python/`
+
+### 7. Interactive Docs (`docs`)
+- Serves beautiful API documentation using Scalar
+- Try-it-out functionality for all endpoints
+- Code generation examples
+- OAuth/authentication flows
 
 ## 📖 Documentation
 

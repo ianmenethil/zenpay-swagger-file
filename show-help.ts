@@ -46,16 +46,14 @@ const commands = [
     category: "Spec Management",
     commands: [
       { name: "getspec", desc: "Download latest Swagger spec and convert to OpenAPI 3.1", example: "bun run getspec" },
-      { name: "split", desc: "Split spec into separate files by route", example: "bun run split" },
-      { name: "bundle", desc: "Bundle split specs back into one file (coming soon)", example: "bun run bundle" },
-      { name: "deref", desc: "Dereference all $ref pointers (coming soon)", example: "bun run deref" },
+      { name: "validate", desc: "Validate OpenAPI 3.1 specification with Scalar", example: "bun run validate" },
+      { name: "docs", desc: "Serve interactive API documentation", example: "bun run docs" },
     ],
   },
   {
     category: "Quality Analysis",
     commands: [
       { name: "analyze", desc: "Analyze spec quality and generate reports", example: "bun run analyze" },
-      { name: "verify", desc: "Verify no data loss during conversion", example: "bun run verify" },
     ],
   },
   {
@@ -65,6 +63,12 @@ const commands = [
       { name: "enhance --apply", desc: "Apply enhancements without preview", example: "bun run enhance --route payments --apply" },
       { name: "enhance:all", desc: "Enhance all routes at once", example: "bun run enhance:all" },
       { name: "diff", desc: "Show differences before/after enhancement", example: "bun run diff --route payments" },
+    ],
+  },
+  {
+    category: "SDK Generation",
+    commands: [
+      { name: "sdk", desc: "Generate TypeScript and Python SDKs from OpenAPI spec", example: "bun run sdk" },
     ],
   },
 ];

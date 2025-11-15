@@ -1,6 +1,6 @@
 # API Quality Report: proxies
 
-**Generated:** 2025-11-15T11:15:25.600Z
+**Generated:** 2025-11-15T19:24:11.353Z
 
 ---
 

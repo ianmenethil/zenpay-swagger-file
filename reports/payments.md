@@ -1,6 +1,6 @@
 # API Quality Report: payments
 
-**Generated:** 2025-11-15T11:15:25.593Z
+**Generated:** 2025-11-15T19:24:11.351Z
 
 ---
 
@@ -14,9 +14,9 @@
 ### Issues Found
 
 - 🔴 **Critical:** 2
-- 🟡 **Warning:** 29
+- 🟡 **Warning:** 28
 - ℹ️ **Info:** 16
-- **Total:** 47
+- **Total:** 46
 
 ---
 
@@ -29,7 +29,7 @@
 | GET | `/v2/payments/{paymentReference}/refundrequests` | ✅ | ❌ | ❌ | 3 |
 | POST | `/v2/payments/{paymentReference}/refundrequests` | ✅ | ❌ | ❌ | 5 |
 | GET | `/v2/payments/uniqueId/{paymentReference}/refundrequests/{refundRequestUniqueId}` | ❌ | ❌ | ❌ | 7 |
-| GET | `/v2/payments` | ❌ | ❌ | ❌ | 23 |
+| GET | `/v2/payments` | ❌ | ❌ | ❌ | 22 |
 | POST | `/v2/payments` | ✅ | ❌ | ❌ | 3 |
 
 ---
@@ -201,9 +201,9 @@
 - Description: ❌ Missing
 - Request Examples: ❌ Missing
 - Response Examples: ❌ Missing
-- Parameters: 10 total, 0 with descriptions
+- Parameters: 10 total, 1 with descriptions
 
-**Issues (23):**
+**Issues (22):**
 
 #### 🔴 Critical Issues
 
@@ -221,8 +221,6 @@
 - **Documentation:** Parameter "toProcessedDate" missing description
   - *Suggestion:* Add a description explaining the parameter's purpose and expected values
 - **Documentation:** Parameter "settlementDate" missing description
-  - *Suggestion:* Add a description explaining the parameter's purpose and expected values
-- **Documentation:** Parameter "paymentSettlement" missing description
   - *Suggestion:* Add a description explaining the parameter's purpose and expected values
 - **Documentation:** Parameter "transactionTypes" missing description
   - *Suggestion:* Add a description explaining the parameter's purpose and expected values
@@ -299,7 +297,7 @@
 
 ### 🟡 Important Improvements
 
-29 warning(s) should be addressed to improve API quality.
+28 warning(s) should be addressed to improve API quality.
 
 ### ℹ️ Optional Enhancements
 

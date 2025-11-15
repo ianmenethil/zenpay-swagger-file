@@ -536,10 +536,7 @@ async function main(): Promise<void> {
   const openapiContent = await readFile(OPENAPI_FILE, "utf-8");
   const openapi = JSON.parse(openapiContent);
 
-  // Create output directories
-  if (!existsSync(SPLIT_DIR)) {
-    await mkdir(SPLIT_DIR, { recursive: true });
-  }
+  // Create output directory for reports
   if (!existsSync(REPORTS_DIR)) {
     await mkdir(REPORTS_DIR, { recursive: true });
   }
@@ -572,17 +569,6 @@ async function main(): Promise<void> {
     console.log(colorize(`\n  Analyzing: ${routeName}`, "cyan"));
 
     // Split spec for this route
-    const routeSpec = {
-      ...openapi,
-      paths,
-    };
-
-    await writeFile(
-      `${SPLIT_DIR}/${routeName}.json`,
-      JSON.stringify(routeSpec, null, 2),
-      "utf-8"
-    );
-
     // Analyze route
     const analysis = analyzeRouteGroup(routeName, paths);
     allAnalyses.push(analysis);
@@ -622,7 +608,6 @@ async function main(): Promise<void> {
   console.log(colorize("║  Analysis Complete                                       ║", "green"));
   console.log(colorize("╚══════════════════════════════════════════════════════════╝\n", "green"));
 
-  console.log(colorize(`✅ Split specs saved to: ${SPLIT_DIR}/`, "green"));
   console.log(colorize(`📊 Reports saved to: ${REPORTS_DIR}/`, "green"));
   console.log(colorize(`📋 Summary: ${REPORTS_DIR}/SUMMARY.md\n`, "green"));
 

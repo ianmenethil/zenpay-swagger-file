@@ -3312,7 +3312,7 @@
             "name": "paymentSettlement",
             "in": "query",
             "required": false,
-            "PaymentSettlement": "All: 0; Settled: 1; NotSettled: 2"
+            "description": "Filter by payment settlement status. PaymentSettlement values: All: 0; Settled: 1; NotSettled: 2"
           },
           {
             "schema": {
@@ -5006,7 +5006,11 @@
             "required": true
           }
         ],
-        "responses": {},
+        "responses": {
+          "501": {
+            "description": "This endpoint is not currently supported"
+          }
+        },
         "security": [
           {
             "Api-Key": []
