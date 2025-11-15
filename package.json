@@ -19,8 +19,8 @@
     "help": "bun run show-help.ts"
   },
   "dependencies": {
-    "ajv": "^8.12.0",
-    "ajv-formats": "^3.0.1"
+    "@scalar/openapi-parser": "^0.23.2",
+    "@scalar/api-reference": "^1.39.3"
   },
   "devDependencies": {
     "@types/bun": "latest"

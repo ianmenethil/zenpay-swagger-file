@@ -3,12 +3,11 @@
 /**
  * OpenAPI Specification Validator
  *
- * Validates OpenAPI 3.1 specs against the official JSON Schema.
+ * Validates OpenAPI 3.1 specs using Scalar's official parser.
  * Downloads the latest schema from OpenAPI Initiative if not cached.
  *
  * Features:
  * - Validates against official OpenAPI 3.1 schema
- * - Caches schema locally for performance
  * - Detailed error reporting
  * - Validates structure, required fields, types
  * - Checks references ($ref) integrity
@@ -16,23 +15,15 @@
  * @example
  * bun run validate
  * bun run validate --file openapi-enhanced.json
- * bun run validate --strict
  */
 
-import { readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import { existsSync } from "fs";
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
+import { validate } from "@scalar/openapi-parser";
 
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
-
-/** Official OpenAPI 3.1 JSON Schema URL */
-const OPENAPI_SCHEMA_URL = "https://spec.openapis.org/oas/3.1/schema/2022-10-07";
-
-/** Local cache for schema */
-const SCHEMA_CACHE_FILE = ".cache/openapi-3.1-schema.json";
 
 /** Default file to validate */
 const DEFAULT_SPEC_FILE = "openapi.json";
@@ -56,143 +47,8 @@ function colorize(text: string, color: keyof typeof colors): string {
 }
 
 // ============================================================================
-// SCHEMA DOWNLOAD & CACHE
-// ============================================================================
-
-/**
- * Download OpenAPI 3.1 JSON Schema
- */
-async function downloadSchema(): Promise<any> {
-  console.log(colorize("📥 Downloading official OpenAPI 3.1 JSON Schema...", "cyan"));
-
-  try {
-    const response = await fetch(OPENAPI_SCHEMA_URL);
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    const schema = await response.json();
-    console.log(colorize("✓ Downloaded schema successfully\n", "green"));
-
-    return schema;
-  } catch (error) {
-    console.error(colorize("✗ Failed to download schema", "red"));
-    console.error(colorize(`  ${error instanceof Error ? error.message : String(error)}`, "dim"));
-    throw error;
-  }
-}
-
-/**
- * Load schema from cache or download if not cached
- */
-async function loadSchema(): Promise<any> {
-  // Check cache first
-  if (existsSync(SCHEMA_CACHE_FILE)) {
-    console.log(colorize("📦 Loading cached OpenAPI schema...", "cyan"));
-    const cached = await readFile(SCHEMA_CACHE_FILE, "utf-8");
-    console.log(colorize("✓ Loaded from cache\n", "green"));
-    return JSON.parse(cached);
-  }
-
-  // Download and cache
-  const schema = await downloadSchema();
-
-  // Save to cache
-  const cacheDir = SCHEMA_CACHE_FILE.split("/").slice(0, -1).join("/");
-  if (!existsSync(cacheDir)) {
-    await Bun.spawn(["mkdir", "-p", cacheDir]).exited;
-  }
-
-  await writeFile(SCHEMA_CACHE_FILE, JSON.stringify(schema, null, 2), "utf-8");
-  console.log(colorize(`✓ Cached schema to ${SCHEMA_CACHE_FILE}\n`, "dim"));
-
-  return schema;
-}
-
-// ============================================================================
 // VALIDATION
 // ============================================================================
-
-/**
- * Validate OpenAPI spec against JSON Schema
- */
-async function validateSpec(spec: any, schema: any, strict = false): Promise<boolean> {
-  console.log(colorize("🔍 Validating OpenAPI specification...\n", "cyan"));
-
-  // Initialize AJV with JSON Schema 2020-12 support
-  const ajv = new Ajv({
-    allErrors: true,
-    verbose: true,
-    strict: strict,
-    validateFormats: true,
-    allowUnionTypes: true,
-  });
-
-  // Add format validators (email, uri, date-time, etc.)
-  addFormats(ajv);
-
-  // Add JSON Schema 2020-12 meta-schema support
-  // OpenAPI 3.1 uses JSON Schema 2020-12
-  const draft202012 = {
-    $schema: "https://json-schema.org/draft/2020-12/schema",
-    $id: "https://json-schema.org/draft/2020-12/schema",
-    $vocabulary: {
-      "https://json-schema.org/draft/2020-12/vocab/core": true,
-      "https://json-schema.org/draft/2020-12/vocab/applicator": true,
-      "https://json-schema.org/draft/2020-12/vocab/unevaluated": true,
-      "https://json-schema.org/draft/2020-12/vocab/validation": true,
-      "https://json-schema.org/draft/2020-12/vocab/meta-data": true,
-      "https://json-schema.org/draft/2020-12/vocab/format-annotation": true,
-      "https://json-schema.org/draft/2020-12/vocab/content": true,
-    },
-    $dynamicAnchor: "meta",
-    title: "Core and Validation vocabulary meta-schema",
-    type: ["object", "boolean"],
-  };
-
-  try {
-    ajv.addMetaSchema(draft202012);
-  } catch (e) {
-    // Ignore if already added
-  }
-
-  // Compile schema
-  const validate = ajv.compile(schema);
-
-  // Validate
-  const valid = validate(spec);
-
-  if (valid) {
-    console.log(colorize("✅ Validation passed!", "green"));
-    console.log(colorize("   Spec conforms to OpenAPI 3.1 standard\n", "dim"));
-    return true;
-  }
-
-  // Show errors
-  console.log(colorize("❌ Validation failed!\n", "red"));
-
-  if (validate.errors) {
-    console.log(colorize(`Found ${validate.errors.length} error(s):\n`, "yellow"));
-
-    for (const error of validate.errors) {
-      const location = error.instancePath || "root";
-      const message = error.message || "Unknown error";
-
-      console.log(colorize(`  ✗ ${location}`, "red"));
-      console.log(colorize(`    ${message}`, "dim"));
-
-      if (error.params) {
-        const params = JSON.stringify(error.params);
-        console.log(colorize(`    ${params}`, "dim"));
-      }
-
-      console.log();
-    }
-  }
-
-  return false;
-}
 
 /**
  * Validate $ref integrity
@@ -326,6 +182,7 @@ function generateReport(
   schemaValid: boolean,
   refsValid: boolean,
   additionalValid: boolean,
+  schemaErrors: any[],
   refErrors: string[],
   warnings: string[]
 ) {
@@ -338,6 +195,10 @@ function generateReport(
   console.log(colorize("Additional Checks:  ", "dim") + (additionalValid ? colorize("✓ PASSED", "green") : colorize("⚠ WARNINGS", "yellow")));
 
   console.log();
+
+  if (schemaErrors.length > 0) {
+    console.log(colorize(`Schema Errors: ${schemaErrors.length}`, "red"));
+  }
 
   if (refErrors.length > 0) {
     console.log(colorize(`Broken References: ${refErrors.length}`, "red"));
@@ -373,11 +234,9 @@ async function main() {
 
   const fileIdx = args.indexOf("--file");
   const specFile = fileIdx >= 0 && fileIdx + 1 < args.length ? args[fileIdx + 1] : DEFAULT_SPEC_FILE;
-  const strict = args.includes("--strict");
-  const skipCache = args.includes("--no-cache");
 
   console.log(colorize("\n╔══════════════════════════════════════════════════════════╗", "cyan"));
-  console.log(colorize("║  OpenAPI 3.1 Specification Validator                    ║", "cyan"));
+  console.log(colorize("║  OpenAPI 3.1 Specification Validator (Scalar)           ║", "cyan"));
   console.log(colorize("╚══════════════════════════════════════════════════════════╝\n", "cyan"));
 
   // Load spec
@@ -385,14 +244,13 @@ async function main() {
     console.error(colorize(`✗ File not found: ${specFile}`, "red"));
     console.error(colorize("\nUsage:", "yellow"));
     console.error(colorize("  bun run validate", "cyan"));
-    console.error(colorize("  bun run validate --file openapi-enhanced.json", "cyan"));
-    console.error(colorize("  bun run validate --strict", "cyan"));
-    console.error(colorize("  bun run validate --no-cache\n", "cyan"));
+    console.error(colorize("  bun run validate --file openapi-enhanced.json\n", "cyan"));
     process.exit(1);
   }
 
   console.log(colorize(`📖 Loading spec: ${specFile}\n`, "cyan"));
-  const spec = JSON.parse(await readFile(specFile, "utf-8"));
+  const specContent = await readFile(specFile, "utf-8");
+  const spec = JSON.parse(specContent);
 
   // Verify it's OpenAPI 3.x
   if (!spec.openapi || !spec.openapi.startsWith("3.")) {
@@ -405,16 +263,35 @@ async function main() {
 
   console.log(colorize(`✓ OpenAPI version: ${spec.openapi}\n`, "green"));
 
-  // Load schema
-  let schema: any;
-  if (skipCache) {
-    schema = await downloadSchema();
-  } else {
-    schema = await loadSchema();
-  }
+  // Validate using Scalar
+  console.log(colorize("🔍 Validating OpenAPI specification with Scalar...\n", "cyan"));
 
-  // Validate against schema
-  const schemaValid = await validateSpec(spec, schema, strict);
+  const result = await validate(specContent);
+
+  let schemaValid = result.valid;
+  const schemaErrors: any[] = [];
+
+  if (!result.valid) {
+    console.log(colorize("❌ Validation failed!\n", "red"));
+
+    if (result.errors && result.errors.length > 0) {
+      console.log(colorize(`Found ${result.errors.length} error(s):\n`, "yellow"));
+
+      for (const error of result.errors) {
+        schemaErrors.push(error);
+
+        const location = error.path || "unknown location";
+        const message = error.message || "Unknown error";
+
+        console.log(colorize(`  ✗ ${location}`, "red"));
+        console.log(colorize(`    ${message}`, "dim"));
+        console.log();
+      }
+    }
+  } else {
+    console.log(colorize("✅ Validation passed!", "green"));
+    console.log(colorize("   Spec conforms to OpenAPI 3.1 standard\n", "dim"));
+  }
 
   // Validate references
   const { valid: refsValid, errors: refErrors } = validateReferences(spec);
@@ -423,7 +300,7 @@ async function main() {
   const { valid: additionalValid, warnings } = additionalValidation(spec);
 
   // Generate report
-  const overallValid = generateReport(schemaValid, refsValid, additionalValid, refErrors, warnings);
+  const overallValid = generateReport(schemaValid, refsValid, additionalValid, schemaErrors, refErrors, warnings);
 
   // Exit with appropriate code
   process.exit(overallValid ? 0 : 1);

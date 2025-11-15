@@ -7,7 +7,7 @@
  * - Automatic retry logic (3 attempts per endpoint)
  * - Multiple fallback URLs
  * - Hash-based caching to avoid unnecessary downloads
- * - Conversion from Swagger 2.0 to OpenAPI 3.1
+ * - Conversion from Swagger 2.0 to OpenAPI 3.1 using Scalar
  * - Data integrity validation
  *
  * @example
@@ -17,6 +17,7 @@
 import { createHash } from "crypto";
 import { readFile, writeFile } from "fs/promises";
 import { existsSync } from "fs";
+import { upgrade } from "@scalar/openapi-parser";
 
 // ============================================================================
 // CONFIGURATION
@@ -227,220 +228,30 @@ function isCacheValid(content: string, cache: CacheDatabase): boolean {
 // ============================================================================
 
 /**
- * Convert Swagger 2.0 to OpenAPI 3.1 specification
+ * Convert Swagger 2.0 to OpenAPI 3.1 specification using Scalar
  *
- * This uses a manual conversion approach following OpenAPI 3.1 spec.
+ * Uses @scalar/openapi-parser to handle conversion automatically.
  * Preserves all metadata including summaries, descriptions, examples, etc.
  *
- * @param swagger - Swagger 2.0 specification object
+ * @param swaggerContent - Swagger 2.0 specification as string
  * @returns OpenAPI 3.1 specification object
  */
-function convertToOpenAPI(swagger: any): any {
-  console.log(colorize("\n🔄 Converting Swagger 2.0 → OpenAPI 3.1...\n", "cyan"));
+async function convertToOpenAPI(swaggerContent: string): Promise<any> {
+  console.log(colorize("\n🔄 Converting Swagger 2.0 → OpenAPI 3.1 (Scalar)...\n", "cyan"));
 
-  // Initialize OpenAPI 3.1 structure
-  const openapi: any = {
-    openapi: "3.1.0",
-    info: swagger.info || {},
-    servers: [],
-    paths: {},
-    components: {
-      schemas: {},
-      securitySchemes: {},
-    },
-  };
+  try {
+    // Scalar's upgrade function automatically converts Swagger 2.0 to OpenAPI 3.1
+    const result = await upgrade(swaggerContent);
 
-  // Convert host + basePath + schemes to servers
-  if (swagger.host) {
-    const schemes = swagger.schemes || ["https"];
-    const basePath = swagger.basePath || "";
+    // The result contains the converted OpenAPI spec
+    const openapi = result.specification;
 
-    for (const scheme of schemes) {
-      openapi.servers.push({
-        url: `${scheme}://${swagger.host}${basePath}`,
-      });
-    }
+    console.log(colorize("✓ Conversion complete\n", "green"));
+    return openapi;
+  } catch (error) {
+    console.error(colorize("✗ Conversion failed:", "red"));
+    throw error;
   }
-
-  // Convert definitions to components.schemas
-  if (swagger.definitions) {
-    openapi.components.schemas = swagger.definitions;
-  }
-
-  // Convert securityDefinitions to components.securitySchemes
-  if (swagger.securityDefinitions) {
-    for (const [name, scheme] of Object.entries(swagger.securityDefinitions as any)) {
-      const convertedScheme: any = { ...scheme };
-
-      // Convert 'apiKey' type
-      if (scheme.type === "apiKey") {
-        convertedScheme.type = "apiKey";
-        convertedScheme.in = scheme.in;
-        convertedScheme.name = scheme.name;
-      }
-      // Convert 'oauth2' type
-      else if (scheme.type === "oauth2") {
-        convertedScheme.type = "oauth2";
-        convertedScheme.flows = {};
-
-        if (scheme.flow === "implicit") {
-          convertedScheme.flows.implicit = {
-            authorizationUrl: scheme.authorizationUrl,
-            scopes: scheme.scopes || {},
-          };
-        } else if (scheme.flow === "accessCode") {
-          convertedScheme.flows.authorizationCode = {
-            authorizationUrl: scheme.authorizationUrl,
-            tokenUrl: scheme.tokenUrl,
-            scopes: scheme.scopes || {},
-          };
-        } else if (scheme.flow === "password") {
-          convertedScheme.flows.password = {
-            tokenUrl: scheme.tokenUrl,
-            scopes: scheme.scopes || {},
-          };
-        } else if (scheme.flow === "application") {
-          convertedScheme.flows.clientCredentials = {
-            tokenUrl: scheme.tokenUrl,
-            scopes: scheme.scopes || {},
-          };
-        }
-
-        delete convertedScheme.flow;
-        delete convertedScheme.authorizationUrl;
-        delete convertedScheme.tokenUrl;
-        delete convertedScheme.scopes;
-      }
-
-      openapi.components.securitySchemes[name] = convertedScheme;
-    }
-  }
-
-  // Convert paths
-  if (swagger.paths) {
-    for (const [path, pathItem] of Object.entries(swagger.paths as any)) {
-      openapi.paths[path] = {};
-
-      for (const [method, operation] of Object.entries(pathItem as any)) {
-        if (!["get", "put", "post", "delete", "options", "head", "patch", "trace"].includes(method)) {
-          continue;
-        }
-
-        const convertedOp: any = { ...operation };
-
-        // Convert consumes/produces to requestBody/responses content
-        if (operation.consumes || swagger.consumes) {
-          const consumes = operation.consumes || swagger.consumes || [];
-          if (operation.parameters) {
-            const bodyParam = operation.parameters.find((p: any) => p.in === "body");
-            if (bodyParam) {
-              convertedOp.requestBody = {
-                description: bodyParam.description,
-                required: bodyParam.required,
-                content: {},
-              };
-
-              for (const mimeType of consumes) {
-                convertedOp.requestBody.content[mimeType] = {
-                  schema: bodyParam.schema,
-                };
-              }
-
-              // Remove body parameter from parameters array
-              convertedOp.parameters = operation.parameters.filter((p: any) => p.in !== "body");
-            }
-          }
-        }
-
-        // Convert formData parameters to requestBody
-        if (operation.parameters) {
-          const formDataParams = operation.parameters.filter((p: any) => p.in === "formData");
-          if (formDataParams.length > 0) {
-            const properties: any = {};
-            const required: string[] = [];
-
-            for (const param of formDataParams) {
-              properties[param.name] = {
-                type: param.type,
-                description: param.description,
-                format: param.format,
-              };
-              if (param.required) {
-                required.push(param.name);
-              }
-            }
-
-            convertedOp.requestBody = {
-              content: {
-                "multipart/form-data": {
-                  schema: {
-                    type: "object",
-                    properties,
-                    ...(required.length > 0 && { required }),
-                  },
-                },
-              },
-            };
-
-            // Remove formData parameters
-            convertedOp.parameters = operation.parameters.filter((p: any) => p.in !== "formData");
-          }
-        }
-
-        // Update responses to include content
-        if (operation.responses) {
-          for (const [statusCode, response] of Object.entries(operation.responses as any)) {
-            if (response.schema) {
-              const produces = operation.produces || swagger.produces || ["application/json"];
-              convertedOp.responses[statusCode] = {
-                description: response.description || "",
-                content: {},
-              };
-
-              for (const mimeType of produces) {
-                convertedOp.responses[statusCode].content[mimeType] = {
-                  schema: response.schema,
-                };
-              }
-
-              // Preserve examples if present
-              if (response.examples) {
-                for (const mimeType of Object.keys(response.examples)) {
-                  if (convertedOp.responses[statusCode].content[mimeType]) {
-                    convertedOp.responses[statusCode].content[mimeType].example = response.examples[mimeType];
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        // Remove Swagger 2.0 specific fields
-        delete convertedOp.consumes;
-        delete convertedOp.produces;
-
-        openapi.paths[path][method] = convertedOp;
-      }
-    }
-  }
-
-  // Preserve global security if present
-  if (swagger.security) {
-    openapi.security = swagger.security;
-  }
-
-  // Preserve tags if present
-  if (swagger.tags) {
-    openapi.tags = swagger.tags;
-  }
-
-  // Preserve externalDocs if present
-  if (swagger.externalDocs) {
-    openapi.externalDocs = swagger.externalDocs;
-  }
-
-  console.log(colorize("✓ Conversion complete\n", "green"));
-  return openapi;
 }
 
 // ============================================================================
@@ -644,6 +455,7 @@ async function main(): Promise<void> {
   try {
     console.log(colorize("\n╔══════════════════════════════════════════════════════════╗", "green"));
     console.log(colorize("║  TravelPay API Specification Downloader & Converter     ║", "green"));
+    console.log(colorize("║  (Powered by Scalar)                                     ║", "green"));
     console.log(colorize("╚══════════════════════════════════════════════════════════╝", "green"));
 
     // Load existing cache
@@ -671,9 +483,9 @@ async function main(): Promise<void> {
     await writeFile(SWAGGER_FILE, content, "utf-8");
     console.log(colorize(`✓ Saved Swagger 2.0 spec → ${SWAGGER_FILE}`, "green"));
 
-    // Parse and convert
+    // Parse and convert using Scalar
     const swagger = JSON.parse(content);
-    const openapi = convertToOpenAPI(swagger);
+    const openapi = await convertToOpenAPI(content);
 
     // Save OpenAPI 3.1 spec
     await writeFile(OPENAPI_FILE, JSON.stringify(openapi, null, 2), "utf-8");

@@ -1,16 +1,10 @@
 {
-  "openapi": "3.1.0",
   "info": {
     "version": "V2",
     "title": "Payments API v2.0",
     "description": "Payments Web Api.",
     "x-swagger-net-version": "8.4.19.001"
   },
-  "servers": [
-    {
-      "url": "https://api.sandbox.travelpay.com.au"
-    }
-  ],
   "paths": {
     "/v2/batchpayments/{batchPaymentId}": {
       "get": {
@@ -21,12 +15,14 @@
         "operationId": "BatchPayments_GetBatchPayment",
         "parameters": [
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "batchPaymentId",
             "in": "path",
             "description": "Unique batch payment identifier",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "required": true
           }
         ],
         "responses": {
@@ -36,7 +32,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPaySummary"
+                    "$ref": "#/components/schemas/ApiBatchPaySummary"
                   },
                   "xml": {
                     "name": "ApiBatchPaySummary",
@@ -48,7 +44,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPaySummary"
+                    "$ref": "#/components/schemas/ApiBatchPaySummary"
                   },
                   "xml": {
                     "name": "ApiBatchPaySummary",
@@ -60,7 +56,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPaySummary"
+                    "$ref": "#/components/schemas/ApiBatchPaySummary"
                   },
                   "xml": {
                     "name": "ApiBatchPaySummary",
@@ -72,7 +68,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPaySummary"
+                    "$ref": "#/components/schemas/ApiBatchPaySummary"
                   },
                   "xml": {
                     "name": "ApiBatchPaySummary",
@@ -150,12 +146,14 @@
         "operationId": "BatchPayments_GetBatchPaymentEntries",
         "parameters": [
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "batchPaymentId",
             "in": "path",
             "description": "Batch Payment Id",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "required": true
           }
         ],
         "responses": {
@@ -165,7 +163,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPayEntry"
+                    "$ref": "#/components/schemas/ApiBatchPayEntry"
                   },
                   "xml": {
                     "name": "ApiBatchPayEntry",
@@ -177,7 +175,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPayEntry"
+                    "$ref": "#/components/schemas/ApiBatchPayEntry"
                   },
                   "xml": {
                     "name": "ApiBatchPayEntry",
@@ -189,7 +187,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPayEntry"
+                    "$ref": "#/components/schemas/ApiBatchPayEntry"
                   },
                   "xml": {
                     "name": "ApiBatchPayEntry",
@@ -201,7 +199,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiBatchPayEntry"
+                    "$ref": "#/components/schemas/ApiBatchPayEntry"
                   },
                   "xml": {
                     "name": "ApiBatchPayEntry",
@@ -277,29 +275,28 @@
         ],
         "summary": "This Method will be return to upload payments batch as a collection of json and process them",
         "operationId": "BatchPayments_CreateBatchPayment",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Batch payment created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/BatchPaymentResponse"
+                  "$ref": "#/components/schemas/BatchPaymentResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/BatchPaymentResponse"
+                  "$ref": "#/components/schemas/BatchPaymentResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/BatchPaymentResponse"
+                  "$ref": "#/components/schemas/BatchPaymentResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/BatchPaymentResponse"
+                  "$ref": "#/components/schemas/BatchPaymentResponse"
                 }
               }
             }
@@ -309,22 +306,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               }
             }
@@ -335,7 +332,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -343,7 +340,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -351,7 +348,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -359,7 +356,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -371,22 +368,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               }
             }
@@ -398,35 +395,35 @@
           }
         ],
         "requestBody": {
-          "description": "collection of batchpayment entries inside a container",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/BatchPaymentRequest"
+                "$ref": "#/components/schemas/BatchPaymentRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/BatchPaymentRequest"
+                "$ref": "#/components/schemas/BatchPaymentRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/BatchPaymentRequest"
+                "$ref": "#/components/schemas/BatchPaymentRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/BatchPaymentRequest"
+                "$ref": "#/components/schemas/BatchPaymentRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/BatchPaymentRequest"
+                "$ref": "#/components/schemas/BatchPaymentRequest"
               }
             }
-          }
+          },
+          "description": "collection of batchpayment entries inside a container",
+          "required": true
         }
       }
     },
@@ -439,11 +436,13 @@
         "operationId": "CardProxies_GetTokenDetail",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "cardProxy",
             "in": "path",
             "description": "Card proxy for which token response is required",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -452,22 +451,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/TokenResponse"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/TokenResponse"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/TokenResponse"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/TokenResponse"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               }
             }
@@ -478,7 +477,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -486,7 +485,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -494,7 +493,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -502,7 +501,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -527,11 +526,13 @@
         "operationId": "CardProxies_Delete",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "cardProxy",
             "in": "path",
             "description": "Card proxy which will be used for processing the payment",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -544,7 +545,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -552,7 +553,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -560,7 +561,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -568,7 +569,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -595,19 +596,23 @@
         "operationId": "CardProxies_GetTransactionFee",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "cardProxy",
             "in": "path",
             "description": "Card proxy which will be used for processing the payment",
-            "required": true,
-            "type": "string"
+            "required": true
           },
           {
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
             "name": "paymentAmount",
             "in": "query",
             "description": "Payment amount to determine the pricing",
-            "required": true,
-            "type": "number",
-            "format": "double"
+            "required": true
           }
         ],
         "responses": {
@@ -616,22 +621,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               }
             }
@@ -642,7 +647,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -650,7 +655,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -658,7 +663,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -666,7 +671,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -691,29 +696,28 @@
         ],
         "summary": "Generate card proxy. Not recommended for software / sites that are not PCI DSS compliant. For an easy and secure card tokenisation and payment option, see our Payment Plugin jQuery.",
         "operationId": "CardProxies_Tokenise",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Card authorisation is successful.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/CardProxyResponse"
+                  "$ref": "#/components/schemas/CardProxyResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/CardProxyResponse"
+                  "$ref": "#/components/schemas/CardProxyResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CardProxyResponse"
+                  "$ref": "#/components/schemas/CardProxyResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CardProxyResponse"
+                  "$ref": "#/components/schemas/CardProxyResponse"
                 }
               }
             }
@@ -724,7 +728,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -732,7 +736,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -740,7 +744,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -748,7 +752,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -766,22 +770,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreconditionFailedResponse"
+                  "$ref": "#/components/schemas/PreconditionFailedResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreconditionFailedResponse"
+                  "$ref": "#/components/schemas/PreconditionFailedResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreconditionFailedResponse"
+                  "$ref": "#/components/schemas/PreconditionFailedResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreconditionFailedResponse"
+                  "$ref": "#/components/schemas/PreconditionFailedResponse"
                 }
               }
             }
@@ -793,35 +797,35 @@
           }
         ],
         "requestBody": {
-          "description": "Card details required to generate a card proxy",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CardProxyRequest"
+                "$ref": "#/components/schemas/CardProxyRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CardProxyRequest"
+                "$ref": "#/components/schemas/CardProxyRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CardProxyRequest"
+                "$ref": "#/components/schemas/CardProxyRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CardProxyRequest"
+                "$ref": "#/components/schemas/CardProxyRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CardProxyRequest"
+                "$ref": "#/components/schemas/CardProxyRequest"
               }
             }
-          }
+          },
+          "description": "Card details required to generate a card proxy",
+          "required": true
         }
       }
     },
@@ -834,11 +838,13 @@
         "operationId": "Customers_GetCustomer",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
             "description": "Customer Reference provided by the merchant",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -847,22 +853,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerResponse"
+                  "$ref": "#/components/schemas/CustomerResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerResponse"
+                  "$ref": "#/components/schemas/CustomerResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerResponse"
+                  "$ref": "#/components/schemas/CustomerResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerResponse"
+                  "$ref": "#/components/schemas/CustomerResponse"
                 }
               }
             }
@@ -934,10 +940,12 @@
         "operationId": "Customers_GetCustomerStatus",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1031,10 +1039,12 @@
         "operationId": "Customers_UpdateCustomerStatus",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1047,7 +1057,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1055,7 +1065,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1063,7 +1073,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1071,7 +1081,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1135,34 +1145,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerStatusRequest"
+                "$ref": "#/components/schemas/CustomerStatusRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerStatusRequest"
+                "$ref": "#/components/schemas/CustomerStatusRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerStatusRequest"
+                "$ref": "#/components/schemas/CustomerStatusRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerStatusRequest"
+                "$ref": "#/components/schemas/CustomerStatusRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CustomerStatusRequest"
+                "$ref": "#/components/schemas/CustomerStatusRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -1175,10 +1185,12 @@
         "operationId": "Customers_GetCustomerAccount",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1187,22 +1199,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerAccountResponse"
+                  "$ref": "#/components/schemas/CustomerAccountResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerAccountResponse"
+                  "$ref": "#/components/schemas/CustomerAccountResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerAccountResponse"
+                  "$ref": "#/components/schemas/CustomerAccountResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerAccountResponse"
+                  "$ref": "#/components/schemas/CustomerAccountResponse"
                 }
               }
             }
@@ -1272,10 +1284,12 @@
         "operationId": "Customers_UpdateCustomerAccount",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1288,7 +1302,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1296,7 +1310,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1304,7 +1318,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1312,7 +1326,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1376,34 +1390,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerAccountRequest"
+                "$ref": "#/components/schemas/CustomerAccountRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerAccountRequest"
+                "$ref": "#/components/schemas/CustomerAccountRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerAccountRequest"
+                "$ref": "#/components/schemas/CustomerAccountRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerAccountRequest"
+                "$ref": "#/components/schemas/CustomerAccountRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CustomerAccountRequest"
+                "$ref": "#/components/schemas/CustomerAccountRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -1416,10 +1430,12 @@
         "operationId": "Customers_GetCustomerProfile",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1428,22 +1444,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/ICustomerProfie"
+                  "$ref": "#/components/schemas/ICustomerProfie"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/ICustomerProfie"
+                  "$ref": "#/components/schemas/ICustomerProfie"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/ICustomerProfie"
+                  "$ref": "#/components/schemas/ICustomerProfie"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/ICustomerProfie"
+                  "$ref": "#/components/schemas/ICustomerProfie"
                 }
               }
             }
@@ -1513,10 +1529,12 @@
         "operationId": "Customers_UpdateCustomerProfile",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1529,7 +1547,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1537,7 +1555,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1545,7 +1563,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1553,7 +1571,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1617,34 +1635,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerProfileRequest"
+                "$ref": "#/components/schemas/CustomerProfileRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerProfileRequest"
+                "$ref": "#/components/schemas/CustomerProfileRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerProfileRequest"
+                "$ref": "#/components/schemas/CustomerProfileRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerProfileRequest"
+                "$ref": "#/components/schemas/CustomerProfileRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CustomerProfileRequest"
+                "$ref": "#/components/schemas/CustomerProfileRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -1657,10 +1675,12 @@
         "operationId": "Customers_GetCustomerPaymentOption",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1669,22 +1689,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerPaymentOption"
+                  "$ref": "#/components/schemas/CustomerPaymentOption"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerPaymentOption"
+                  "$ref": "#/components/schemas/CustomerPaymentOption"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerPaymentOption"
+                  "$ref": "#/components/schemas/CustomerPaymentOption"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CustomerPaymentOption"
+                  "$ref": "#/components/schemas/CustomerPaymentOption"
                 }
               }
             }
@@ -1754,10 +1774,12 @@
         "operationId": "Customers_UpdateCustomerPaymentOption",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -1770,7 +1792,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1778,7 +1800,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1786,7 +1808,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1794,7 +1816,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -1858,34 +1880,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerPaymentOption"
+                "$ref": "#/components/schemas/CustomerPaymentOption"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CustomerPaymentOption"
+                "$ref": "#/components/schemas/CustomerPaymentOption"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerPaymentOption"
+                "$ref": "#/components/schemas/CustomerPaymentOption"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CustomerPaymentOption"
+                "$ref": "#/components/schemas/CustomerPaymentOption"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CustomerPaymentOption"
+                "$ref": "#/components/schemas/CustomerPaymentOption"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -1898,109 +1920,127 @@
         "operationId": "Customers_Get",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "query",
             "description": "Customer reference",
-            "required": false,
-            "type": "string"
+            "required": false
           },
           {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ],
+                "CustomerMerchantStatus": "Open: 0; AwaitingEmailVerfication: 1; AwaitingSignature: 2; SetUpIncomplete: 3; Restricted: 4; Closed: 5; OnHold: 6; PendingBankAccountVerification: 7; ReferCustomerAccount: 8"
+              }
+            },
+            "style": "form",
+            "explode": true,
             "name": "customerStatuses",
             "in": "query",
             "description": "Customer statuses. Default is all. 0 - Open, 1 - AwaitingEmailVerfication, 2 - AwaitingSignature, 3 - SetUpIncomplete, 4 - Restricted, 5 - Closed, 6 - OnHold",
-            "required": false,
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8
-              ],
-              "CustomerMerchantStatus": "Open: 0; AwaitingEmailVerfication: 1; AwaitingSignature: 2; SetUpIncomplete: 3; Restricted: 4; Closed: 5; OnHold: 6; PendingBankAccountVerification: 7; ReferCustomerAccount: 8"
-            },
-            "collectionFormat": "multi",
-            "type": "array"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "fromOpenDate",
             "in": "query",
             "description": "From Customer open date. Format: yyyy-MM-dd",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "toOpenDate",
             "in": "query",
             "description": "To Customer open date. Format: yyyy-MM-dd",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "fromClosedDate",
             "in": "query",
             "description": "From Customer closed date. Format: yyyy-MM-dd",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "toClosedDate",
             "in": "query",
             "description": "To Customer closed date. Format: yyyy-MM-dd",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "enum": [
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  148,
+                  149
+                ],
+                "PaymentOption": "AutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149"
+              }
+            },
+            "style": "form",
+            "explode": true,
             "name": "paymentOptions",
             "in": "query",
             "description": "Payment options. Default is all. 22 - AutoPay, 23 - EmailReminder, 24 - SmsReminder, 25 - FixedTerm, 26 - BatchPay, 27 - ScheduledPay, 28 - OneOff, 148 - PayID, 149 - BPAY",
-            "required": false,
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "enum": [
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                148,
-                149
-              ],
-              "PaymentOption": "AutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149"
-            },
-            "collectionFormat": "multi",
-            "type": "array"
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "offset",
             "in": "query",
             "description": "Starting index of the record. An index starts from 0. Default = 0",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "limit",
             "in": "query",
             "description": "Page size. Default = 20. Maximum page size allowed = 2000",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
+            "required": false
           }
         ],
         "responses": {
@@ -2010,7 +2050,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/CustomerResponse"
+                    "$ref": "#/components/schemas/CustomerResponse"
                   },
                   "xml": {
                     "name": "CustomerResponse",
@@ -2022,7 +2062,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/CustomerResponse"
+                    "$ref": "#/components/schemas/CustomerResponse"
                   },
                   "xml": {
                     "name": "CustomerResponse",
@@ -2034,7 +2074,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/CustomerResponse"
+                    "$ref": "#/components/schemas/CustomerResponse"
                   },
                   "xml": {
                     "name": "CustomerResponse",
@@ -2046,7 +2086,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/CustomerResponse"
+                    "$ref": "#/components/schemas/CustomerResponse"
                   },
                   "xml": {
                     "name": "CustomerResponse",
@@ -2145,29 +2185,28 @@
         ],
         "summary": "Create customer using the provided details",
         "operationId": "Customers_CreateCustomer",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Customer created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/NewCustomer"
+                  "$ref": "#/components/schemas/NewCustomer"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/NewCustomer"
+                  "$ref": "#/components/schemas/NewCustomer"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/NewCustomer"
+                  "$ref": "#/components/schemas/NewCustomer"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/NewCustomer"
+                  "$ref": "#/components/schemas/NewCustomer"
                 }
               }
             }
@@ -2203,7 +2242,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2211,7 +2250,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2219,7 +2258,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2227,7 +2266,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2291,35 +2330,35 @@
           }
         ],
         "requestBody": {
-          "description": "Customer details to create in the system",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/NewCustomer"
+                "$ref": "#/components/schemas/NewCustomer"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/NewCustomer"
+                "$ref": "#/components/schemas/NewCustomer"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/NewCustomer"
+                "$ref": "#/components/schemas/NewCustomer"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/NewCustomer"
+                "$ref": "#/components/schemas/NewCustomer"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/NewCustomer"
+                "$ref": "#/components/schemas/NewCustomer"
               }
             }
-          }
+          },
+          "description": "Customer details to create in the system",
+          "required": true
         }
       }
     },
@@ -2332,11 +2371,13 @@
         "operationId": "Customers_UpdateCustomerReference",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "path",
             "description": "Old customer reference",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -2349,7 +2390,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2357,7 +2398,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2365,7 +2406,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2373,7 +2414,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2437,8 +2478,6 @@
           }
         ],
         "requestBody": {
-          "description": "New customer reference",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -2465,7 +2504,9 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "description": "New customer reference",
+          "required": true
         }
       }
     },
@@ -2482,22 +2523,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PingResponse"
+                  "$ref": "#/components/schemas/PingResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PingResponse"
+                  "$ref": "#/components/schemas/PingResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PingResponse"
+                  "$ref": "#/components/schemas/PingResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PingResponse"
+                  "$ref": "#/components/schemas/PingResponse"
                 }
               }
             }
@@ -2519,11 +2560,13 @@
         "operationId": "Payments_GetPayment",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "paymentReference",
             "in": "path",
             "description": "Payment Reference",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -2532,22 +2575,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               }
             }
@@ -2619,11 +2662,13 @@
         "operationId": "Payments_GetPaymentByUniqueId",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "merchantUniqueId",
             "in": "path",
             "description": "Merchant Unique Id. This is provided by the merchant when creating an payment.",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -2632,22 +2677,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               }
             }
@@ -2719,11 +2764,13 @@
         "operationId": "Payments_GetRefundRequest",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "paymentReference",
             "in": "path",
             "description": "Payment Reference",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -2733,7 +2780,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2745,7 +2792,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2757,7 +2804,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2769,7 +2816,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2786,7 +2833,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2794,7 +2841,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2802,7 +2849,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2810,7 +2857,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2860,11 +2907,13 @@
         "operationId": "Payments_CreateRefundRequests",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "paymentReference",
             "in": "path",
             "description": "Payment Reference",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -2874,7 +2923,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2886,7 +2935,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2898,7 +2947,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2910,7 +2959,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/RefundResponse"
+                    "$ref": "#/components/schemas/RefundResponse"
                   },
                   "xml": {
                     "name": "RefundResponse",
@@ -2952,7 +3001,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2960,7 +3009,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2968,7 +3017,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -2976,7 +3025,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3043,34 +3092,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/RefundRequest"
+                "$ref": "#/components/schemas/RefundRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/RefundRequest"
+                "$ref": "#/components/schemas/RefundRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/RefundRequest"
+                "$ref": "#/components/schemas/RefundRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/RefundRequest"
+                "$ref": "#/components/schemas/RefundRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/RefundRequest"
+                "$ref": "#/components/schemas/RefundRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -3083,16 +3132,20 @@
         "operationId": "Payments_GetV2PaymentsUniqueIdByPaymentReferenceRefundrequestsByRefundRequestUniqueId",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "paymentReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           },
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "refundRequestUniqueId",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -3101,22 +3154,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/RefundResponse"
+                  "$ref": "#/components/schemas/RefundResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/RefundResponse"
+                  "$ref": "#/components/schemas/RefundResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/RefundResponse"
+                  "$ref": "#/components/schemas/RefundResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/RefundResponse"
+                  "$ref": "#/components/schemas/RefundResponse"
                 }
               }
             }
@@ -3212,93 +3265,111 @@
         "operationId": "Payments_Get",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "query",
-            "required": false,
-            "type": "string"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "fromProcessedDate",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "toProcessedDate",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "settlementDate",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
-            "name": "paymentSettlement",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "enum": [
-              0,
-              1,
-              2
-            ],
-            "PaymentSettlement": "All: 0; Settled: 1; NotSettled: 2"
-          },
-          {
-            "name": "transactionTypes",
-            "in": "query",
-            "required": false,
-            "items": {
+            "schema": {
               "type": "integer",
               "format": "int32",
               "enum": [
+                0,
                 1,
-                2,
-                3,
-                4,
-                5,
-                6
-              ],
-              "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+                2
+              ]
             },
-            "collectionFormat": "multi",
-            "type": "array"
+            "name": "paymentSettlement",
+            "in": "query",
+            "required": false,
+            "PaymentSettlement": "All: 0; Settled: 1; NotSettled: 2"
           },
           {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ],
+                "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "name": "transactionTypes",
+            "in": "query",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
             "name": "isRecalled",
             "in": "query",
-            "required": false,
-            "type": "boolean"
+            "required": false
           },
           {
+            "schema": {
+              "type": "boolean"
+            },
             "name": "isRefunded",
             "in": "query",
-            "required": false,
-            "type": "boolean"
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "offset",
             "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "limit",
             "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
+            "required": false
           }
         ],
         "responses": {
@@ -3308,7 +3379,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PaymentResponse"
+                    "$ref": "#/components/schemas/PaymentResponse"
                   },
                   "xml": {
                     "name": "PaymentResponse",
@@ -3320,7 +3391,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PaymentResponse"
+                    "$ref": "#/components/schemas/PaymentResponse"
                   },
                   "xml": {
                     "name": "PaymentResponse",
@@ -3332,7 +3403,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PaymentResponse"
+                    "$ref": "#/components/schemas/PaymentResponse"
                   },
                   "xml": {
                     "name": "PaymentResponse",
@@ -3344,7 +3415,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PaymentResponse"
+                    "$ref": "#/components/schemas/PaymentResponse"
                   },
                   "xml": {
                     "name": "PaymentResponse",
@@ -3418,29 +3489,28 @@
         ],
         "summary": "Perform OneOff payment for a registered customer with customer reference and payment amount",
         "operationId": "Payments_Post",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Payment is processed.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentResponse"
+                  "$ref": "#/components/schemas/PaymentResponse"
                 }
               }
             }
@@ -3476,7 +3546,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3484,7 +3554,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3492,7 +3562,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3500,7 +3570,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3539,35 +3609,35 @@
           }
         ],
         "requestBody": {
-          "description": "For making payment for existing customer, use Customer Reference and Payment Amount\r\nFor making card proxy based, use all the fields in the request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/PaymentRequest"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/PaymentRequest"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/PaymentRequest"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/PaymentRequest"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/PaymentRequest"
+                "$ref": "#/components/schemas/PaymentRequest"
               }
             }
-          }
+          },
+          "description": "For making payment for existing customer, use Customer Reference and Payment Amount\r\nFor making card proxy based, use all the fields in the request",
+          "required": true
         }
       }
     },
@@ -3579,10 +3649,12 @@
         "operationId": "Preauths_Get",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "preauthReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -3591,22 +3663,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               }
             }
@@ -3652,40 +3724,48 @@
         "operationId": "Preauths_GetV2Preauths",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "customerReference",
             "in": "query",
-            "required": false,
-            "type": "string"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "fromProcessedDate",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
             "name": "toProcessedDate",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "offset",
             "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "required": false
           },
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "limit",
             "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
+            "required": false
           }
         ],
         "responses": {
@@ -3695,7 +3775,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PreauthResponse"
+                    "$ref": "#/components/schemas/PreauthResponse"
                   },
                   "xml": {
                     "name": "PreauthResponse",
@@ -3707,7 +3787,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PreauthResponse"
+                    "$ref": "#/components/schemas/PreauthResponse"
                   },
                   "xml": {
                     "name": "PreauthResponse",
@@ -3719,7 +3799,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PreauthResponse"
+                    "$ref": "#/components/schemas/PreauthResponse"
                   },
                   "xml": {
                     "name": "PreauthResponse",
@@ -3731,7 +3811,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/PreauthResponse"
+                    "$ref": "#/components/schemas/PreauthResponse"
                   },
                   "xml": {
                     "name": "PreauthResponse",
@@ -3754,29 +3834,28 @@
           "Preauths"
         ],
         "operationId": "Preauths_Post",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Preauth is created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PreauthResponse"
+                  "$ref": "#/components/schemas/PreauthResponse"
                 }
               }
             }
@@ -3812,7 +3891,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3820,7 +3899,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3828,7 +3907,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3836,7 +3915,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3849,7 +3928,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3857,7 +3936,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3865,7 +3944,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3873,7 +3952,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -3912,34 +3991,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/PreauthRequest"
+                "$ref": "#/components/schemas/PreauthRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/PreauthRequest"
+                "$ref": "#/components/schemas/PreauthRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/PreauthRequest"
+                "$ref": "#/components/schemas/PreauthRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/PreauthRequest"
+                "$ref": "#/components/schemas/PreauthRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/PreauthRequest"
+                "$ref": "#/components/schemas/PreauthRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -3951,10 +4030,12 @@
         "operationId": "Preauths_VoidPreauth",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "preauthReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -3963,22 +4044,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/VoidCardResponse"
+                  "$ref": "#/components/schemas/VoidCardResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/VoidCardResponse"
+                  "$ref": "#/components/schemas/VoidCardResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/VoidCardResponse"
+                  "$ref": "#/components/schemas/VoidCardResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/VoidCardResponse"
+                  "$ref": "#/components/schemas/VoidCardResponse"
                 }
               }
             }
@@ -4014,7 +4095,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4022,7 +4103,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4030,7 +4111,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4038,7 +4119,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4111,10 +4192,12 @@
         "operationId": "Preauths_CapturePreauth",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "preauthReference",
             "in": "path",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -4123,22 +4206,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/CaptureCardResponse"
+                  "$ref": "#/components/schemas/CaptureCardResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/CaptureCardResponse"
+                  "$ref": "#/components/schemas/CaptureCardResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CaptureCardResponse"
+                  "$ref": "#/components/schemas/CaptureCardResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/CaptureCardResponse"
+                  "$ref": "#/components/schemas/CaptureCardResponse"
                 }
               }
             }
@@ -4199,7 +4282,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4207,7 +4290,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4215,7 +4298,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4223,7 +4306,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4287,34 +4370,34 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/CaptureCardRequest"
+                "$ref": "#/components/schemas/CaptureCardRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/CaptureCardRequest"
+                "$ref": "#/components/schemas/CaptureCardRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/CaptureCardRequest"
+                "$ref": "#/components/schemas/CaptureCardRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/CaptureCardRequest"
+                "$ref": "#/components/schemas/CaptureCardRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/CaptureCardRequest"
+                "$ref": "#/components/schemas/CaptureCardRequest"
               }
             }
-          }
+          },
+          "required": true
         }
       }
     },
@@ -4327,11 +4410,13 @@
         "operationId": "Proxies_GetPaymentAccountProxy",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "proxy",
             "in": "path",
             "description": "Payment account proxy",
-            "required": true,
-            "type": "string"
+            "required": true
           }
         ],
         "responses": {
@@ -4340,22 +4425,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentAccountProxyResponse"
+                  "$ref": "#/components/schemas/PaymentAccountProxyResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentAccountProxyResponse"
+                  "$ref": "#/components/schemas/PaymentAccountProxyResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentAccountProxyResponse"
+                  "$ref": "#/components/schemas/PaymentAccountProxyResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PaymentAccountProxyResponse"
+                  "$ref": "#/components/schemas/PaymentAccountProxyResponse"
                 }
               }
             }
@@ -4366,7 +4451,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4374,7 +4459,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4382,7 +4467,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4390,7 +4475,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4417,19 +4502,23 @@
         "operationId": "Proxies_GetTransactionFee",
         "parameters": [
           {
+            "schema": {
+              "type": "string"
+            },
             "name": "proxy",
             "in": "path",
             "description": "Proxy which will be used for processing the payment",
-            "required": true,
-            "type": "string"
+            "required": true
           },
           {
+            "schema": {
+              "type": "number",
+              "format": "double"
+            },
             "name": "paymentAmount",
             "in": "query",
             "description": "Payment amount to determine the pricing",
-            "required": true,
-            "type": "number",
-            "format": "double"
+            "required": true
           }
         ],
         "responses": {
@@ -4438,22 +4527,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/PricingResponse"
+                  "$ref": "#/components/schemas/PricingResponse"
                 }
               }
             }
@@ -4464,7 +4553,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4472,7 +4561,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4480,7 +4569,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4488,7 +4577,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4515,12 +4604,14 @@
         "operationId": "RequestPays_GetRequestPay",
         "parameters": [
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "requestPayId",
             "in": "path",
             "description": "Request Pay Identifier",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "required": true
           }
         ],
         "responses": {
@@ -4529,22 +4620,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/ApiRequestPaySummary"
+                  "$ref": "#/components/schemas/ApiRequestPaySummary"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/ApiRequestPaySummary"
+                  "$ref": "#/components/schemas/ApiRequestPaySummary"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/ApiRequestPaySummary"
+                  "$ref": "#/components/schemas/ApiRequestPaySummary"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/ApiRequestPaySummary"
+                  "$ref": "#/components/schemas/ApiRequestPaySummary"
                 }
               }
             }
@@ -4616,12 +4707,14 @@
         "operationId": "RequestPays_GetRequestPayEntries",
         "parameters": [
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "requestPayId",
             "in": "path",
             "description": "Request pay identifier",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "required": true
           }
         ],
         "responses": {
@@ -4631,7 +4724,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiRequestPayEntry"
+                    "$ref": "#/components/schemas/ApiRequestPayEntry"
                   },
                   "xml": {
                     "name": "ApiRequestPayEntry",
@@ -4643,7 +4736,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiRequestPayEntry"
+                    "$ref": "#/components/schemas/ApiRequestPayEntry"
                   },
                   "xml": {
                     "name": "ApiRequestPayEntry",
@@ -4655,7 +4748,7 @@
               "application/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiRequestPayEntry"
+                    "$ref": "#/components/schemas/ApiRequestPayEntry"
                   },
                   "xml": {
                     "name": "ApiRequestPayEntry",
@@ -4667,7 +4760,7 @@
               "text/xml": {
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/ApiRequestPayEntry"
+                    "$ref": "#/components/schemas/ApiRequestPayEntry"
                   },
                   "xml": {
                     "name": "ApiRequestPayEntry",
@@ -4743,29 +4836,28 @@
         ],
         "summary": "This Method will be return to upload request payments as a collection of json and process them",
         "operationId": "RequestPays_CreateRequestPayment",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Request to pay created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/RequestPayResponse"
+                  "$ref": "#/components/schemas/RequestPayResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/RequestPayResponse"
+                  "$ref": "#/components/schemas/RequestPayResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/RequestPayResponse"
+                  "$ref": "#/components/schemas/RequestPayResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/RequestPayResponse"
+                  "$ref": "#/components/schemas/RequestPayResponse"
                 }
               }
             }
@@ -4775,22 +4867,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/AmbiguousResult"
+                  "$ref": "#/components/schemas/AmbiguousResult"
                 }
               }
             }
@@ -4801,7 +4893,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4809,7 +4901,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4817,7 +4909,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4825,7 +4917,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4837,22 +4929,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/InternalServerErrorResult"
+                  "$ref": "#/components/schemas/InternalServerErrorResult"
                 }
               }
             }
@@ -4864,35 +4956,35 @@
           }
         ],
         "requestBody": {
-          "description": "Collection of request pay entries inside a container",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/RequestPayRequest"
+                "$ref": "#/components/schemas/RequestPayRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/RequestPayRequest"
+                "$ref": "#/components/schemas/RequestPayRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/RequestPayRequest"
+                "$ref": "#/components/schemas/RequestPayRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/RequestPayRequest"
+                "$ref": "#/components/schemas/RequestPayRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/RequestPayRequest"
+                "$ref": "#/components/schemas/RequestPayRequest"
               }
             }
-          }
+          },
+          "description": "Collection of request pay entries inside a container",
+          "required": true
         }
       }
     },
@@ -4905,11 +4997,13 @@
         "operationId": "Sessions_Get",
         "parameters": [
           {
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
             "name": "sessionId",
             "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
+            "required": true
           }
         ],
         "responses": {},
@@ -4927,29 +5021,28 @@
         ],
         "summary": "Used to create session for Payment Plugin. The session created will have an expiry.",
         "operationId": "Sessions_Post",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Session created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/SessionResponse"
+                  "$ref": "#/components/schemas/SessionResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/definitions/SessionResponse"
+                  "$ref": "#/components/schemas/SessionResponse"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/definitions/SessionResponse"
+                  "$ref": "#/components/schemas/SessionResponse"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/definitions/SessionResponse"
+                  "$ref": "#/components/schemas/SessionResponse"
                 }
               }
             }
@@ -4960,7 +5053,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4968,7 +5061,7 @@
               "text/json": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4976,7 +5069,7 @@
               "application/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -4984,7 +5077,7 @@
               "text/xml": {
                 "schema": {
                   "additionalProperties": {
-                    "$ref": "#/definitions/ModelState"
+                    "$ref": "#/components/schemas/ModelState"
                   },
                   "type": "object"
                 }
@@ -5001,39 +5094,83 @@
           }
         ],
         "requestBody": {
-          "description": "Session request data.",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/SessionRequest"
+                "$ref": "#/components/schemas/SessionRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/definitions/SessionRequest"
+                "$ref": "#/components/schemas/SessionRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/definitions/SessionRequest"
+                "$ref": "#/components/schemas/SessionRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/definitions/SessionRequest"
+                "$ref": "#/components/schemas/SessionRequest"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/definitions/SessionRequest"
+                "$ref": "#/components/schemas/SessionRequest"
               }
             }
-          }
+          },
+          "description": "Session request data.",
+          "required": true
         }
       }
     }
   },
+  "tags": [
+    {
+      "name": "BatchPayments",
+      "description": "Manage Batch Payments. You can create or fetch batch payments."
+    },
+    {
+      "name": "CardProxies",
+      "description": "Manage card proxies."
+    },
+    {
+      "name": "Customers",
+      "description": "Manage customers"
+    },
+    {
+      "name": "Diagnostics",
+      "description": "System Diagnostics"
+    },
+    {
+      "name": "Payments",
+      "description": "Manage Payments. You can create or fetch one-off payments."
+    },
+    {
+      "name": "Preauths",
+      "description": "Preauth -- Create, Fetch, Void and Capture"
+    },
+    {
+      "name": "Proxies",
+      "description": "Manage card and bank proxies."
+    },
+    {
+      "name": "RequestPays",
+      "description": "Manage request to pays.You can create or fetch request pays."
+    },
+    {
+      "name": "Sessions",
+      "description": "Sessions"
+    }
+  ],
+  "openapi": "3.1.1",
+  "servers": [
+    {
+      "url": "https://api.sandbox.travelpay.com.au"
+    }
+  ],
   "components": {
     "schemas": {
       "ApiBatchPaySummary": {
@@ -5267,7 +5404,7 @@
           "batchPaymentEntries": {
             "description": "Collection of BatchPayment entry",
             "items": {
-              "$ref": "#/definitions/BatchPaymentDataRecord"
+              "$ref": "#/components/schemas/BatchPaymentDataRecord"
             },
             "xml": {
               "name": "BatchPaymentDataRecord",
@@ -5362,13 +5499,13 @@
         "description": "Encapsulates the state of model binding to a property of an action-method argument, or to the argument itself.",
         "properties": {
           "value": {
-            "$ref": "#/definitions/ValueProviderResult",
+            "$ref": "#/components/schemas/ValueProviderResult",
             "description": "Gets a {System.Web.Http.ValueProviders.ValueProviderResult} object that encapsulates the value that was being bound during model binding."
           },
           "errors": {
             "description": "Gets a {System.Web.Http.ModelBinding.ModelErrorCollection} object that contains any errors that occurred during model binding.",
             "items": {
-              "$ref": "#/definitions/ModelError"
+              "$ref": "#/components/schemas/ModelError"
             },
             "readOnly": true,
             "xml": {
@@ -5474,7 +5611,7 @@
         "description": "Pricing response.",
         "properties": {
           "pricing": {
-            "$ref": "#/definitions/Pricing",
+            "$ref": "#/components/schemas/Pricing",
             "description": "Applicable pricing based on provided card and payment details."
           }
         },
@@ -5529,8 +5666,10 @@
           },
           "expiry": {
             "description": "Card expiry in MM/yy format.",
-            "example": "MM/yy",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "MM/yy"
+            ]
           },
           "cardHolderName": {
             "description": "Card holder name.",
@@ -5542,7 +5681,7 @@
             "format": "double"
           },
           "threeDSecureData": {
-            "$ref": "#/definitions/ThreeDSecureData",
+            "$ref": "#/components/schemas/ThreeDSecureData",
             "description": "Conditional. Pass the values if 3DSecure is required"
           }
         },
@@ -5558,7 +5697,7 @@
             "type": "boolean"
           },
           "browserData": {
-            "$ref": "#/definitions/ThreeDSecureBrowserData",
+            "$ref": "#/components/schemas/ThreeDSecureBrowserData",
             "description": "Cardholder's browser data. Mandatory if UseThreeDSecure is true"
           },
           "callbackUrl": {
@@ -5646,7 +5785,7 @@
             "type": "string"
           },
           "pricing": {
-            "$ref": "#/definitions/Pricing",
+            "$ref": "#/components/schemas/Pricing",
             "description": "Applicable pricing based on provided card and payment details."
           },
           "redirectUrl": {
@@ -5684,15 +5823,15 @@
         "description": "Customer information",
         "properties": {
           "profile": {
-            "$ref": "#/definitions/CustomerProfile",
+            "$ref": "#/components/schemas/CustomerProfile",
             "description": "Customer profile"
           },
           "account": {
-            "$ref": "#/definitions/CustomerAccountResponse",
+            "$ref": "#/components/schemas/CustomerAccountResponse",
             "description": "Customer Payment account"
           },
           "paymentOption": {
-            "$ref": "#/definitions/CustomerPaymentOption",
+            "$ref": "#/components/schemas/CustomerPaymentOption",
             "description": "Customer payment option"
           },
           "merchantName": {
@@ -5739,7 +5878,7 @@
             "type": "string"
           },
           "address": {
-            "$ref": "#/definitions/CustomerAddress"
+            "$ref": "#/components/schemas/CustomerAddress"
           },
           "email": {
             "type": "string"
@@ -5780,10 +5919,10 @@
       "CustomerAccountResponse": {
         "properties": {
           "bankAccount": {
-            "$ref": "#/definitions/BankAccount"
+            "$ref": "#/components/schemas/BankAccount"
           },
           "creditCard": {
-            "$ref": "#/definitions/CreditCard"
+            "$ref": "#/components/schemas/CreditCard"
           }
         },
         "xml": {
@@ -5859,11 +5998,11 @@
             "NotificationMethod": "None: 0; Sms: 1; Email: 2"
           },
           "payIdDetail": {
-            "$ref": "#/definitions/PayIdDetail",
+            "$ref": "#/components/schemas/PayIdDetail",
             "description": "return PayID Details"
           },
           "bPayDetail": {
-            "$ref": "#/definitions/BPayDetail",
+            "$ref": "#/components/schemas/BPayDetail",
             "description": "return BPAY Details"
           }
         },
@@ -6062,21 +6201,21 @@
         "description": "Customer Bank/Credit Card account. Use PaymentAccountProxy or CreditCardProxy or BankAccount. \r\nIf more than one details are passed, only one detail used as per the following order, 1. PaymentAccountProxy 2. BankAccount 3. CreditCardProxy \r\nPreferred option is PaymentAccountProxy",
         "properties": {
           "bankAccount": {
-            "$ref": "#/definitions/BankAccount",
+            "$ref": "#/components/schemas/BankAccount",
             "description": "Customer bank account details.\r\nProvide valid BSB and Account Number."
           },
           "creditCardProxy": {
-            "$ref": "#/definitions/CreditCardProxy",
+            "$ref": "#/components/schemas/CreditCardProxy",
             "description": "Customer credit / debit card proxy. \r\nProxy is generated using the /cardProxies API or Payments Plugin."
           },
           "paymentAccountProxy": {
-            "$ref": "#/definitions/AccountProxy",
+            "$ref": "#/components/schemas/AccountProxy",
             "description": "This replaces the BankAccount and CreditCardProxy. \r\nProxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
           },
           "addtionalPaymentAccountProxies": {
             "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card.",
             "items": {
-              "$ref": "#/definitions/AccountProxy"
+              "$ref": "#/components/schemas/AccountProxy"
             },
             "xml": {
               "name": "AccountProxy",
@@ -6158,7 +6297,7 @@
             "type": "string"
           },
           "address": {
-            "$ref": "#/definitions/CustomerAddress"
+            "$ref": "#/components/schemas/CustomerAddress"
           },
           "email": {
             "type": "string"
@@ -6219,7 +6358,7 @@
             "type": "string"
           },
           "address": {
-            "$ref": "#/definitions/CustomerAddress"
+            "$ref": "#/components/schemas/CustomerAddress"
           },
           "email": {
             "type": "string"
@@ -6291,7 +6430,7 @@
             "type": "string"
           },
           "address": {
-            "$ref": "#/definitions/CustomerAddress",
+            "$ref": "#/components/schemas/CustomerAddress",
             "description": "Customer address"
           },
           "email": {
@@ -6380,7 +6519,7 @@
           "additionalReferences": {
             "description": "Additional references if you have more than one references to manage. Eg: Parents paying childcare fee for more than one kid.",
             "items": {
-              "$ref": "#/definitions/AdditionalReference"
+              "$ref": "#/components/schemas/AdditionalReference"
             },
             "xml": {
               "name": "AdditionalReference",
@@ -6389,11 +6528,11 @@
             "type": "array"
           },
           "bankAccount": {
-            "$ref": "#/definitions/BankAccount",
+            "$ref": "#/components/schemas/BankAccount",
             "description": "Customer bank account details."
           },
           "card": {
-            "$ref": "#/definitions/CreditCardProxy",
+            "$ref": "#/components/schemas/CreditCardProxy",
             "description": "Customer credit / debit card proxy. (Token is generated using the /tokens api."
           },
           "enableBPayOption": {
@@ -6409,13 +6548,13 @@
             "type": "boolean"
           },
           "paymentAccountProxy": {
-            "$ref": "#/definitions/AccountProxy",
+            "$ref": "#/components/schemas/AccountProxy",
             "description": "This replaces the BankAccount and Card properties. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card."
           },
           "additionalPaymentAccountProxies": {
             "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card.",
             "items": {
-              "$ref": "#/definitions/AccountProxy"
+              "$ref": "#/components/schemas/AccountProxy"
             },
             "xml": {
               "name": "AccountProxy",
@@ -6484,11 +6623,11 @@
             "type": "string"
           },
           "payIdDetail": {
-            "$ref": "#/definitions/PayIdDetail",
+            "$ref": "#/components/schemas/PayIdDetail",
             "description": "return PayID Details"
           },
           "bPayDetail": {
-            "$ref": "#/definitions/BPayDetail",
+            "$ref": "#/components/schemas/BPayDetail",
             "description": "return BPAY Details"
           },
           "customerReference": {
@@ -6523,7 +6662,7 @@
             "type": "string"
           },
           "address": {
-            "$ref": "#/definitions/CustomerAddress",
+            "$ref": "#/components/schemas/CustomerAddress",
             "description": "Customer address"
           },
           "email": {
@@ -6612,7 +6751,7 @@
           "additionalReferences": {
             "description": "Additional references if you have more than one references to manage. Eg: Parents paying childcare fee for more than one kid.",
             "items": {
-              "$ref": "#/definitions/AdditionalReference"
+              "$ref": "#/components/schemas/AdditionalReference"
             },
             "xml": {
               "name": "AdditionalReference",
@@ -6621,11 +6760,11 @@
             "type": "array"
           },
           "bankAccount": {
-            "$ref": "#/definitions/BankAccount",
+            "$ref": "#/components/schemas/BankAccount",
             "description": "Customer bank account details."
           },
           "card": {
-            "$ref": "#/definitions/CreditCardProxy",
+            "$ref": "#/components/schemas/CreditCardProxy",
             "description": "Customer credit / debit card proxy. (Token is generated using the /tokens api."
           },
           "enableBPayOption": {
@@ -6641,13 +6780,13 @@
             "type": "boolean"
           },
           "paymentAccountProxy": {
-            "$ref": "#/definitions/AccountProxy",
+            "$ref": "#/components/schemas/AccountProxy",
             "description": "This replaces the BankAccount and Card properties. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card."
           },
           "additionalPaymentAccountProxies": {
             "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card.",
             "items": {
-              "$ref": "#/definitions/AccountProxy"
+              "$ref": "#/components/schemas/AccountProxy"
             },
             "xml": {
               "name": "AccountProxy",
@@ -6901,13 +7040,13 @@
             "format": "double"
           },
           "settlementPostPartialRefund": {
-            "$ref": "#/definitions/SettlementPayment",
+            "$ref": "#/components/schemas/SettlementPayment",
             "description": "Balance Payment if any is available"
           },
           "refunds": {
             "description": "All refunds processed on this payment",
             "items": {
-              "$ref": "#/definitions/SubPayment"
+              "$ref": "#/components/schemas/SubPayment"
             },
             "xml": {
               "name": "SubPayment",
@@ -6918,7 +7057,7 @@
           "recalls": {
             "description": "All recalls processed on this payment",
             "items": {
-              "$ref": "#/definitions/SubPayment"
+              "$ref": "#/components/schemas/SubPayment"
             },
             "xml": {
               "name": "SubPayment",
@@ -7151,7 +7290,7 @@
             "type": "string"
           },
           "paymentAccountProxy": {
-            "$ref": "#/definitions/AccountProxy",
+            "$ref": "#/components/schemas/AccountProxy",
             "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
           },
           "companyName": {
@@ -7203,11 +7342,11 @@
             "OverrideFeePayer": "Default: 0; Merchant: 1; Customer: 2"
           },
           "card": {
-            "$ref": "#/definitions/PaymentCard",
+            "$ref": "#/components/schemas/PaymentCard",
             "description": "PAN detail"
           },
           "threeDSecureData": {
-            "$ref": "#/definitions/ThreeDSecureData",
+            "$ref": "#/components/schemas/ThreeDSecureData",
             "description": "Optional. 3DSecure details"
           }
         },
@@ -7487,7 +7626,7 @@
             "type": "string"
           },
           "paymentAccountProxy": {
-            "$ref": "#/definitions/AccountProxy",
+            "$ref": "#/components/schemas/AccountProxy",
             "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
           },
           "companyName": {
@@ -7535,11 +7674,11 @@
             "OverrideFeePayer": "Default: 0; Merchant: 1; Customer: 2"
           },
           "card": {
-            "$ref": "#/definitions/PaymentCard",
+            "$ref": "#/components/schemas/PaymentCard",
             "description": "PAN detail"
           },
           "threeDSecureData": {
-            "$ref": "#/definitions/ThreeDSecureData",
+            "$ref": "#/components/schemas/ThreeDSecureData",
             "description": "Optional. 3DSecure details"
           }
         },
@@ -7824,83 +7963,115 @@
         "properties": {
           "accountType": {
             "description": "Type of payment account",
-            "example": "Card",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Card"
+            ]
           },
           "cardHolderName": {
             "description": "Card holder name (Card accounts only)",
-            "example": "John Smith",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "John Smith"
+            ]
           },
           "cardNumber": {
             "description": "Masked card number (Card accounts only)",
-            "example": "****1234",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "****1234"
+            ]
           },
           "cardExpiry": {
             "description": "Card expiry date (Card accounts only)",
-            "example": "12/25",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "12/25"
+            ]
           },
           "cardType": {
             "description": "Card type (Card accounts only)",
-            "example": "Visa",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Visa"
+            ]
           },
           "processorToken": {
             "description": "Processor token (Card accounts only)",
-            "example": "tok_1234567890",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "tok_1234567890"
+            ]
           },
           "processorName": {
             "description": "Processor name (Card accounts only)",
-            "example": "Stripe",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Stripe"
+            ]
           },
           "processor3DSPayload": {
             "description": "3DS payload (Card accounts only)",
-            "example": "eyJhbGciOiJIUzI1NiJ9...",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "eyJhbGciOiJIUzI1NiJ9..."
+            ]
           },
           "accountName": {
             "description": "Account name (Bank/PayTo accounts)",
-            "example": "John Smith",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "John Smith"
+            ]
           },
           "accountNumber": {
             "description": "Account number (Bank/PayTo accounts)",
-            "example": "12345678",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "12345678"
+            ]
           },
           "bsb": {
             "description": "BSB code (Bank/PayTo accounts)",
-            "example": "123-456",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "123-456"
+            ]
           },
           "payId": {
             "description": "PayId identifier (PayId accounts only)",
-            "example": "john.smith@email.com",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "john.smith@email.com"
+            ]
           },
           "payIdName": {
             "description": "PayId display name (PayId accounts only)",
-            "example": "John Smith",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "John Smith"
+            ]
           },
           "payToStatus": {
             "description": "PayTo status (PayTo accounts only)",
-            "example": "Active",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Active"
+            ]
           },
           "uId": {
             "description": "Unique identifier (PayTo accounts only)",
-            "example": "12345678-1234-5678-9012-123456789012",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "12345678-1234-5678-9012-123456789012"
+            ]
           },
           "statusDescription": {
             "description": "Status description (PayTo accounts only)",
-            "example": "Account is active and ready for payments",
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Account is active and ready for payments"
+            ]
           }
         },
         "xml": {
@@ -8098,7 +8269,7 @@
           "requestPaymentEntries": {
             "description": "Collection of RequestPayment entry",
             "items": {
-              "$ref": "#/definitions/RequestPayRequestRecord"
+              "$ref": "#/components/schemas/RequestPayRequestRecord"
             },
             "xml": {
               "name": "RequestPayRequestRecord",
@@ -8297,9 +8468,11 @@
           },
           "timestamp": {
             "description": "Required.\r\nTimestamp is required from v4. Provide current datetime in UTC ISO 8601 format as timestamp. format: yyyy-MM-ddTHH:mm:ss",
-            "example": "2025-10-01T02:15:56",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "examples": [
+              "2025-10-01T02:15:56"
+            ]
           },
           "paymentAccountProxy": {
             "description": "Conditional.\r\nUse this parameter to make a payment using a payment account proxy which is generated using mode '1'.",
@@ -8369,11 +8542,11 @@
             "type": "string"
           },
           "allowedPaymentMethods": {
-            "$ref": "#/definitions/PluginPaymentMethods",
+            "$ref": "#/components/schemas/PluginPaymentMethods",
             "description": "Allowed Payment methods"
           },
           "customization": {
-            "$ref": "#/definitions/PluginCustomization",
+            "$ref": "#/components/schemas/PluginCustomization",
             "description": "Optional.\r\nFields to customize the plugin fields"
           },
           "fingerprint": {
@@ -8493,43 +8666,5 @@
         "in": "header"
       }
     }
-  },
-  "tags": [
-    {
-      "name": "BatchPayments",
-      "description": "Manage Batch Payments. You can create or fetch batch payments."
-    },
-    {
-      "name": "CardProxies",
-      "description": "Manage card proxies."
-    },
-    {
-      "name": "Customers",
-      "description": "Manage customers"
-    },
-    {
-      "name": "Diagnostics",
-      "description": "System Diagnostics"
-    },
-    {
-      "name": "Payments",
-      "description": "Manage Payments. You can create or fetch one-off payments."
-    },
-    {
-      "name": "Preauths",
-      "description": "Preauth -- Create, Fetch, Void and Capture"
-    },
-    {
-      "name": "Proxies",
-      "description": "Manage card and bank proxies."
-    },
-    {
-      "name": "RequestPays",
-      "description": "Manage request to pays.You can create or fetch request pays."
-    },
-    {
-      "name": "Sessions",
-      "description": "Sessions"
-    }
-  ]
+  }
 }
