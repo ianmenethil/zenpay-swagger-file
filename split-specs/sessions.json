@@ -1,0 +1,3651 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "V2",
+    "title": "Payments API v2.0",
+    "description": "Payments Web Api.",
+    "x-swagger-net-version": "8.4.19.001"
+  },
+  "servers": [
+    {
+      "url": "https://api.sandbox.travelpay.com.au"
+    }
+  ],
+  "paths": {
+    "/v2/sessions/{sessionId}": {
+      "get": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "Not supported",
+        "operationId": "Sessions_Get",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "Used to create session for Payment Plugin. The session created will have an expiry.",
+        "operationId": "Sessions_Post",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Session created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/SessionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/definitions/SessionResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/definitions/SessionResponse"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/definitions/SessionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/definitions/ModelState"
+                  },
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/definitions/ModelState"
+                  },
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/definitions/ModelState"
+                  },
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/definitions/ModelState"
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unable create session. Read the response content for more information."
+          }
+        },
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ],
+        "requestBody": {
+          "description": "Session request data.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/SessionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/definitions/SessionRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/definitions/SessionRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/definitions/SessionRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/definitions/SessionRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiBatchPaySummary": {
+        "description": "Batch payment summary",
+        "properties": {
+          "submittedDate": {
+            "description": "Batch submitted date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingDate": {
+            "description": "Batch processed date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalEntries": {
+            "description": "Total batch items in the batch",
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalAmount": {
+            "description": "Total batch payment amount",
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "description": "Below are the expected output values:\r\n1) File Uploaded: Batch file is uploaded and pending file processing\r\n2) Pending: Payment is not processed yet\r\n3) Validation in Progress: Batch validation is in progress\r\n4) On Hold - Potential Duplicate: Batch is on hold awaiting manual activation\r\n5) Ready for Payment Processing: Batch duplicate validation is completed and now it is ready for Payment processing\r\n6) On Hold Approved\r\n7) Payment Processing in Progress: Batch payment processing in progress\r\n8) Completed: Batch payment processing completed\r\n9) Cancelled: Batch payment is cancelled\r\n10) BatchPay Not Allowed: Error in processing - Merchant status doesn't allow to process batch payment\r\n11) Merchant Not Found: Error in file/batch processing merchant code in file not found in database\r\n12) Technical Error: Any technical error like batch entry has been added twice",
+            "type": "string"
+          },
+          "statusRemarks": {
+            "description": "Status remarks",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "Merchant code",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "Merchant name (Trading name)",
+            "type": "string"
+          },
+          "merchantUniqueBatchId": {
+            "description": "Unique batch id provided by the merchant.",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ApiBatchPaySummary"
+        },
+        "type": "object"
+      },
+      "ApiBatchPayEntry": {
+        "description": "Batch entry item",
+        "properties": {
+          "customerReference": {
+            "description": "Reference of the Customer who paid the payment",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer who paid the payment.",
+            "type": "string"
+          },
+          "companyName": {
+            "description": "Customer company name",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentDate": {
+            "description": "Payment date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "entryStatus": {
+            "description": " Below are the expected output values:\r\n 1) BatchPay Entry Pending : This Entry is waiting to be processed.\r\n 2) BatchPay Entry Processed : Payment for this Entry has been successfully processed.\r\n 3) Customer not found : This Customer is not found in system. Create the Customer using POST - /v2/customers API.\r\n 4) Duplicate entry : There is a duplicate entry in the batch. Remove duplicate entry.\r\n 5) Multiple customers found : The System has detected that there is Multiple Customers that have the same Reference setup. Check Customers and update reference.\r\n 6) Customer status is not open : Corresponding customer for batchpay entry is not in open state. Update Customer Status to Open.\r\n 7) Payment end date has expired : Payment End Date for BatchPay Entry has expired. Update Date to a future date.\r\n 8) Payment option is not BatchPay : Customer's Payment Option needs to be BatchPay in order to be processed. Update Customer Payment Option to BatchPay.\r\n 9) Customer status does not allow payment processing : Customer Status is invalid. Customer Status must be Open to process payments. Check Status of Customer.\r\n10) Invalid payment amount : Payment amount is not valid. Check amount and resubmit.\r\n11) Error during payment processing : There was an error while processing payment. Please contact Zenith Payments.\r\n12) Technical Error : This Entry has encountered an unhandled error. Please contact Zenith Payments.\r\n13) Cancelled : Batch is cancelled.\r\n14) DuplicatePaymentUniqueId : Duplicate payment unique id.",
+            "type": "string"
+          },
+          "paymentResource": {
+            "description": "Link to the actual payment",
+            "type": "string"
+          },
+          "paymentStatus": {
+            "description": " Below are the expected output values:\r\n 1) Pending : This Payment is waiting be to processed.\r\n 2) Error : This Payment has encountered an Error.\r\n 3) Submitted : This Payment was successfully submitted.\r\n 4) Successful : This Payment was successful.\r\n 5) Successful (Recalled) : This Payment was Recalled. The System has detected that this Entry potentially has been submitted in another Batch. \r\n 6) Successful (Refunded) : This Payment was Refunded.\r\n 7) Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n 8) Failed : This Payment has Failed.\r\n 9) Cancelled : This Payment was Cancelled.\r\n10) Suppressed : This Payment was Suppressed.\r\n11) InProgress : This Payment is being processed.",
+            "type": "string"
+          },
+          "failureCode": {
+            "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "return failure reason if a payment is failed. (Conditional)",
+            "type": "string"
+          },
+          "processorReference": {
+            "description": "Processor reference for the payment done",
+            "type": "string"
+          },
+          "paymentReference": {
+            "description": "Unique Payment Reference for the payment done.",
+            "type": "string"
+          },
+          "baseAmount": {
+            "description": "Base amount of the payment is done",
+            "type": "number",
+            "format": "double"
+          },
+          "customerFee": {
+            "description": "Fee charged on customer card",
+            "type": "number",
+            "format": "double"
+          },
+          "processedAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee charged on Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantWithheldAmount": {
+            "description": "Funds to Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "lastDigits": {
+            "description": "Payment Card No",
+            "type": "string"
+          },
+          "paymentMethod": {
+            "description": "Method was used to process the transaction. ie: Bank Account, Credit Card, etc",
+            "type": "string"
+          },
+          "processingDate": {
+            "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentCard": {
+            "description": "return Payment card used",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. (Conditional)",
+            "type": "string"
+          },
+          "retryPaymentResource": {
+            "description": "Link to the retry payment",
+            "type": "string"
+          },
+          "isPaymentRetryScheduled": {
+            "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+            "type": "boolean"
+          },
+          "retryScheduledOn": {
+            "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "retryPaymentReference": {
+            "description": "Retry payment reference. (Conditional)",
+            "type": "string"
+          },
+          "retryPaymentStatus": {
+            "description": "Retry payment status",
+            "type": "string"
+          },
+          "isPaymentRecalled": {
+            "description": "Payment recalled.",
+            "type": "boolean"
+          },
+          "recalledOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "recalledReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "isPaymentRefunded": {
+            "description": "Payment refunded.",
+            "type": "boolean"
+          },
+          "refundedOn": {
+            "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ssZ, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. (Conditional)",
+            "type": "string"
+          },
+          "cardCategory": {
+            "description": "Card category",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ApiBatchPayEntry"
+        },
+        "type": "object"
+      },
+      "BatchPaymentRequest": {
+        "description": "Container for batch payment entries\r\nRoot element containing a collection of BatchPaymentEntry",
+        "required": [
+          "batchPaymentEntries"
+        ],
+        "properties": {
+          "batchPaymentEntries": {
+            "description": "Collection of BatchPayment entry",
+            "items": {
+              "$ref": "#/definitions/BatchPaymentDataRecord"
+            },
+            "xml": {
+              "name": "BatchPaymentDataRecord",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "merchantUniqueBatchId": {
+            "description": "Unique batch id provided by the merchant.",
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "xml": {
+          "name": "BatchPaymentRequest"
+        },
+        "type": "object"
+      },
+      "BatchPaymentDataRecord": {
+        "description": "Represent one batch payment entry sent from the client\r\nFormat can either be in the form of Json or XML",
+        "required": [
+          "customerReference",
+          "paymentAmount"
+        ],
+        "properties": {
+          "customerReference": {
+            "description": "customer reference in individual payment batch entry",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Payment amount in individual payment batch entry",
+            "type": "number",
+            "format": "double",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0.01
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. Can be used when Proxy payment is performed. (Optional)",
+            "type": "string",
+            "maxLength": 50
+          },
+          "paymentAccountProxy": {
+            "description": "Pass an alternative Proxy if required (Optional). If no Proxy is passed, the nominated card / bank account is used.",
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "xml": {
+          "name": "BatchPaymentDataRecord"
+        },
+        "type": "object"
+      },
+      "BatchPaymentResponse": {
+        "description": "Batch Payment Response for call to Uploading",
+        "properties": {
+          "batchPaymentId": {
+            "description": "Id of BatchPayment",
+            "type": "integer",
+            "format": "int32"
+          },
+          "warningMessages": {
+            "description": "WarningMessages after processing batch",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "merchantUniqueBatchId": {
+            "description": "Unique batch id provided by the merchant.",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "BatchPaymentResponse"
+        },
+        "type": "object"
+      },
+      "AmbiguousResult": {
+        "description": "",
+        "properties": {},
+        "xml": {
+          "name": "AmbiguousResult"
+        },
+        "type": "object"
+      },
+      "ModelState": {
+        "description": "Encapsulates the state of model binding to a property of an action-method argument, or to the argument itself.",
+        "properties": {
+          "value": {
+            "$ref": "#/definitions/ValueProviderResult",
+            "description": "Gets a {System.Web.Http.ValueProviders.ValueProviderResult} object that encapsulates the value that was being bound during model binding."
+          },
+          "errors": {
+            "description": "Gets a {System.Web.Http.ModelBinding.ModelErrorCollection} object that contains any errors that occurred during model binding.",
+            "items": {
+              "$ref": "#/definitions/ModelError"
+            },
+            "readOnly": true,
+            "xml": {
+              "name": "ModelError",
+              "wrapped": true
+            },
+            "type": "array"
+          }
+        },
+        "xml": {
+          "name": "ModelState"
+        },
+        "type": "object"
+      },
+      "ValueProviderResult": {
+        "description": "Represents the result of binding a value (such as from a form post or query string) to an action-method argument property, or to the argument itself.",
+        "properties": {
+          "attemptedValue": {
+            "description": "Gets or sets the raw value that is converted to a string for display.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "culture": {
+            "description": "Gets or sets the culture.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "rawValue": {
+            "description": "Gets or set the raw value that is supplied by the value provider.",
+            "readOnly": true,
+            "type": "object"
+          }
+        },
+        "xml": {
+          "name": "ValueProviderResult"
+        },
+        "type": "object"
+      },
+      "ModelError": {
+        "description": "Represents an error that occurs during model binding.",
+        "properties": {
+          "exception": {
+            "description": "Gets or sets the exception object.",
+            "readOnly": true,
+            "type": "object"
+          },
+          "errorMessage": {
+            "description": "Gets or sets the error message.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ModelError"
+        },
+        "type": "object"
+      },
+      "InternalServerErrorResult": {
+        "description": "Represents an action result that returns an empty {System.Net.HttpStatusCode.InternalServerError} response.",
+        "properties": {
+          "request": {
+            "description": "Gets the request message which led to this result.",
+            "readOnly": true,
+            "type": "object"
+          }
+        },
+        "xml": {
+          "name": "InternalServerErrorResult"
+        },
+        "type": "object"
+      },
+      "TokenResponse": {
+        "description": "Token Response.",
+        "properties": {
+          "cardProxy": {
+            "description": "Card proxy that can be used to process payment.",
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Obfuscated card number.",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "Card expiry in MM/yy format.",
+            "type": "string"
+          },
+          "cardType": {
+            "description": "Card type (Visa, MasterCard etc.)",
+            "type": "string"
+          },
+          "status": {
+            "description": "Proxy status",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "TokenResponse"
+        },
+        "type": "object"
+      },
+      "PricingResponse": {
+        "description": "Pricing response.",
+        "properties": {
+          "pricing": {
+            "$ref": "#/definitions/Pricing",
+            "description": "Applicable pricing based on provided card and payment details."
+          }
+        },
+        "xml": {
+          "name": "PricingResponse"
+        },
+        "type": "object"
+      },
+      "Pricing": {
+        "description": "Applicable fee for the card used.",
+        "properties": {
+          "customerFee": {
+            "description": "Fee paid by the customer.",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee paid by the merchant.",
+            "type": "number",
+            "format": "double"
+          },
+          "processingAmount": {
+            "description": "Total amount that we be charged to the card.",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentAmount": {
+            "description": "Payment amount i.e. base amount excluding any fee.",
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "xml": {
+          "name": "Pricing"
+        },
+        "type": "object"
+      },
+      "CardProxyRequest": {
+        "description": "Credit/Debit Card details.",
+        "required": [
+          "cardNumber",
+          "expiry"
+        ],
+        "properties": {
+          "customerUniqueId": {
+            "description": "Customer unique identifier.",
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Credit/Debit Card number",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "Card expiry in MM/yy format.",
+            "example": "MM/yy",
+            "type": "string"
+          },
+          "cardHolderName": {
+            "description": "Card holder name.",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Amount is optional. If provided, the applicable pricing will be returned in the result.",
+            "type": "number",
+            "format": "double"
+          },
+          "threeDSecureData": {
+            "$ref": "#/definitions/ThreeDSecureData",
+            "description": "Conditional. Pass the values if 3DSecure is required"
+          }
+        },
+        "xml": {
+          "name": "CardProxyRequest"
+        },
+        "type": "object"
+      },
+      "ThreeDSecureData": {
+        "properties": {
+          "useThreeDSecure": {
+            "description": "Will trigger 3DSecure process if enabled or valid for the card",
+            "type": "boolean"
+          },
+          "browserData": {
+            "$ref": "#/definitions/ThreeDSecureBrowserData",
+            "description": "Cardholder's browser data. Mandatory if UseThreeDSecure is true"
+          },
+          "callbackUrl": {
+            "description": "Endpoint to receive status notifications once 3DSecure is completed. Use [uniqueId] (case sensitive) in URL to differentiate different payments and 3DS statuses\r\nFor example: CallbackUrl https://www.yourdomain.com.au/3dsecure/[uniqueId] will be translated to https://www.yourdomain.com.au/callbacks/123456 assuming uniqueId is 123456",
+            "type": "string"
+          },
+          "redirectUrl": {
+            "description": "Redirect URL used to redirect once the 3DSecure process is completed. Use [uniqueId], [status] (case sensitive) in URL to differentiate different payments and 3DS statuses\r\nFor example: RedirectUrl https://www.yourdomain.com.au/3dsecure/[uniqueId]?status=[status] will be translated to https://www.yourdomain.com.au/3dsecure/123456?status=Success assuming uniqueId is 123456\r\nPossible 3DSecure statuses: Success, Failed, Cancelled",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ThreeDSecureData"
+        },
+        "type": "object"
+      },
+      "ThreeDSecureBrowserData": {
+        "properties": {
+          "acceptHeader": {
+            "description": "Exact content of the HTTP accept headers as sent to the 3DS Requestor from the Cardholder's browser",
+            "type": "string"
+          },
+          "ipAddress": {
+            "description": "IP address of the browser as returned by the HTTP headers to the 3DS Requestor.",
+            "type": "string"
+          },
+          "language": {
+            "description": "Value representing the browser language as defined in IETF BCP47. The value is limited to 1-8 characters. Value is returned from navigator.language property.",
+            "type": "string"
+          },
+          "colorDepth": {
+            "description": "Value representing the bit depth of the colour palette for displaying images, in bits per pixel. Obtained from Cardholder browser using the screen.colorDepth property.\r\nPossible values: 1, 4, 8, 15, 16, 24, 32, 48",
+            "type": "integer",
+            "format": "int32"
+          },
+          "screenHeight": {
+            "description": "Total height of the Cardholder's screen in pixels. Value is returned from the screen.height property.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "screenWidth": {
+            "description": "Total width of the Cardholder's screen in pixels. Value is returned from the screen.width property.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "timezone": {
+            "description": "Time difference between UTC time and the Cardholder browser local time, in minutes. The field is limited to 1-5 characters where the value is returned from the getTimezoneOffset() method.",
+            "type": "string"
+          },
+          "userAgent": {
+            "description": "Exact content of the HTTP user-agent header. The field is limited to maximum 2048 characters. Obtained from Cardholder browser using the navigator.userAgent property.",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ThreeDSecureBrowserData"
+        },
+        "type": "object"
+      },
+      "CardProxyResponse": {
+        "description": "Card authorisation response.",
+        "properties": {
+          "cardProxy": {
+            "description": "Processor token. Used to make payment next time.",
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Obfuscated card number.",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "Card expiry in MM/yy format.",
+            "type": "string"
+          },
+          "cardType": {
+            "description": "Card type (Visa, MasterCard etc.)",
+            "type": "string"
+          },
+          "failureCode": {
+            "description": "Failure code in case the authorisation fails.",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "Failure reason in case the authorisation fails.",
+            "type": "string"
+          },
+          "pricing": {
+            "$ref": "#/definitions/Pricing",
+            "description": "Applicable pricing based on provided card and payment details."
+          },
+          "redirectUrl": {
+            "description": "3DSecure redirect url to complete the 3DSecure challege if required by the scheme",
+            "type": "string"
+          },
+          "status": {
+            "description": "Proxy status\r\nExpected Statuses\r\n1. Pending\tThis proxy is waiting be to processed\r\n2. Successful - This proxy was successful\r\n3. Failed - This proxy has Failed\r\n4. PendingThreeDS - This proxy needs to complete 3DSecure process using the RedirectUrl",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "CardProxyResponse"
+        },
+        "type": "object"
+      },
+      "PreconditionFailedResponse": {
+        "properties": {
+          "errorCode": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "errorMessage": {
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PreconditionFailedResponse"
+        },
+        "type": "object"
+      },
+      "CustomerResponse": {
+        "description": "Customer information",
+        "properties": {
+          "profile": {
+            "$ref": "#/definitions/CustomerProfile",
+            "description": "Customer profile"
+          },
+          "account": {
+            "$ref": "#/definitions/CustomerAccountResponse",
+            "description": "Customer Payment account"
+          },
+          "paymentOption": {
+            "$ref": "#/definitions/CustomerPaymentOption",
+            "description": "Customer payment option"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "CustomerResponse"
+        },
+        "type": "object"
+      },
+      "CustomerProfile": {
+        "properties": {
+          "enableBPayOption": {
+            "type": "boolean"
+          },
+          "customerCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "customerReference": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "abn": {
+            "type": "string"
+          },
+          "merchantStaffMember": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/definitions/CustomerAddress"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "fax": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "openDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateClosed": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "bPayReference": {
+            "type": "string"
+          },
+          "customerStatus": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "CustomerProfile"
+        },
+        "type": "object"
+      },
+      "CustomerAccountResponse": {
+        "properties": {
+          "bankAccount": {
+            "$ref": "#/definitions/BankAccount"
+          },
+          "creditCard": {
+            "$ref": "#/definitions/CreditCard"
+          }
+        },
+        "xml": {
+          "name": "CustomerAccountResponse"
+        },
+        "type": "object"
+      },
+      "CustomerPaymentOption": {
+        "required": [
+          "paymentOption",
+          "paymentAmount",
+          "paymentFrequency",
+          "nextPaymentDate",
+          "notificationMethod"
+        ],
+        "properties": {
+          "paymentOption": {
+            "description": "Payment option. Use the correct payment option which is supported by the merchant.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              148,
+              149
+            ],
+            "PaymentOption": "AutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149"
+          },
+          "paymentAmount": {
+            "description": "Payment amount. Set the default amount for auto payments or amount for one-off payment.",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentFrequency": {
+            "description": "Payment frequency. Applicable to auto pay, email reminder and sms reminder. Returns monthly if frequency is not available.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              32,
+              33,
+              38,
+              34,
+              35,
+              36,
+              37
+            ],
+            "PaymentFrequency": "Weekly: 32; Fortnightly: 33; Monthly: 34; Quarterly: 35; HalfYearly: 36; Yearly: 37; FourWeeks: 38"
+          },
+          "nextPaymentDate": {
+            "description": "Payment start date.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentEndDate": {
+            "description": "Payment end date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "notificationMethod": {
+            "description": "Notification method used to indicate the communication channel when payment successful or failed.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "NotificationMethod": "None: 0; Sms: 1; Email: 2"
+          },
+          "payIdDetail": {
+            "$ref": "#/definitions/PayIdDetail",
+            "description": "return PayID Details"
+          },
+          "bPayDetail": {
+            "$ref": "#/definitions/BPayDetail",
+            "description": "return BPAY Details"
+          }
+        },
+        "xml": {
+          "name": "CustomerPaymentOption"
+        },
+        "type": "object"
+      },
+      "CustomerAddress": {
+        "description": "Customer address model",
+        "required": [
+          "address1",
+          "suburb",
+          "state",
+          "country",
+          "postcode"
+        ],
+        "properties": {
+          "address1": {
+            "description": "Address line 1",
+            "type": "string"
+          },
+          "address2": {
+            "description": "Address line 2",
+            "type": "string"
+          },
+          "suburb": {
+            "description": "Suburb / city",
+            "type": "string",
+            "maxLength": 50
+          },
+          "state": {
+            "description": "State / province",
+            "type": "string",
+            "maxLength": 50
+          },
+          "country": {
+            "description": "Country",
+            "type": "string",
+            "maxLength": 100
+          },
+          "postcode": {
+            "description": "Postcode",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "CustomerAddress"
+        },
+        "type": "object"
+      },
+      "BankAccount": {
+        "description": "Bank Account",
+        "required": [
+          "bsb",
+          "accountNumber",
+          "accountName"
+        ],
+        "properties": {
+          "bsb": {
+            "description": "BSB Number. Format: 000000",
+            "type": "string",
+            "maxLength": 6
+          },
+          "accountNumber": {
+            "description": "Bank Account number",
+            "type": "string",
+            "pattern": "^([0-9]{4,10})"
+          },
+          "accountName": {
+            "description": "Account Holder name",
+            "type": "string",
+            "maxLength": 32,
+            "pattern": "[\\u0020-\\u007E]*"
+          },
+          "bankBranch": {
+            "description": "Bank branch",
+            "type": "string",
+            "maxLength": 50
+          },
+          "bankName": {
+            "description": "Bank Name",
+            "type": "string",
+            "maxLength": 50
+          },
+          "label": {
+            "description": "Label for the account",
+            "type": "string",
+            "maxLength": 50
+          },
+          "isPayTo": {
+            "description": "Bank account is PayTo if true",
+            "type": "boolean"
+          },
+          "payToStatus": {
+            "description": "If PayTo account, this field will let you know the status of the Mandate.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
+          }
+        },
+        "xml": {
+          "name": "BankAccount"
+        },
+        "type": "object"
+      },
+      "CreditCard": {
+        "properties": {
+          "label": {
+            "description": "Label for the card",
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Card number.",
+            "type": "string"
+          },
+          "cardType": {
+            "description": "Card Type",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "Expiry",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "CreditCard"
+        },
+        "type": "object"
+      },
+      "PayIdDetail": {
+        "properties": {
+          "payId": {
+            "description": "PayID",
+            "type": "string"
+          },
+          "payIdName": {
+            "description": "PayID Name",
+            "type": "string"
+          },
+          "reference": {
+            "description": "Reference",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PayIdDetail"
+        },
+        "type": "object"
+      },
+      "BPayDetail": {
+        "properties": {
+          "billerCode": {
+            "description": "BPAY Biller Code",
+            "type": "string"
+          },
+          "billerReference": {
+            "description": "BPAY Biller Reference",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "BPayDetail"
+        },
+        "type": "object"
+      },
+      "CustomerStatusRequest": {
+        "description": "Status request",
+        "properties": {
+          "reason": {
+            "description": "Reason if the customer is closed.",
+            "type": "string"
+          },
+          "closeCustomer": {
+            "description": "True to close, false to open.",
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "CustomerStatusRequest"
+        },
+        "type": "object"
+      },
+      "CustomerAccountRequest": {
+        "description": "Customer Bank/Credit Card account. Use PaymentAccountProxy or CreditCardProxy or BankAccount. \r\nIf more than one details are passed, only one detail used as per the following order, 1. PaymentAccountProxy 2. BankAccount 3. CreditCardProxy \r\nPreferred option is PaymentAccountProxy",
+        "properties": {
+          "bankAccount": {
+            "$ref": "#/definitions/BankAccount",
+            "description": "Customer bank account details.\r\nProvide valid BSB and Account Number."
+          },
+          "creditCardProxy": {
+            "$ref": "#/definitions/CreditCardProxy",
+            "description": "Customer credit / debit card proxy. \r\nProxy is generated using the /cardProxies API or Payments Plugin."
+          },
+          "paymentAccountProxy": {
+            "$ref": "#/definitions/AccountProxy",
+            "description": "This replaces the BankAccount and CreditCardProxy. \r\nProxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
+          },
+          "addtionalPaymentAccountProxies": {
+            "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card.",
+            "items": {
+              "$ref": "#/definitions/AccountProxy"
+            },
+            "xml": {
+              "name": "AccountProxy",
+              "wrapped": true
+            },
+            "type": "array"
+          }
+        },
+        "xml": {
+          "name": "CustomerAccountRequest"
+        },
+        "type": "object"
+      },
+      "CreditCardProxy": {
+        "description": "Credit card proxy",
+        "required": [
+          "cardProxy"
+        ],
+        "properties": {
+          "cardProxy": {
+            "description": "Card proxy generated by the /cardproxies api.",
+            "type": "string",
+            "maxLength": 40
+          },
+          "label": {
+            "description": "Label for the card",
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "xml": {
+          "name": "CreditCardProxy"
+        },
+        "type": "object"
+      },
+      "AccountProxy": {
+        "description": "Account proxy. Recommended to use instead of CardProxy.",
+        "required": [
+          "proxy"
+        ],
+        "properties": {
+          "proxy": {
+            "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies api for card.",
+            "type": "string",
+            "maxLength": 40
+          },
+          "label": {
+            "description": "Label for the account",
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "xml": {
+          "name": "AccountProxy"
+        },
+        "type": "object"
+      },
+      "ICustomerProfie": {
+        "properties": {
+          "enableBPayOption": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "abn": {
+            "type": "string"
+          },
+          "merchantStaffMember": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/definitions/CustomerAddress"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "fax": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "xml": {
+          "name": "ICustomerProfie"
+        },
+        "type": "object"
+      },
+      "CustomerProfileRequest": {
+        "required": [
+          "firstName",
+          "lastName",
+          "address",
+          "email",
+          "dateOfBirth"
+        ],
+        "properties": {
+          "enableBPayOption": {
+            "type": "boolean"
+          },
+          "title": {
+            "description": "Provide the salutation. Eg: Mr or Mrs",
+            "type": "string",
+            "maxLength": 10
+          },
+          "firstName": {
+            "description": "First name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "lastName": {
+            "description": "Last name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "abn": {
+            "type": "string"
+          },
+          "merchantStaffMember": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/definitions/CustomerAddress"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "fax": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "xml": {
+          "name": "CustomerProfileRequest"
+        },
+        "type": "object"
+      },
+      "NewCustomer": {
+        "description": "Create customer request model",
+        "required": [
+          "customerReference",
+          "firstName",
+          "lastName",
+          "email",
+          "mobile",
+          "dateOfBirth",
+          "paymentOption",
+          "paymentAmount",
+          "paymentFrequency",
+          "paymentStartDate",
+          "notificationMethod"
+        ],
+        "properties": {
+          "customerReference": {
+            "description": "Customer / Parent Reference. Should be unique and provided by the merchant.\r\nIf you are paying the merchant by BPAY, this should be your BPAY Reference.",
+            "type": "string"
+          },
+          "title": {
+            "description": "Provide the salutation. Eg: Mr or Mrs",
+            "type": "string",
+            "maxLength": 10
+          },
+          "firstName": {
+            "description": "First name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "lastName": {
+            "description": "Last name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "customerCompanyName": {
+            "description": "Company name if this is company account.",
+            "type": "string"
+          },
+          "abn": {
+            "description": "Australian Business Number",
+            "type": "string"
+          },
+          "merchantStaffMember": {
+            "description": "Merchant Staff member assigned to this customer / parent.",
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/definitions/CustomerAddress",
+            "description": "Customer address"
+          },
+          "email": {
+            "description": "Email address",
+            "type": "string"
+          },
+          "mobile": {
+            "description": "Mobile number",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone number",
+            "type": "string"
+          },
+          "fax": {
+            "description": "Fax number",
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "description": "Date of birth. Customer must be atleast 16 years old.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionCode": {
+            "description": "Promotion code if any.",
+            "type": "string"
+          },
+          "paymentOption": {
+            "description": "Payment option. Use the correct payment option which is supported by the merchant.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              148,
+              149
+            ],
+            "PaymentOption": "AutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149"
+          },
+          "paymentAmount": {
+            "description": "Payment amount. Set the default amount for auto payments or amount for one-off payment.",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentFrequency": {
+            "description": "Payment frequency. Applicable to auto pay, email reminder and sms reminder.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              32,
+              33,
+              38,
+              34,
+              35,
+              36,
+              37
+            ],
+            "PaymentFrequency": "Weekly: 32; Fortnightly: 33; Monthly: 34; Quarterly: 35; HalfYearly: 36; Yearly: 37; FourWeeks: 38"
+          },
+          "paymentStartDate": {
+            "description": "Payment start date.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentEndDate": {
+            "description": "Payment end date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "notificationMethod": {
+            "description": "Notification method used to indicate the communication channel when payment successful or failed.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "NotificationMethod": "None: 0; Sms: 1; Email: 2"
+          },
+          "additionalReferences": {
+            "description": "Additional references if you have more than one references to manage. Eg: Parents paying childcare fee for more than one kid.",
+            "items": {
+              "$ref": "#/definitions/AdditionalReference"
+            },
+            "xml": {
+              "name": "AdditionalReference",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "bankAccount": {
+            "$ref": "#/definitions/BankAccount",
+            "description": "Customer bank account details."
+          },
+          "card": {
+            "$ref": "#/definitions/CreditCardProxy",
+            "description": "Customer credit / debit card proxy. (Token is generated using the /tokens api."
+          },
+          "enableBPayOption": {
+            "description": "Allows to enable BPAY option for the customer / parent",
+            "type": "boolean"
+          },
+          "sendWelcomeEmail": {
+            "description": "Sends welcome email if set to true. Default is set to true if not passed.",
+            "type": "boolean"
+          },
+          "isBPayCrnPassed": {
+            "description": "Send this as true when customer reference passed if CRN. Default is set to false if not passed.",
+            "type": "boolean"
+          },
+          "paymentAccountProxy": {
+            "$ref": "#/definitions/AccountProxy",
+            "description": "This replaces the BankAccount and Card properties. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card."
+          },
+          "additionalPaymentAccountProxies": {
+            "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card.",
+            "items": {
+              "$ref": "#/definitions/AccountProxy"
+            },
+            "xml": {
+              "name": "AccountProxy",
+              "wrapped": true
+            },
+            "type": "array"
+          }
+        },
+        "xml": {
+          "name": "NewCustomer"
+        },
+        "type": "object"
+      },
+      "AdditionalReference": {
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "customerReference": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "AdditionalReference"
+        },
+        "type": "object"
+      },
+      "NewCustomerResponse": {
+        "description": "New Customer response",
+        "required": [
+          "customerReference",
+          "firstName",
+          "lastName",
+          "email",
+          "mobile",
+          "dateOfBirth",
+          "paymentOption",
+          "paymentAmount",
+          "paymentFrequency",
+          "paymentStartDate",
+          "notificationMethod"
+        ],
+        "properties": {
+          "customerLogin": {
+            "description": "Customer login",
+            "type": "string"
+          },
+          "passwordGenerationUrl": {
+            "description": "Password generation for customer login",
+            "type": "string"
+          },
+          "billerCode": {
+            "description": "If BPAY payment method is enabled, biller code will be returned.",
+            "type": "string"
+          },
+          "billerReference": {
+            "description": "If BPAY payment method is enabled, biller reference can be used by the customer to make BPAY payment.",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "payIdDetail": {
+            "$ref": "#/definitions/PayIdDetail",
+            "description": "return PayID Details"
+          },
+          "bPayDetail": {
+            "$ref": "#/definitions/BPayDetail",
+            "description": "return BPAY Details"
+          },
+          "customerReference": {
+            "description": "Customer / Parent Reference. Should be unique and provided by the merchant.\r\nIf you are paying the merchant by BPAY, this should be your BPAY Reference.",
+            "type": "string"
+          },
+          "title": {
+            "description": "Provide the salutation. Eg: Mr or Mrs",
+            "type": "string",
+            "maxLength": 10
+          },
+          "firstName": {
+            "description": "First name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "lastName": {
+            "description": "Last name",
+            "type": "string",
+            "maxLength": 30
+          },
+          "customerCompanyName": {
+            "description": "Company name if this is company account.",
+            "type": "string"
+          },
+          "abn": {
+            "description": "Australian Business Number",
+            "type": "string"
+          },
+          "merchantStaffMember": {
+            "description": "Merchant Staff member assigned to this customer / parent.",
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/definitions/CustomerAddress",
+            "description": "Customer address"
+          },
+          "email": {
+            "description": "Email address",
+            "type": "string"
+          },
+          "mobile": {
+            "description": "Mobile number",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Phone number",
+            "type": "string"
+          },
+          "fax": {
+            "description": "Fax number",
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "description": "Date of birth. Customer must be atleast 16 years old.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "promotionCode": {
+            "description": "Promotion code if any.",
+            "type": "string"
+          },
+          "paymentOption": {
+            "description": "Payment option. Use the correct payment option which is supported by the merchant.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              148,
+              149
+            ],
+            "PaymentOption": "AutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149"
+          },
+          "paymentAmount": {
+            "description": "Payment amount. Set the default amount for auto payments or amount for one-off payment.",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentFrequency": {
+            "description": "Payment frequency. Applicable to auto pay, email reminder and sms reminder.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              32,
+              33,
+              38,
+              34,
+              35,
+              36,
+              37
+            ],
+            "PaymentFrequency": "Weekly: 32; Fortnightly: 33; Monthly: 34; Quarterly: 35; HalfYearly: 36; Yearly: 37; FourWeeks: 38"
+          },
+          "paymentStartDate": {
+            "description": "Payment start date.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentEndDate": {
+            "description": "Payment end date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "notificationMethod": {
+            "description": "Notification method used to indicate the communication channel when payment successful or failed.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "NotificationMethod": "None: 0; Sms: 1; Email: 2"
+          },
+          "additionalReferences": {
+            "description": "Additional references if you have more than one references to manage. Eg: Parents paying childcare fee for more than one kid.",
+            "items": {
+              "$ref": "#/definitions/AdditionalReference"
+            },
+            "xml": {
+              "name": "AdditionalReference",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "bankAccount": {
+            "$ref": "#/definitions/BankAccount",
+            "description": "Customer bank account details."
+          },
+          "card": {
+            "$ref": "#/definitions/CreditCardProxy",
+            "description": "Customer credit / debit card proxy. (Token is generated using the /tokens api."
+          },
+          "enableBPayOption": {
+            "description": "Allows to enable BPAY option for the customer / parent",
+            "type": "boolean"
+          },
+          "sendWelcomeEmail": {
+            "description": "Sends welcome email if set to true. Default is set to true if not passed.",
+            "type": "boolean"
+          },
+          "isBPayCrnPassed": {
+            "description": "Send this as true when customer reference passed if CRN. Default is set to false if not passed.",
+            "type": "boolean"
+          },
+          "paymentAccountProxy": {
+            "$ref": "#/definitions/AccountProxy",
+            "description": "This replaces the BankAccount and Card properties. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card."
+          },
+          "additionalPaymentAccountProxies": {
+            "description": "Additional PaymentAccountProxies. \r\nProxy is generated using the Payments Plugin for Bank and Credit/Debit Card or /cardProxies api for Credit/Debit Card.",
+            "items": {
+              "$ref": "#/definitions/AccountProxy"
+            },
+            "xml": {
+              "name": "AccountProxy",
+              "wrapped": true
+            },
+            "type": "array"
+          }
+        },
+        "xml": {
+          "name": "NewCustomerResponse"
+        },
+        "type": "object"
+      },
+      "PingResponse": {
+        "description": "Ping result",
+        "properties": {
+          "serverDateTime": {
+            "description": "Server Date Time",
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "description": "API version",
+            "type": "string"
+          },
+          "timeZoneInfo": {
+            "description": "DateTime Time Zone",
+            "type": "string"
+          },
+          "buildVersion": {
+            "description": "Build version",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PingResponse"
+        },
+        "type": "object"
+      },
+      "PaymentResponse": {
+        "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+        "properties": {
+          "paymentReference": {
+            "description": "Unique Payment Reference for the payment done.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer who paid the payment.",
+            "type": "string"
+          },
+          "customerReference": {
+            "description": "Reference of the Customer who paid the payment",
+            "type": "string"
+          },
+          "paymentStatus": {
+            "description": "Current Status of the payment.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+            "type": "string"
+          },
+          "baseAmount": {
+            "description": "Base amount of the payment is done",
+            "type": "number",
+            "format": "double"
+          },
+          "fundsToMerchant": {
+            "description": "Funds to Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "customerFee": {
+            "description": "Fee charged on customer card",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee charged on Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "accountOrCardNo": {
+            "description": "Payment Card No",
+            "type": "string"
+          },
+          "paymentAccount": {
+            "description": "Payment Account by which the payment is done.",
+            "type": "string"
+          },
+          "processingDate": {
+            "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "processorReference": {
+            "description": "Processor reference for the payment done",
+            "type": "string"
+          },
+          "isPaymentSettledToMerchant": {
+            "description": "return true if payment is settled to merchant",
+            "type": "boolean"
+          },
+          "failureCode": {
+            "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "return failure reason if a payment is failed. (Conditional)",
+            "type": "string"
+          },
+          "paymentCard": {
+            "description": "return Payment card used",
+            "type": "string"
+          },
+          "subCardType": {
+            "description": "return SubCardType",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. (Conditional)",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRetryScheduled": {
+            "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+            "type": "boolean"
+          },
+          "retryScheduledOn": {
+            "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "retryPaymentReference": {
+            "description": "Retry payment reference. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRecalled": {
+            "description": "Payment recalled.",
+            "type": "boolean"
+          },
+          "recalledOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "recalledReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "recalledTransactionReference": {
+            "description": "RecalledTransactionReference : If a charge transaction is recalled then this is transaction reference of recall transaction.(Conditional)",
+            "type": "string"
+          },
+          "isPaymentRefunded": {
+            "description": "Payment refunded.",
+            "type": "boolean"
+          },
+          "refundedOn": {
+            "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "refundedTransactionReference": {
+            "description": "RefundedTransactionReference : If a charge transaction is refunded then this is transaction reference of refunded transaction.(Conditional)",
+            "type": "string"
+          },
+          "cardCategory": {
+            "description": "Card category",
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+          },
+          "transactionTypeDisplay": {
+            "description": "Transaction Type. Possible values:\r\n1. Charge\r\n2. Invoice\r\n3. Refund\r\n4. Chargeback\r\n5. Recall\r\n6. Fixed Term Settlement",
+            "type": "string"
+          },
+          "originalTransactionReference": {
+            "description": "OriginalTransactionReference : For a Recall / Refund transaction, it is the transaction reference of original transaction.",
+            "type": "string"
+          },
+          "isPaymentChargeBacked": {
+            "description": "Payment Charge Backed.",
+            "type": "boolean"
+          },
+          "chargeBackedOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "chargeBackedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "chargeBackedTransactionReference": {
+            "description": "ChargedBackedTransactionReference : If a charge transaction is charged back then this is transaction reference of charged back transaction.(Conditional)",
+            "type": "string"
+          },
+          "paymentSourceDisplay": {
+            "description": "Payment source of transaction",
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment Reference",
+            "type": "string"
+          },
+          "abn": {
+            "description": "ABN for the transaction",
+            "type": "string"
+          },
+          "preauthExpiryAt": {
+            "description": "Preauth expiry in minutes",
+            "type": "string",
+            "format": "date-time"
+          },
+          "remainingPreauthAmount": {
+            "description": "Remaining preauth amount",
+            "type": "number",
+            "format": "double"
+          },
+          "settlementPostPartialRefund": {
+            "$ref": "#/definitions/SettlementPayment",
+            "description": "Balance Payment if any is available"
+          },
+          "refunds": {
+            "description": "All refunds processed on this payment",
+            "items": {
+              "$ref": "#/definitions/SubPayment"
+            },
+            "xml": {
+              "name": "SubPayment",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "recalls": {
+            "description": "All recalls processed on this payment",
+            "items": {
+              "$ref": "#/definitions/SubPayment"
+            },
+            "xml": {
+              "name": "SubPayment",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "redirectUrl": {
+            "description": "3DSecure redirect url to complete the 3DSecure challege if required by the scheme",
+            "type": "string"
+          },
+          "sku1": {
+            "description": "returns SKU1",
+            "type": "string"
+          },
+          "sku2": {
+            "description": "returns SKU2",
+            "type": "string"
+          },
+          "customerCode": {
+            "description": "returns CustomerCode. This is unique reference for a customer if they are in the systerm",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PaymentResponse"
+        },
+        "type": "object"
+      },
+      "SettlementPayment": {
+        "properties": {
+          "processedOn": {
+            "description": "Processing date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "transactionReference": {
+            "description": "TransactionReference",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current Status of the balance payment.\r\nExpected Statuses\r\n1. Pending\r\n2. Error\r\n3. Submitted\r\n4. Successful\r\n5. Failed\r\n6. Cancelled\r\n7. Suppressed\r\n8. InProgress",
+            "type": "string"
+          },
+          "merchantSettlementDate": {
+            "description": "Date payment will be settled to the merchant",
+            "type": "string",
+            "format": "date-time"
+          },
+          "fundsToMerchant": {
+            "description": "Amount to be settled to the merchant",
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "xml": {
+          "name": "SettlementPayment"
+        },
+        "type": "object"
+      },
+      "SubPayment": {
+        "properties": {
+          "processedOn": {
+            "description": "Refund/Recall date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerFee": {
+            "description": "Fee charged on Customer",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee charged on Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "reason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "transactionReference": {
+            "description": "TransactionReference : If a charge transaction is refunded/recalled then this is transaction reference of that transaction.(Conditional)",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current Status of the refund/recall.\r\nExpected Statuses\r\n1. Pending\tThis refund/recall is waiting be to processed\r\n2. Error - This refund/recall has encountered an Error\r\n3. Submitted - This refund/recall was successfully submitted\r\n4. Successful - This refund/recall was successful\r\n5. Failed - This refund/recall has Failed\r\n6. Cancelled - This refund/recall was Cancelled\r\n7. Suppressed - This refund/recall was Suppressed\r\n8. InProgress - This refund/recall is being processed",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "SubPayment"
+        },
+        "type": "object"
+      },
+      "RefundResponse": {
+        "description": "Refund request response.",
+        "properties": {
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "paymentReference": {
+            "description": "Payment Reference",
+            "type": "string"
+          },
+          "refundValue": {
+            "description": "Refund value",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "RefundValue": "Base: 1; Partial: 2; Full: 3"
+          },
+          "refundValueString": {
+            "description": "Refund value (Human readable)",
+            "readOnly": true,
+            "type": "string"
+          },
+          "refundAmount": {
+            "description": "Refund Amount.",
+            "type": "number",
+            "format": "double"
+          },
+          "requestStatus": {
+            "description": "Refund request status",
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestStatusString": {
+            "description": "Refund request status (Human readable)",
+            "type": "string"
+          },
+          "requestReason": {
+            "description": "Reason for the refund request",
+            "type": "string"
+          },
+          "cancelReason": {
+            "description": "Reason for the refund request cancellation. This field will returned only if the status is 'Canceled'",
+            "type": "string"
+          },
+          "rejectReason": {
+            "description": "Reason for the refund request rejected. This field will returned only if the status is 'Rejected'",
+            "type": "string"
+          },
+          "refundRequestUniqueId": {
+            "description": "Refund Request Unique Id",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional Reference",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "RefundResponse"
+        },
+        "type": "object"
+      },
+      "RefundRequest": {
+        "description": "Refund request object",
+        "required": [
+          "refundValue",
+          "refundRequestReason"
+        ],
+        "properties": {
+          "refundValue": {
+            "description": "Refund value - Defaults to 'BaseAmount' (1) if not passed.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "RefundValue": "Base: 1; Partial: 2; Full: 3"
+          },
+          "refundAmount": {
+            "description": "Refund Amount (Conditional). Amount is required when Refund Value is 'Partial' (2)",
+            "type": "number",
+            "format": "double"
+          },
+          "refundRequestReason": {
+            "description": "Reason for the refund request",
+            "type": "string",
+            "maxLength": 50
+          },
+          "refundRequestUniqueId": {
+            "description": "Refund Request Unique Id",
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "xml": {
+          "name": "RefundRequest"
+        },
+        "type": "object"
+      },
+      "PaymentRequest": {
+        "description": "Payment request object",
+        "required": [
+          "customerReference",
+          "paymentAmount",
+          "overrideFeePayer"
+        ],
+        "properties": {
+          "customerReference": {
+            "description": "Customer reference. Required only when payment account proxy or card proxy is not provided.",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Payment amount",
+            "type": "number",
+            "format": "double"
+          },
+          "cardProxy": {
+            "description": "Card Proxy (Conditional). Use only if you want to pay using card proxy.",
+            "type": "string"
+          },
+          "paymentAccountProxy": {
+            "$ref": "#/definitions/AccountProxy",
+            "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
+          },
+          "companyName": {
+            "description": "Customer company name.",
+            "type": "string"
+          },
+          "contactNumber": {
+            "description": "Customer contact number.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer name.",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "abn": {
+            "description": "Customer Australian Business Number.",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant.",
+            "type": "string",
+            "maxLength": 50
+          },
+          "sendPaymentConfirmation": {
+            "description": "Flag to send the customer invoice.",
+            "type": "boolean"
+          },
+          "customerEmail": {
+            "description": "The customer email to which an invoice is sent to.",
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "overrideFeePayer": {
+            "description": "Override Fee Payer. This field is to determine who is paying transaction fee. \r\n0 Use Set Profile - default\r\n1 Merchant Pays Fee (if allowed)\r\n2 Customer Pays Fee (if allowed)",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "OverrideFeePayer": "Default: 0; Merchant: 1; Customer: 2"
+          },
+          "card": {
+            "$ref": "#/definitions/PaymentCard",
+            "description": "PAN detail"
+          },
+          "threeDSecureData": {
+            "$ref": "#/definitions/ThreeDSecureData",
+            "description": "Optional. 3DSecure details"
+          }
+        },
+        "xml": {
+          "name": "PaymentRequest"
+        },
+        "type": "object"
+      },
+      "PaymentCard": {
+        "required": [
+          "cardHolder",
+          "cardNumber",
+          "expiryMonth",
+          "expiryYear",
+          "cvv"
+        ],
+        "properties": {
+          "cardHolder": {
+            "type": "string"
+          },
+          "cardNumber": {
+            "type": "string"
+          },
+          "expiryMonth": {
+            "type": "string"
+          },
+          "expiryYear": {
+            "type": "string",
+            "maxLength": 4,
+            "minLength": 4
+          },
+          "cvv": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PaymentCard"
+        },
+        "type": "object"
+      },
+      "PreauthResponse": {
+        "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+        "properties": {
+          "preauthReference": {
+            "description": "Unique Payment Reference for the payment done.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer who paid the payment.",
+            "type": "string"
+          },
+          "customerReference": {
+            "description": "Reference of the Customer who paid the payment",
+            "type": "string"
+          },
+          "preauthStatus": {
+            "description": "Current Status of the payment.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+            "type": "string"
+          },
+          "baseAmount": {
+            "description": "Base amount of the payment is done",
+            "type": "number",
+            "format": "double"
+          },
+          "fundsToMerchant": {
+            "description": "Funds to Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "customerFee": {
+            "description": "Fee charged on customer card",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee charged on Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "preauthAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "accountOrCardNo": {
+            "description": "Payment Card No",
+            "type": "string"
+          },
+          "paymentAccount": {
+            "description": "Payment Account by which the payment is done.",
+            "type": "string"
+          },
+          "processingDate": {
+            "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "processorReference": {
+            "description": "Processor reference for the payment done",
+            "type": "string"
+          },
+          "isPaymentSettledToMerchant": {
+            "description": "return true if payment is settled to merchant",
+            "type": "boolean"
+          },
+          "failureCode": {
+            "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "return failure reason if a payment is failed. (Conditional)",
+            "type": "string"
+          },
+          "paymentCard": {
+            "description": "return Payment card used",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. (Conditional)",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRetryScheduled": {
+            "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+            "type": "boolean"
+          },
+          "retryScheduledOn": {
+            "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "retryPaymentReference": {
+            "description": "Retry payment reference. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRecalled": {
+            "description": "Payment recalled.",
+            "type": "boolean"
+          },
+          "recalledOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "recalledReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "recalledTransactionReference": {
+            "description": "RecalledTransactionReference : If a charge transaction is recalled then this is transaction reference of recall transaction.(Conditional)",
+            "type": "string"
+          },
+          "isPaymentRefunded": {
+            "description": "Payment refunded.",
+            "type": "boolean"
+          },
+          "refundedOn": {
+            "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "refundedTransactionReference": {
+            "description": "RefundedTransactionReference : If a charge transaction is refunded then this is transaction reference of refunded transaction.(Conditional)",
+            "type": "string"
+          },
+          "cardCategory": {
+            "description": "Card category",
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+          },
+          "transactionTypeDisplay": {
+            "description": "Transaction Type. Possible values:\r\n1. Charge\r\n2. Invoice\r\n3. Refund\r\n4. Chargeback\r\n5. Recall\r\n6. Fixed Term Settlement",
+            "type": "string"
+          },
+          "originalTransactionReference": {
+            "description": "OriginalTransactionReference : For a Recall / Refund transaction, it is the transaction reference of original transaction.",
+            "type": "string"
+          },
+          "isPaymentChargeBacked": {
+            "description": "Payment Charge Backed.",
+            "type": "boolean"
+          },
+          "chargeBackedOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "chargeBackedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "chargeBackedTransactionReference": {
+            "description": "ChargedBackedTransactionReference : If a charge transaction is charged back then this is transaction reference of charged back transaction.(Conditional)",
+            "type": "string"
+          },
+          "paymentSourceDisplay": {
+            "description": "Payment source of transaction",
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment Reference",
+            "type": "string"
+          },
+          "abn": {
+            "description": "ABN for the transaction",
+            "type": "string"
+          },
+          "preauthExpiryAt": {
+            "description": "Preauth Expires at.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "remainingPreauthAmount": {
+            "description": "Remaining preauth amount after one or more captures",
+            "type": "number",
+            "format": "double"
+          },
+          "redirectUrl": {
+            "description": "3DSecure redirect url to complete the 3DSecure challege if required by the scheme",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PreauthResponse"
+        },
+        "type": "object"
+      },
+      "PreauthRequest": {
+        "required": [
+          "customerReference",
+          "preauthAmount"
+        ],
+        "properties": {
+          "customerReference": {
+            "description": "Customer reference. Required only when payment account proxy or card proxy is not provided.",
+            "type": "string"
+          },
+          "preauthAmount": {
+            "description": "Preauth amount",
+            "type": "number",
+            "format": "double"
+          },
+          "cardProxy": {
+            "description": "Card Proxy (Conditional). Use only if you want to pay using card proxy.",
+            "type": "string"
+          },
+          "paymentAccountProxy": {
+            "$ref": "#/definitions/AccountProxy",
+            "description": "Card or bank accont proxy. Proxy is generated using the Payments Plugin for bank account and card or /cardProxies API for card."
+          },
+          "companyName": {
+            "description": "Customer company name.",
+            "type": "string"
+          },
+          "contactNumber": {
+            "description": "Customer contact number.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer name.",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "abn": {
+            "description": "Customer Australian Business Number.",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant.",
+            "type": "string",
+            "maxLength": 50
+          },
+          "customerEmail": {
+            "description": "The customer email to which an invoice is sent to.",
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "overrideFeePayer": {
+            "description": "Override Fee Payer. This field is to determine who is paying transaction fee. \r\n0 Use Set Profile - default\r\n1 Merchant Pays Fee (if allowed)\r\n2 Customer Pays Fee (if allowed)",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "OverrideFeePayer": "Default: 0; Merchant: 1; Customer: 2"
+          },
+          "card": {
+            "$ref": "#/definitions/PaymentCard",
+            "description": "PAN detail"
+          },
+          "threeDSecureData": {
+            "$ref": "#/definitions/ThreeDSecureData",
+            "description": "Optional. 3DSecure details"
+          }
+        },
+        "xml": {
+          "name": "PreauthRequest"
+        },
+        "type": "object"
+      },
+      "VoidCardResponse": {
+        "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+        "properties": {
+          "preauthReference": {
+            "description": "Unique Payment Reference for the payment done.",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current Status of the void.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+            "type": "string"
+          },
+          "failureCode": {
+            "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "return failure reason if a payment is failed. (Conditional)",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "VoidCardResponse"
+        },
+        "type": "object"
+      },
+      "CaptureCardRequest": {
+        "required": [
+          "paymentAmount"
+        ],
+        "properties": {
+          "paymentAmount": {
+            "description": "Amount to capture",
+            "type": "number",
+            "format": "double"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. This field is returned in reconciliation reports.",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant.",
+            "type": "string",
+            "maxLength": 50
+          },
+          "sendPaymentConfirmation": {
+            "description": "Flag to send the customer invoice.",
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "CaptureCardRequest"
+        },
+        "type": "object"
+      },
+      "CaptureCardResponse": {
+        "description": "Payment response.\r\n(Conditional) - Fields marked as conditional only returned on certain conditions.",
+        "properties": {
+          "paymentReference": {
+            "description": "Unique Payment Reference for the payment done.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer who paid the payment.",
+            "type": "string"
+          },
+          "customerReference": {
+            "description": "Reference of the Customer who paid the payment",
+            "type": "string"
+          },
+          "paymentStatus": {
+            "description": "Current Status of the payment.\r\nExpected Statuses\r\n1. Pending\tThis Payment is waiting be to processed\r\n2. Error - This Payment has encountered an Error\r\n3. Submitted - This Payment was successfully submitted\r\n4. Successful - This Payment was successful\r\n5. Successful(Recalled) - This Payment was Recalled\r\n6. Successful(Refunded) - This Payment was Refunded\r\n7. Successful (Refunded) (Recalled) - This Payment was Refunded and Recalled\r\n8. Failed - This Payment has Failed\r\n9. Cancelled - This Payment was Cancelled\r\n10. Suppressed - This Payment was Suppressed\r\n11. InProgress - This Payment is being processed",
+            "type": "string"
+          },
+          "baseAmount": {
+            "description": "Base amount of the payment is done",
+            "type": "number",
+            "format": "double"
+          },
+          "fundsToMerchant": {
+            "description": "Funds to Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "customerFee": {
+            "description": "Fee charged on customer card",
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "description": "Fee charged on Merchant",
+            "type": "number",
+            "format": "double"
+          },
+          "paymentAmount": {
+            "description": "Total payment amount including the fees",
+            "type": "number",
+            "format": "double"
+          },
+          "accountOrCardNo": {
+            "description": "Payment Card No",
+            "type": "string"
+          },
+          "paymentAccount": {
+            "description": "Payment Account by which the payment is done.",
+            "type": "string"
+          },
+          "processingDate": {
+            "description": "Processing Date for the payment. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "description": "Settlement Date for the payment. This is a calculated date and may change until the payment been settled. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST",
+            "type": "string",
+            "format": "date-time"
+          },
+          "processorReference": {
+            "description": "Processor reference for the payment done",
+            "type": "string"
+          },
+          "isPaymentSettledToMerchant": {
+            "description": "return true if payment is settled to merchant",
+            "type": "boolean"
+          },
+          "failureCode": {
+            "description": "return failure code if a payment is failed. Please refer: http://tinyurl.com/y6lkmpsv for more details. (Conditional)",
+            "type": "string"
+          },
+          "failureReason": {
+            "description": "return failure reason if a payment is failed. (Conditional)",
+            "type": "string"
+          },
+          "paymentCard": {
+            "description": "return Payment card used",
+            "type": "string"
+          },
+          "additionalReference": {
+            "description": "Additional reference. (Conditional)",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRetryScheduled": {
+            "description": "Return TRUE if it is a retry payment pending. Based on Program/Merchant settings, a failed payment will be retried.",
+            "type": "boolean"
+          },
+          "retryScheduledOn": {
+            "description": "Retry payment scheduled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "retryPaymentReference": {
+            "description": "Retry payment reference. (Conditional)",
+            "type": "string"
+          },
+          "isPaymentRecalled": {
+            "description": "Payment recalled.",
+            "type": "boolean"
+          },
+          "recalledOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "recalledReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "recalledTransactionReference": {
+            "description": "RecalledTransactionReference : If a charge transaction is recalled then this is transaction reference of recall transaction.(Conditional)",
+            "type": "string"
+          },
+          "isPaymentRefunded": {
+            "description": "Payment refunded.",
+            "type": "boolean"
+          },
+          "refundedOn": {
+            "description": "Refunded date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "refundedTransactionReference": {
+            "description": "RefundedTransactionReference : If a charge transaction is refunded then this is transaction reference of refunded transaction.(Conditional)",
+            "type": "string"
+          },
+          "cardCategory": {
+            "description": "Card category",
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "TransactionType": "Charge: 1; InvoicePayment: 2; Refund: 3; Chargeback: 4; Recall: 5; FixedTermSettlement: 6"
+          },
+          "transactionTypeDisplay": {
+            "description": "Transaction Type. Possible values:\r\n1. Charge\r\n2. Invoice\r\n3. Refund\r\n4. Chargeback\r\n5. Recall\r\n6. Fixed Term Settlement",
+            "type": "string"
+          },
+          "originalTransactionReference": {
+            "description": "OriginalTransactionReference : For a Recall / Refund transaction, it is the transaction reference of original transaction.",
+            "type": "string"
+          },
+          "isPaymentChargeBacked": {
+            "description": "Payment Charge Backed.",
+            "type": "boolean"
+          },
+          "chargeBackedOn": {
+            "description": "Recalled date. Date Format: yyyy-MM-ddTHH:mm:ss, TimeZone: AEST (Conditional)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "chargeBackedReason": {
+            "description": "Reason. (Conditional)",
+            "type": "string"
+          },
+          "chargeBackedTransactionReference": {
+            "description": "ChargedBackedTransactionReference : If a charge transaction is charged back then this is transaction reference of charged back transaction.(Conditional)",
+            "type": "string"
+          },
+          "paymentSourceDisplay": {
+            "description": "Payment source of transaction",
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "description": "One Off Payment Reference",
+            "type": "string"
+          },
+          "abn": {
+            "description": "ABN for the transaction",
+            "type": "string"
+          },
+          "preauthExpiryAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remainingPreauthAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "xml": {
+          "name": "CaptureCardResponse"
+        },
+        "type": "object"
+      },
+      "PaymentAccountProxyResponse": {
+        "description": "Payment Account Proxy Response Model - represents the different response structures",
+        "properties": {
+          "accountType": {
+            "description": "Type of payment account",
+            "example": "Card",
+            "type": "string"
+          },
+          "cardHolderName": {
+            "description": "Card holder name (Card accounts only)",
+            "example": "John Smith",
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Masked card number (Card accounts only)",
+            "example": "****1234",
+            "type": "string"
+          },
+          "cardExpiry": {
+            "description": "Card expiry date (Card accounts only)",
+            "example": "12/25",
+            "type": "string"
+          },
+          "cardType": {
+            "description": "Card type (Card accounts only)",
+            "example": "Visa",
+            "type": "string"
+          },
+          "processorToken": {
+            "description": "Processor token (Card accounts only)",
+            "example": "tok_1234567890",
+            "type": "string"
+          },
+          "processorName": {
+            "description": "Processor name (Card accounts only)",
+            "example": "Stripe",
+            "type": "string"
+          },
+          "processor3DSPayload": {
+            "description": "3DS payload (Card accounts only)",
+            "example": "eyJhbGciOiJIUzI1NiJ9...",
+            "type": "string"
+          },
+          "accountName": {
+            "description": "Account name (Bank/PayTo accounts)",
+            "example": "John Smith",
+            "type": "string"
+          },
+          "accountNumber": {
+            "description": "Account number (Bank/PayTo accounts)",
+            "example": "12345678",
+            "type": "string"
+          },
+          "bsb": {
+            "description": "BSB code (Bank/PayTo accounts)",
+            "example": "123-456",
+            "type": "string"
+          },
+          "payId": {
+            "description": "PayId identifier (PayId accounts only)",
+            "example": "john.smith@email.com",
+            "type": "string"
+          },
+          "payIdName": {
+            "description": "PayId display name (PayId accounts only)",
+            "example": "John Smith",
+            "type": "string"
+          },
+          "payToStatus": {
+            "description": "PayTo status (PayTo accounts only)",
+            "example": "Active",
+            "type": "string"
+          },
+          "uId": {
+            "description": "Unique identifier (PayTo accounts only)",
+            "example": "12345678-1234-5678-9012-123456789012",
+            "type": "string"
+          },
+          "statusDescription": {
+            "description": "Status description (PayTo accounts only)",
+            "example": "Account is active and ready for payments",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PaymentAccountProxyResponse"
+        },
+        "type": "object"
+      },
+      "ApiRequestPaySummary": {
+        "description": "Api request to pay summary",
+        "properties": {
+          "submittedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalEntries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string"
+          },
+          "statusRemarks": {
+            "type": "string"
+          },
+          "merchantCode": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "merchantUniqueRequestBatchId": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ApiRequestPaySummary"
+        },
+        "type": "object"
+      },
+      "ApiRequestPayEntry": {
+        "description": "Api request pay entry",
+        "properties": {
+          "customerReference": {
+            "type": "string"
+          },
+          "customerName": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "entryStatus": {
+            "type": "string"
+          },
+          "paymentResource": {
+            "type": "string"
+          },
+          "paymentStatus": {
+            "type": "string"
+          },
+          "failureReason": {
+            "type": "string"
+          },
+          "failureCode": {
+            "type": "string"
+          },
+          "processorReference": {
+            "type": "string"
+          },
+          "paymentReference": {
+            "type": "string"
+          },
+          "baseAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "customerFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "processedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "merchantFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "merchantWithheldAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "lastDigits": {
+            "type": "string"
+          },
+          "paymentMethod": {
+            "type": "string"
+          },
+          "processingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentCard": {
+            "type": "string"
+          },
+          "additionalReference": {
+            "type": "string"
+          },
+          "oneOffPaymentReference": {
+            "type": "string"
+          },
+          "retryPaymentResource": {
+            "type": "string"
+          },
+          "isPaymentRetryScheduled": {
+            "type": "boolean"
+          },
+          "retryScheduledOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "retryPaymentReference": {
+            "type": "string"
+          },
+          "retryPaymentStatus": {
+            "type": "string"
+          },
+          "isPaymentRecalled": {
+            "type": "boolean"
+          },
+          "recalledOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recalledReason": {
+            "type": "string"
+          },
+          "merchantCode": {
+            "type": "string"
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "isPaymentRefunded": {
+            "type": "boolean"
+          },
+          "refundedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundedReason": {
+            "type": "string"
+          },
+          "requestReference": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ApiRequestPayEntry"
+        },
+        "type": "object"
+      },
+      "RequestPayRequest": {
+        "description": "Container for request to pay entries\r\nRoot element containing a collection of RequestPayEntry",
+        "required": [
+          "requestPaymentEntries"
+        ],
+        "properties": {
+          "requestPaymentEntries": {
+            "description": "Collection of RequestPayment entry",
+            "items": {
+              "$ref": "#/definitions/RequestPayRequestRecord"
+            },
+            "xml": {
+              "name": "RequestPayRequestRecord",
+              "wrapped": true
+            },
+            "type": "array"
+          },
+          "merchantUniqueRequestBatchId": {
+            "description": "Unique batch id provided by the merchant.",
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "xml": {
+          "name": "RequestPayRequest"
+        },
+        "type": "object"
+      },
+      "RequestPayRequestRecord": {
+        "description": "Represent one request pay entry sent from the client",
+        "required": [
+          "customerReference",
+          "paymentAmount",
+          "firstName"
+        ],
+        "properties": {
+          "customerReference": {
+            "description": "customer reference in individual payment request entry",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Payment amount in individual payment request entry",
+            "type": "number",
+            "format": "double",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0.01
+          },
+          "firstName": {
+            "description": "First name of the customer",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "Last name of the customer",
+            "type": "string"
+          },
+          "email": {
+            "description": "Customer email in individual payment request entry. Use comma or semicolon to provide more than one email address for a customer.",
+            "type": "string"
+          },
+          "mobile": {
+            "description": "Customer mobile in individual payment request entry",
+            "type": "string",
+            "pattern": "^04[0-9]{8}$"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Unique payment id provided by the merchant. Can be used when Proxy payment is performed. (Optional)",
+            "type": "string",
+            "maxLength": 50
+          }
+        },
+        "xml": {
+          "name": "RequestPayRequestRecord"
+        },
+        "type": "object"
+      },
+      "RequestPayResponse": {
+        "description": "Request pay response",
+        "properties": {
+          "requestPayId": {
+            "description": "Id of RequestPay for call to Uploading",
+            "type": "integer",
+            "format": "int32"
+          },
+          "warningMessages": {
+            "description": "WarningMessages after processing batch",
+            "type": "string"
+          },
+          "merchantName": {
+            "description": "returns Merchant Trading Name",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "returns Merchant Code",
+            "type": "string"
+          },
+          "merchantUniqueRequestBatchId": {
+            "description": "Unique request pay batch id provided by the merchant.",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "RequestPayResponse"
+        },
+        "type": "object"
+      },
+      "SessionRequest": {
+        "description": "Session request",
+        "required": [
+          "version",
+          "endpointUrl",
+          "merchantCode",
+          "isJsPlugin",
+          "mode",
+          "userMode",
+          "displayMode",
+          "redirectUrl",
+          "merchantUniquePaymentId",
+          "timestamp"
+        ],
+        "properties": {
+          "version": {
+            "description": "Required. Plugin version. Always use the latest",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "OnlinePaymentVersion": "v1: 1; v2: 2; v3: 3; v4: 4; v5: 5"
+          },
+          "endpointUrl": {
+            "description": "Endpoint url of the plugin. Just provide the base url. For example: https://pay.travelpay.com.au",
+            "type": "string"
+          },
+          "merchantCode": {
+            "description": "Merchant code. Make sure the merchant code is related to the API credentials",
+            "type": "string"
+          },
+          "isJsPlugin": {
+            "description": "Is JS Plugin. Default is true. Set to false if you want to use without iframe.",
+            "type": "boolean"
+          },
+          "mode": {
+            "description": "Optional.\r\nMust be one of the following three values\r\n0 - Make Payment\r\n1 - Tokenise\r\n2 - Custom Payment\r\n3 - Preauthorization\r\n\r\nDefaults to 0 if not provided.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "PaymentMode": "DefaultPayment: 0; Tokenise: 1; CustomPayment: 2; Preauth: 3"
+          },
+          "userMode": {
+            "description": "Optional.\r\nMust be one of the following two values\r\n0 - Customer Facing - default (cardholder must enter CCV or 3DS)\r\n1 - Merchant Facing(for merchant use only - no CCV or 3DS) - if supported by merchant options.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1
+            ],
+            "UserMode": "Customer: 0; Merchant: 1"
+          },
+          "displayMode": {
+            "description": "Optional.\r\nMust be one of the following two values\r\n0 - Default(Modal)\r\n1 - Redirect Url\r\n\r\nDefaults to 0 if not provided.\r\n*Google Pay and Apple Pay works if Modal or Redirect Url with iframe is used.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1
+            ],
+            "PluginDisplayMode": "Default: 0; RedirectUrl: 1"
+          },
+          "redirectUrl": {
+            "description": "Required.\r\nThe page will redirect to this URL with the result in the query string. Refer the return parameters section below.",
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.",
+            "type": "string"
+          },
+          "customerReference": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.",
+            "type": "string"
+          },
+          "paymentAmount": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.\r\nReturns applicable fee if provided with mode 1.",
+            "type": "number",
+            "format": "double"
+          },
+          "showFeeOnTokenising": {
+            "description": "Required if mode is set to 1.\r\nShow the applicable fees for the token at the end of the process.Default is false.",
+            "type": "boolean"
+          },
+          "showFailedPaymentFeeOnTokenising": {
+            "description": "Optional if mode is set to 1.\r\nShow the applicable failed payment fees for the token at the end of the process.Default is false.",
+            "type": "boolean"
+          },
+          "merchantUniquePaymentId": {
+            "description": "Required.\r\nPayment id provided by the merchant. Must be unique and can not be reused if a transaction is processed using this id. This field also work as IdempotencyKey for request for successful requests.",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Required.\r\nTimestamp is required from v4. Provide current datetime in UTC ISO 8601 format as timestamp. format: yyyy-MM-ddTHH:mm:ss",
+            "example": "2025-10-01T02:15:56",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentAccountProxy": {
+            "description": "Conditional.\r\nUse this parameter to make a payment using a payment account proxy which is generated using mode '1'.",
+            "type": "string"
+          },
+          "callbackUrl": {
+            "description": "Optional.\r\nThe URL will be called with HTTP POST method to submit the result. Refer to Payment Plugin documentation for payment response payload.",
+            "type": "string"
+          },
+          "hideTermsAndConditions": {
+            "description": "Optional.\r\nThis will hide the Terms and Conditions.\r\nDefaults to 'false' if not provided.",
+            "type": "boolean"
+          },
+          "sendConfirmationEmailToMerchant": {
+            "description": "Optional.\r\nThis will send confirmation email to merchant.\r\nDefaults to 'false' if not provided.",
+            "type": "boolean"
+          },
+          "additionalReference": {
+            "type": "string"
+          },
+          "contactNumber": {
+            "description": "Optional.\r\nContact number",
+            "type": "string"
+          },
+          "customerEmail": {
+            "description": "Required.\r\nEmail address to which invoice will be emailed if the merchant is configured.\r\nIt is mandatory from V4.",
+            "type": "string"
+          },
+          "businessNumber": {
+            "description": "Optional.\r\nBusiness Number (For example: ABN). Used for reward programs if the Program is enabled to provide reward points.",
+            "type": "string"
+          },
+          "companyName": {
+            "description": "Optional.\r\nCustomer company name.",
+            "type": "string"
+          },
+          "overrideFeePayer": {
+            "description": "Optional.\r\nMust be one of the following three values\r\n0 - Default(based on pricing profile)\r\n1 - Merchant(Merchant will pay the fee regardless of pricing profile setting)\r\n2 - Customer(Customer will pay the fee regardless of pricing profile setting)\r\nDefaults to 0 if not provided.",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "OverrideFeePayer": "Default: 0; Merchant: 1; Customer: 2"
+          },
+          "departureDate": {
+            "description": "Conditional.\r\nDepartureDate is required for Slice Pay. Provide date in UTC ISO 8601 format as departureDate. format: yyyy-MM-dd",
+            "type": "string",
+            "format": "date-time"
+          },
+          "sendConfirmationEmailToCustomer": {
+            "description": "Optional.\r\nThis will send confirmation email to customer.\r\nDefaults to 'false' if not provided.",
+            "type": "boolean"
+          },
+          "allowSaveCardUserOption": {
+            "description": "Optional.\r\nThis will allow to save the card information.\r\nDefaults to 'false' if not provided.\r\nThis option will only work if 'Enable Plugin Pay &amp; Save Card' option is enabled at program or merchant level.",
+            "type": "boolean"
+          },
+          "sku1": {
+            "description": "Optional.\r\nStock Keeping Unit – Optional text fields, allowing up to 50 alphanumeric characters. If the value exceeds 50 characters, only the first 50 characters will be retained and the rest discarded.",
+            "type": "string"
+          },
+          "sku2": {
+            "description": "Optional\r\nStock Keeping Unit – Optional text fields, allowing up to 50 alphanumeric characters. If the value exceeds 50 characters, only the first 50 characters will be retained and the rest discarded.",
+            "type": "string"
+          },
+          "allowedPaymentMethods": {
+            "$ref": "#/definitions/PluginPaymentMethods",
+            "description": "Allowed Payment methods"
+          },
+          "customization": {
+            "$ref": "#/definitions/PluginCustomization",
+            "description": "Optional.\r\nFields to customize the plugin fields"
+          },
+          "fingerprint": {
+            "description": "Not required. This is a internal field and no need to populate.",
+            "type": "string"
+          },
+          "apiKey": {
+            "description": "Not required. This is a internal field and no need to populate.",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "SessionRequest"
+        },
+        "type": "object"
+      },
+      "PluginPaymentMethods": {
+        "description": "Plugin payment methods",
+        "properties": {
+          "bankAccount": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.\r\nShow bank account option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "payTo": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.\r\nShow PayTo option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "payId": {
+            "description": "Conditional.\r\nRequired if mode is set to 0 or 2.\r\nShow PayID option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "applePay": {
+            "description": "Conditional if mode is set to 0.\r\nShow Apple Pay option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "googlePay": {
+            "description": "Conditional if mode is set to 0.\r\nShow Google Pay option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "latitudePay": {
+            "description": "Conditional if mode is set to 0.\r\nShow Latitude Pay option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "slicePay": {
+            "description": "Conditional if mode is set to 0.\r\nShow Slice Pay option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          },
+          "unionPay": {
+            "description": "Conditional if mode is set to 0.\r\nShow UnionPay option only if the option is enable for the merchant.Default is false.",
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "PluginPaymentMethods"
+        },
+        "type": "object"
+      },
+      "PluginCustomization": {
+        "description": "Plugin customization",
+        "properties": {
+          "title": {
+            "description": "Plugin Title.\r\nDefaults to 'Process Payment' if not provided.",
+            "type": "string"
+          },
+          "hideHeader": {
+            "type": "boolean"
+          },
+          "hideMerchantLogo": {
+            "description": "This will hide the merchant logo if any.\r\nDefaults to 'false' if not provided.",
+            "type": "boolean"
+          },
+          "customerNameLabel": {
+            "description": "Custom label to override default customer name display text",
+            "type": "string"
+          },
+          "customerReferenceLabel": {
+            "description": "Custom label to override default customer reference display text",
+            "type": "string"
+          },
+          "paymentAmountLabel": {
+            "description": "Custom label to override default payment amount display text",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "PluginCustomization"
+        },
+        "type": "object"
+      },
+      "SessionResponse": {
+        "properties": {
+          "secureToken": {
+            "description": "Token used to initialize the payment plugin.",
+            "type": "string"
+          },
+          "expiresAt": {
+            "description": "Expiry of the secure token.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "endpointUrl": {
+            "description": "Payment plugin endpoint url",
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "SessionResponse"
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "Api-Key": {
+        "type": "apiKey",
+        "description": "API Key Authentication",
+        "name": "Api-Key",
+        "in": "header"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BatchPayments",
+      "description": "Manage Batch Payments. You can create or fetch batch payments."
+    },
+    {
+      "name": "CardProxies",
+      "description": "Manage card proxies."
+    },
+    {
+      "name": "Customers",
+      "description": "Manage customers"
+    },
+    {
+      "name": "Diagnostics",
+      "description": "System Diagnostics"
+    },
+    {
+      "name": "Payments",
+      "description": "Manage Payments. You can create or fetch one-off payments."
+    },
+    {
+      "name": "Preauths",
+      "description": "Preauth -- Create, Fetch, Void and Capture"
+    },
+    {
+      "name": "Proxies",
+      "description": "Manage card and bank proxies."
+    },
+    {
+      "name": "RequestPays",
+      "description": "Manage request to pays.You can create or fetch request pays."
+    },
+    {
+      "name": "Sessions",
+      "description": "Sessions"
+    }
+  ]
+}
