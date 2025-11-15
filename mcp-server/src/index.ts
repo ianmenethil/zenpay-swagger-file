@@ -7,14 +7,17 @@ import {
   ListToolsRequestSchema,
   Tool,
 } from "@modelcontextprotocol/sdk/types.js";
-import { spawn } from "child_process";
 import { promisify } from "util";
 import { exec as execCallback } from "child_process";
 import * as path from "path";
-import * as fs from "fs/promises";
+import { fileURLToPath } from "url";
 import axios from "axios";
 
 const exec = promisify(execCallback);
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Environment configuration
 const ENVIRONMENTS = {
