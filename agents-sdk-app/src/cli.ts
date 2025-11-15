@@ -63,20 +63,21 @@ When generating code:
 // Interactive mode
 async function interactiveMode() {
   console.log(chalk.blue.bold('TravelPay Agent - Interactive Mode'));
-  console.log(chalk.gray('Connected to MCP server with TravelPay tools'));
+  console.log(chalk.gray('NOTE: MCP server integration coming soon'));
   console.log(chalk.gray('Type "exit" to quit\n'));
 
   const conversationHistory: Array<any> = [];
 
   while (true) {
-    const { question } = await inquirer.prompt([
+    const answers: any = await inquirer.prompt([
       {
         type: 'input',
         name: 'question',
-        message: chalk.green('You:'),
-        prefix: ''
+        message: 'You:'
       }
     ]);
+
+    const question = answers.question;
 
     if (question.toLowerCase() === 'exit') {
       console.log(chalk.blue('Goodbye!'));
@@ -97,9 +98,11 @@ async function interactiveMode() {
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4096,
         system: SYSTEM_PROMPT,
-        messages: conversationHistory,
-        // Connect to MCP server
-        mcp_servers: [MCP_SERVER_CONFIG]
+        messages: conversationHistory
+        // NOTE: MCP server integration (mcp_servers parameter)
+        // will be available in future SDK versions
+        // When available, uncomment:
+        // mcp_servers: [MCP_SERVER_CONFIG]
       });
 
       spinner.stop();
@@ -107,7 +110,7 @@ async function interactiveMode() {
       // Extract assistant response
       const assistantMessage = response.content
         .filter(block => block.type === 'text')
-        .map(block => block.text)
+        .map(block => (block as any).text)
         .join('\n');
 
       console.log(chalk.cyan('\nAgent:'), assistantMessage);
@@ -143,15 +146,16 @@ async function oneShot(question: string) {
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: question }],
-      mcp_servers: [MCP_SERVER_CONFIG]
+      messages: [{ role: 'user', content: question }]
+      // NOTE: MCP server integration coming in future SDK version
+      // mcp_servers: [MCP_SERVER_CONFIG]
     });
 
     spinner.stop();
 
     const assistantMessage = response.content
       .filter(block => block.type === 'text')
-      .map(block => block.text)
+      .map(block => (block as any).text)
       .join('\n');
 
     console.log(assistantMessage);

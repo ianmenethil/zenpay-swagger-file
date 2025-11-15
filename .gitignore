@@ -20,6 +20,10 @@ sdk/
 # MCP server build artifacts
 mcp-server/dist/
 
+# Agents SDK app build artifacts
+agents-sdk-app/dist/
+agents-sdk-app/node_modules/
+
 # Environment variables (contains API keys)
 .env
 
