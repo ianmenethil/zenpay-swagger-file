@@ -6,6 +6,10 @@ node_modules/
 
 # Temporary files
 openapi-enhanced.json
+openapi-deref.json
+openapi-bundled.json
+openapi-normalized.json
+openapi-clean.json
 *.tmp
 *.bak
 
