@@ -12,17 +12,17 @@ import { promisify } from "util";
 import { exec as execCallback } from "child_process";
 import * as path from "path";
 import * as fs from "fs/promises";
+import axios from "axios";
 
 const exec = promisify(execCallback);
 
 // Environment configuration
-const TRAVELPAY_ENVS = {
-  production: process.env.TRAVELPAY_API_URL_PROD || "https://api.travelpay.com",
-  sandbox: process.env.TRAVELPAY_API_URL_SANDBOX || "https://sandbox-api.travelpay.com",
-  uat: process.env.TRAVELPAY_API_URL_UAT || "https://uat-api.travelpay.com",
+const ENVIRONMENTS = {
+  production: "https://api.travelpay.com.au",
+  sandbox: "https://api.sandbox.travelpay.com.au",
+  uat: "https://apiuat.travelpay.com.au",
 };
 
-const TRAVELPAY_API_KEY = process.env.TRAVELPAY_API_KEY || "";
 const REPO_ROOT = path.resolve(__dirname, "../..");
 
 // Tool definitions
@@ -187,47 +187,59 @@ async function runBunScript(
 }
 
 // Helper function to make HTTP requests to TravelPay API
-async function travelPayRequest(
-  method: string,
+// TravelPay requires BOTH api-key header AND HTTP basic auth
+async function makeApiRequest<T>(
   endpoint: string,
-  environment: string = "sandbox",
-  body?: any
-): Promise<any> {
-  if (!TRAVELPAY_API_KEY) {
-    throw new Error(
-      "TRAVELPAY_API_KEY environment variable is required for TravelPay API calls"
-    );
+  environment: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  data?: any,
+  params?: any
+): Promise<T> {
+  try {
+    const envUpper = environment.toUpperCase();
+    const apiKey = process.env[`TRAVELPAY_${envUpper}_API_KEY`];
+    const username = process.env[`TRAVELPAY_${envUpper}_USERNAME`];
+    const password = process.env[`TRAVELPAY_${envUpper}_PASSWORD`];
+
+    if (!apiKey || !username || !password) {
+      throw new Error(
+        `Missing credentials for ${environment} environment. ` +
+        `Required: TRAVELPAY_${envUpper}_API_KEY, TRAVELPAY_${envUpper}_USERNAME, TRAVELPAY_${envUpper}_PASSWORD`
+      );
+    }
+
+    const baseUrl = ENVIRONMENTS[environment as keyof typeof ENVIRONMENTS];
+
+    console.error(`[MCP] TravelPay API: ${method} ${baseUrl}/${endpoint}`);
+
+    // TravelPay requires BOTH api-key header AND basic auth
+    const response = await axios({
+      method,
+      url: `${baseUrl}/${endpoint}`,
+      data,
+      params,
+      timeout: 30000,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "api-key": apiKey, // Custom TravelPay header
+      },
+      auth: {
+        username,
+        password,
+      },
+    });
+
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(
+        `TravelPay API error: ${error.response.status} ${error.response.statusText}\n` +
+        `${JSON.stringify(error.response.data, null, 2)}`
+      );
+    }
+    throw error;
   }
-
-  const baseUrl = TRAVELPAY_ENVS[environment as keyof typeof TRAVELPAY_ENVS];
-  const url = `${baseUrl}${endpoint}`;
-
-  const headers: Record<string, string> = {
-    "Authorization": `Bearer ${TRAVELPAY_API_KEY}`,
-    "Content-Type": "application/json",
-  };
-
-  const options: RequestInit = {
-    method,
-    headers,
-  };
-
-  if (body) {
-    options.body = JSON.stringify(body);
-  }
-
-  console.error(`[MCP] TravelPay API: ${method} ${url}`);
-
-  const response = await fetch(url, options);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(
-      `TravelPay API error: ${response.status} ${response.statusText}\n${JSON.stringify(data, null, 2)}`
-    );
-  }
-
-  return data;
 }
 
 // Tool handlers
@@ -310,7 +322,7 @@ async function handleTravelPayCreatePayment(args: any): Promise<string> {
     description: args.description || "Payment via MCP",
   };
 
-  const result = await travelPayRequest("POST", "/v1/payment-sessions", environment, payload);
+  const result = await makeApiRequest<any>("v1/payment-sessions", environment, "POST", payload);
 
   return `✅ Payment session created\n\nSession ID: ${result.id}\nAmount: ${args.amount} ${args.currency}\nStatus: ${result.status}\nEnvironment: ${environment}\n\nFull response:\n${JSON.stringify(result, null, 2)}`;
 }
@@ -319,7 +331,7 @@ async function handleTravelPayGetSession(args: any): Promise<string> {
   const environment = args.environment || "sandbox";
   const sessionId = args.sessionId;
 
-  const result = await travelPayRequest("GET", `/v1/payment-sessions/${sessionId}`, environment);
+  const result = await makeApiRequest<any>(`v1/payment-sessions/${sessionId}`, environment, "GET");
 
   return `✅ Payment session retrieved\n\nSession ID: ${result.id}\nAmount: ${result.amount} ${result.currency}\nStatus: ${result.status}\nEnvironment: ${environment}\n\nFull response:\n${JSON.stringify(result, null, 2)}`;
 }
@@ -393,7 +405,20 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   console.error("[MCP] OpenAPI TravelPay Toolkit MCP Server starting...");
   console.error(`[MCP] Repository root: ${REPO_ROOT}`);
-  console.error(`[MCP] TravelPay API key configured: ${TRAVELPAY_API_KEY ? "✅" : "❌"}`);
+
+  // Check credentials for each environment
+  const checkEnv = (env: string) => {
+    const upper = env.toUpperCase();
+    const hasKey = !!process.env[`TRAVELPAY_${upper}_API_KEY`];
+    const hasUser = !!process.env[`TRAVELPAY_${upper}_USERNAME`];
+    const hasPass = !!process.env[`TRAVELPAY_${upper}_PASSWORD`];
+    const allPresent = hasKey && hasUser && hasPass;
+    console.error(`[MCP] ${env} credentials: ${allPresent ? "✅" : "❌"}`);
+  };
+
+  checkEnv("sandbox");
+  checkEnv("uat");
+  checkEnv("production");
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
