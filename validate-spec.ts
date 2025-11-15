@@ -4,7 +4,6 @@
  * OpenAPI Specification Validator
  *
  * Validates OpenAPI 3.1 specs using Scalar's official parser.
- * Downloads the latest schema from OpenAPI Initiative if not cached.
  *
  * Features:
  * - Validates against official OpenAPI 3.1 schema
@@ -19,7 +18,7 @@
 
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
-import { validate } from "@scalar/openapi-parser";
+import { validate, dereference } from "@scalar/openapi-parser";
 
 // ============================================================================
 // CONFIGURATION
@@ -49,71 +48,6 @@ function colorize(text: string, color: keyof typeof colors): string {
 // ============================================================================
 // VALIDATION
 // ============================================================================
-
-/**
- * Validate $ref integrity
- */
-function validateReferences(spec: any): { valid: boolean; errors: string[] } {
-  console.log(colorize("🔗 Checking $ref integrity...\n", "cyan"));
-
-  const errors: string[] = [];
-  const refs = new Set<string>();
-
-  // Collect all $ref values
-  function collectRefs(obj: any, path = "") {
-    if (obj && typeof obj === "object") {
-      if (obj.$ref && typeof obj.$ref === "string") {
-        refs.add(obj.$ref);
-      }
-
-      for (const [key, value] of Object.entries(obj)) {
-        collectRefs(value, path ? `${path}.${key}` : key);
-      }
-    }
-  }
-
-  collectRefs(spec);
-
-  console.log(colorize(`  Found ${refs.size} references to validate\n`, "dim"));
-
-  // Validate each reference
-  for (const ref of refs) {
-    // Internal reference
-    if (ref.startsWith("#/")) {
-      const path = ref.substring(2).split("/");
-      let target: any = spec;
-
-      for (const segment of path) {
-        if (target && typeof target === "object") {
-          target = target[segment];
-        } else {
-          errors.push(`Invalid reference: ${ref} (${segment} not found)`);
-          break;
-        }
-      }
-
-      if (!target) {
-        errors.push(`Invalid reference: ${ref} (target not found)`);
-      }
-    }
-    // External reference (just warn, don't validate)
-    else {
-      console.log(colorize(`  ⚠ External reference: ${ref}`, "yellow"));
-    }
-  }
-
-  if (errors.length === 0) {
-    console.log(colorize("✓ All references are valid\n", "green"));
-    return { valid: true, errors: [] };
-  } else {
-    console.log(colorize(`✗ Found ${errors.length} broken reference(s):\n`, "red"));
-    for (const error of errors) {
-      console.log(colorize(`  • ${error}`, "red"));
-    }
-    console.log();
-    return { valid: false, errors };
-  }
-}
 
 /**
  * Additional validation checks
@@ -201,7 +135,7 @@ function generateReport(
   }
 
   if (refErrors.length > 0) {
-    console.log(colorize(`Broken References: ${refErrors.length}`, "red"));
+    console.log(colorize(`Reference Errors: ${refErrors.length}`, "red"));
   }
 
   if (warnings.length > 0) {
@@ -272,7 +206,7 @@ async function main() {
   const schemaErrors: any[] = [];
 
   if (!result.valid) {
-    console.log(colorize("❌ Validation failed!\n", "red"));
+    console.log(colorize("❌ Schema validation failed!\n", "red"));
 
     if (result.errors && result.errors.length > 0) {
       console.log(colorize(`Found ${result.errors.length} error(s):\n`, "yellow"));
@@ -289,12 +223,29 @@ async function main() {
       }
     }
   } else {
-    console.log(colorize("✅ Validation passed!", "green"));
+    console.log(colorize("✅ Schema validation passed!", "green"));
     console.log(colorize("   Spec conforms to OpenAPI 3.1 standard\n", "dim"));
   }
 
-  // Validate references
-  const { valid: refsValid, errors: refErrors } = validateReferences(spec);
+  // Validate references using Scalar's dereference
+  console.log(colorize("🔗 Validating $ref integrity with Scalar...\n", "cyan"));
+
+  let refsValid = true;
+  const refErrors: string[] = [];
+
+  try {
+    await dereference(specContent);
+    console.log(colorize("✓ All references are valid and resolvable\n", "green"));
+  } catch (error: any) {
+    refsValid = false;
+    console.log(colorize("✗ Reference validation failed!\n", "red"));
+
+    const errorMsg = error.message || String(error);
+    refErrors.push(errorMsg);
+
+    console.log(colorize(`  ${errorMsg}`, "red"));
+    console.log();
+  }
 
   // Additional validation
   const { valid: additionalValid, warnings } = additionalValidation(spec);
