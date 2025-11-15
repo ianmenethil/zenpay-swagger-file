@@ -18,6 +18,7 @@
     "normalize": "bun run normalize-spec.ts",
     "sanitize": "bun run sanitize-spec.ts",
     "traverse": "bun run traverse-spec.ts",
+    "sdk": "bun run generate-sdk.ts",
     "docs": "bun run serve-docs.ts",
     "help": "bun run show-help.ts"
   },
