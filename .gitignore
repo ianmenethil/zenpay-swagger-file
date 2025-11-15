@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+mcp-server/node_modules/
 
 # Cache
 .cache/
@@ -15,6 +16,12 @@ openapi-clean.json
 
 # Generated SDKs
 sdk/
+
+# MCP server build artifacts
+mcp-server/dist/
+
+# Environment variables (contains API keys)
+.env
 
 # OS files
 .DS_Store

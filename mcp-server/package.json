@@ -1,0 +1,37 @@
+{
+  "name": "openapi-travelpay-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for OpenAPI toolkit with TravelPay domain expertise",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "openapi-travelpay-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "openapi",
+    "swagger",
+    "travelpay",
+    "api",
+    "sdk"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
