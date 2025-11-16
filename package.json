@@ -16,6 +16,7 @@
     "compare": "bun run compare-specs.ts",
     "deep-compare": "bun run deep-compare-specs.ts",
     "verify": "bun run verify-comparison.ts",
+    "normalize": "bun run normalize-and-diff.ts",
     "postman:download": "bun run postman-download.ts",
     "postman:convert": "bun run postman-to-openapi31.ts",
     "postman:upload": "bun run postman-upload.ts",
