@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+mcp-server/node_modules/
+
+# Cache
+.cache/
+
+# Temporary files
+openapi-enhanced.json
+openapi-deref.json
+openapi-bundled.json
+openapi-normalized.json
+openapi-clean.json
+*.tmp
+*.bak
+
+# Generated SDKs
+sdk/
+
+# MCP server build artifacts
+mcp-server/dist/
+
+# Agents SDK app build artifacts
+agents-sdk-app/dist/
+agents-sdk-app/node_modules/
+
+# Environment variables (contains API keys)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

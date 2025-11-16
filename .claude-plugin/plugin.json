@@ -1,0 +1,61 @@
+{
+  "name": "travelpay-openapi-toolkit",
+  "version": "1.0.0",
+  "displayName": "TravelPay OpenAPI Toolkit",
+  "description": "Complete OpenAPI toolkit with TravelPay domain expertise, MCP server, SDK generation, and spec analysis",
+  "author": "Your Name",
+  "homepage": "https://github.com/yourusername/zenpay-swagger-file",
+  "license": "MIT",
+  "categories": ["api", "payments", "openapi", "developer-tools"],
+  "keywords": ["travelpay", "openapi", "swagger", "api", "payments", "sdk", "mcp"],
+  "icon": "💳",
+  "components": {
+    "commands": true,
+    "agents": true,
+    "skills": true,
+    "mcpServers": true
+  },
+  "requirements": {
+    "node": ">=18.0.0"
+  },
+  "permissions": {
+    "network": true,
+    "filesystem": {
+      "read": ["openapi.json", "reports/**", "sdk/**"],
+      "write": ["openapi.json", "reports/**", "sdk/**"]
+    },
+    "execute": ["bun"]
+  },
+  "configuration": {
+    "environments": {
+      "type": "array",
+      "description": "TravelPay API environments",
+      "default": ["sandbox", "uat", "production"],
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "apiKey": {
+            "type": "string",
+            "secret": true
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "secret": true
+          }
+        }
+      }
+    },
+    "defaultEnvironment": {
+      "type": "string",
+      "description": "Default environment for API calls",
+      "default": "sandbox",
+      "enum": ["sandbox", "uat", "production"]
+    }
+  }
+}

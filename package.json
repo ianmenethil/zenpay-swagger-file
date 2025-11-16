@@ -1,0 +1,35 @@
+{
+  "name": "zenpay-api-docs",
+  "version": "1.0.0",
+  "description": "TravelPay API documentation tools and specifications",
+  "scripts": {
+    "getspec": "bun run swagger-downloader.ts",
+    "validate": "bun run validate-spec.ts",
+    "analyze": "bun run analyze-spec.ts",
+    "enhance": "bun run enhance-spec.ts",
+    "enhance:preview": "bun run enhance-spec.ts --preview",
+    "enhance:all": "bun run enhance-spec.ts --all --apply",
+    "sdk": "bun run generate-sdk.ts",
+    "docs": "bun run serve-docs.ts",
+    "diff": "bun run show-diff.ts",
+    "help": "bun run show-help.ts",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "dependencies": {
+    "@scalar/openapi-parser": "^0.23.2",
+    "@scalar/api-reference": "^1.39.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "keywords": [
+    "openapi",
+    "swagger",
+    "api",
+    "documentation",
+    "travelpay"
+  ],
+  "author": "TravelPay",
+  "license": "MIT"
+}
