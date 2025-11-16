@@ -1,13 +1,14 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.1",
   "info": {
-    "title": "Zenith Payments API",
-    "description": "OpenAPI specification generated from Postman collection",
+    "title": "Zenith Payments Developer Guide",
+    "description": "OpenAPI specification generated from Postman collection: Zenith Payments Developer Guide",
     "version": "2.0.0"
   },
   "servers": [
     {
-      "url": "undefined://{{baseURL}}"
+      "url": "https://api.sandbox.travelpay.com.au",
+      "description": "Sandbox Environment"
     }
   ],
   "tags": [
@@ -130,23 +131,25 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "batchPaymentEntries": [
-                    {
-                      "customerReference": "<string>",
-                      "paymentAmount": "<double>",
-                      "merchantUniquePaymentId": "<string>",
-                      "paymentAccountProxy": "<string>"
-                    },
-                    {
-                      "customerReference": "<string>",
-                      "paymentAmount": "<double>",
-                      "merchantUniquePaymentId": "<string>",
-                      "paymentAccountProxy": "<string>"
-                    }
-                  ],
-                  "merchantUniqueBatchId": "<string>"
-                }
+                "examples": [
+                  {
+                    "batchPaymentEntries": [
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "merchantUniquePaymentId": "<string>",
+                        "paymentAccountProxy": "<string>"
+                      },
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "merchantUniquePaymentId": "<string>",
+                        "paymentAccountProxy": "<string>"
+                      }
+                    ],
+                    "merchantUniqueBatchId": "<string>"
+                  }
+                ]
               }
             }
           }
@@ -158,7 +161,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -166,7 +173,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{apiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -193,7 +204,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -201,7 +216,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{apiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -228,7 +247,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -236,7 +259,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{apiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -266,7 +293,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -274,7 +305,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{apiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -301,7 +336,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -309,7 +348,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -333,7 +376,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -341,7 +388,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -367,7 +418,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -375,7 +430,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           },
           {
             "name": "paymentAmount",
@@ -384,7 +443,11 @@
               "type": "string"
             },
             "description": "(Required) Payment amount to determine the pricing",
-            "example": "<<double>>"
+            "examples": {
+              "default": {
+                "value": "<<double>>"
+              }
+            }
           }
         ],
         "responses": {
@@ -413,7 +476,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -421,7 +488,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -429,7 +500,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -453,7 +528,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -461,7 +540,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           },
           {
             "name": "customerReference",
@@ -470,7 +553,11 @@
               "type": "string"
             },
             "description": "Customer reference",
-            "example": "Ref1"
+            "examples": {
+              "default": {
+                "value": "Ref1"
+              }
+            }
           },
           {
             "name": "customerStatuses",
@@ -479,7 +566,11 @@
               "type": "integer"
             },
             "description": "Customer statuses. Default is all. 0 - Open, 1 - AwaitingEmailVerfication, 2 - AwaitingSignature, 3 - SetUpIncomplete, 4 - Restricted, 5 - Closed, 6 - OnHold",
-            "example": "0"
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
           },
           {
             "name": "fromOpenDate",
@@ -488,7 +579,11 @@
               "type": "string"
             },
             "description": "From Customer open date. Format: yyyy-MM-dd",
-            "example": "2022-05-12"
+            "examples": {
+              "default": {
+                "value": "2022-05-12"
+              }
+            }
           },
           {
             "name": "toOpenDate",
@@ -497,7 +592,11 @@
               "type": "string"
             },
             "description": "To Customer open date. Format: yyyy-MM-dd",
-            "example": "2022-05-01"
+            "examples": {
+              "default": {
+                "value": "2022-05-01"
+              }
+            }
           },
           {
             "name": "fromClosedDate",
@@ -506,7 +605,11 @@
               "type": "string"
             },
             "description": "From Customer closed date. Format: yyyy-MM-dd",
-            "example": "2020-01-01"
+            "examples": {
+              "default": {
+                "value": "2020-01-01"
+              }
+            }
           },
           {
             "name": "toClosedDate",
@@ -515,7 +618,11 @@
               "type": "string"
             },
             "description": "To Customer closed date. Format: yyyy-MM-dd",
-            "example": "2020-01-01"
+            "examples": {
+              "default": {
+                "value": "2020-01-01"
+              }
+            }
           },
           {
             "name": "paymentOptions",
@@ -524,7 +631,11 @@
               "type": "integer"
             },
             "description": "Payment options. Default is all. 22 - AutoPay, 23 - EmailReminder, 24 - SmsReminder, 25 - FixedTerm, 26 - BatchPay, 27 - ScheduledPay, 28 - OneOff, 148 - PayID, 149 - BPAY",
-            "example": "22"
+            "examples": {
+              "default": {
+                "value": "22"
+              }
+            }
           },
           {
             "name": "offset",
@@ -533,7 +644,11 @@
               "type": "integer"
             },
             "description": "Starting index of the record. An index starts from 0. Default = 0",
-            "example": "0"
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
           },
           {
             "name": "limit",
@@ -542,7 +657,11 @@
               "type": "integer"
             },
             "description": "Page size. Default = 20. Maximum page size allowed = 2000",
-            "example": "200"
+            "examples": {
+              "default": {
+                "value": "200"
+              }
+            }
           }
         ],
         "responses": {
@@ -569,7 +688,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -577,7 +700,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -603,7 +730,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -611,7 +742,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -637,7 +772,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -645,7 +784,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -672,7 +815,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -680,7 +827,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -688,7 +839,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -714,7 +869,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -722,7 +881,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -749,7 +912,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -757,7 +924,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -765,7 +936,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -791,7 +966,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -799,7 +978,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -827,7 +1010,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -835,7 +1022,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -843,7 +1034,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -870,7 +1065,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -878,7 +1077,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -905,7 +1108,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -913,7 +1120,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -921,7 +1132,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -950,7 +1165,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -958,7 +1177,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -966,7 +1189,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -996,7 +1223,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -1004,7 +1235,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -1012,7 +1247,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{apiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1036,7 +1275,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           },
           {
             "name": "customerReference",
@@ -1045,7 +1288,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the customer reference",
-            "example": "Ref1"
+            "examples": {
+              "default": {
+                "value": "Ref1"
+              }
+            }
           },
           {
             "name": "fromProcessedDate",
@@ -1054,7 +1301,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the payments from date",
-            "example": "2018-08-22"
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
           },
           {
             "name": "toProcessedDate",
@@ -1063,7 +1314,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the payments to date",
-            "example": "2018-08-22"
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
           },
           {
             "name": "settlementDate",
@@ -1072,7 +1327,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the payments settlement date",
-            "example": "2018-08-22"
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
           },
           {
             "name": "paymentSettlement",
@@ -1081,7 +1340,11 @@
               "type": "integer"
             },
             "description": "(Optional) Filter by if the payment is settled to the merchant. \"0\" payment is not settled. \"1\" payment is settled to the merchant",
-            "example": "0"
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
           },
           {
             "name": "transactionTypes",
@@ -1090,7 +1353,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the different transaction types",
-            "example": "null"
+            "examples": {
+              "default": {
+                "value": "null"
+              }
+            }
           },
           {
             "name": "transactionTypes",
@@ -1099,7 +1366,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the different transaction types",
-            "example": "null"
+            "examples": {
+              "default": {
+                "value": "null"
+              }
+            }
           },
           {
             "name": "isRecalled",
@@ -1108,7 +1379,11 @@
               "type": "boolean"
             },
             "description": "(Optional) Filter by if the payments are in recalled status",
-            "example": "false"
+            "examples": {
+              "default": {
+                "value": "false"
+              }
+            }
           },
           {
             "name": "isRefunded",
@@ -1117,7 +1392,11 @@
               "type": "boolean"
             },
             "description": "(Optional) Filter by if the payments are in refunded status",
-            "example": "false"
+            "examples": {
+              "default": {
+                "value": "false"
+              }
+            }
           },
           {
             "name": "offset",
@@ -1126,7 +1405,11 @@
               "type": "integer"
             },
             "description": "(Optional)",
-            "example": "0"
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
           },
           {
             "name": "limit",
@@ -1135,7 +1418,11 @@
               "type": "integer"
             },
             "description": "(Optional)",
-            "example": "20"
+            "examples": {
+              "default": {
+                "value": "20"
+              }
+            }
           }
         ],
         "responses": {
@@ -1161,7 +1448,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -1169,7 +1460,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1195,7 +1490,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1224,7 +1523,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -1232,7 +1535,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "api-key",
@@ -1240,7 +1547,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1264,7 +1575,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1290,7 +1605,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1316,7 +1635,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1341,29 +1664,31 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "requestPaymentEntries": [
-                    {
-                      "customerReference": "<string>",
-                      "paymentAmount": "<double>",
-                      "firstName": "<string>",
-                      "lastName": "<string>",
-                      "email": "<string>",
-                      "mobile": "0411111111",
-                      "merchantUniquePaymentId": "<string>"
-                    },
-                    {
-                      "customerReference": "<string>",
-                      "paymentAmount": "<double>",
-                      "firstName": "<string>",
-                      "lastName": "<string>",
-                      "email": "<string>",
-                      "mobile": "0411111111",
-                      "merchantUniquePaymentId": "<string>"
-                    }
-                  ],
-                  "merchantUniqueRequestBatchId": "<string>"
-                }
+                "examples": [
+                  {
+                    "requestPaymentEntries": [
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "firstName": "<string>",
+                        "lastName": "<string>",
+                        "email": "<string>",
+                        "mobile": "0411111111",
+                        "merchantUniquePaymentId": "<string>"
+                      },
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "firstName": "<string>",
+                        "lastName": "<string>",
+                        "email": "<string>",
+                        "mobile": "0411111111",
+                        "merchantUniquePaymentId": "<string>"
+                      }
+                    ],
+                    "merchantUniqueRequestBatchId": "<string>"
+                  }
+                ]
               }
             }
           }
@@ -1375,7 +1700,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -1383,7 +1712,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1409,7 +1742,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1435,7 +1772,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1462,7 +1803,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1510,7 +1855,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1536,7 +1885,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "{{ApiKey}}"
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
           }
         ],
         "responses": {
@@ -1562,7 +1915,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           },
           {
             "name": "paymentReference",
@@ -1571,7 +1928,11 @@
               "type": "integer"
             },
             "description": "(Optional) Filter by payment reference",
-            "example": "45066"
+            "examples": {
+              "default": {
+                "value": "45066"
+              }
+            }
           },
           {
             "name": "customerReference",
@@ -1580,7 +1941,11 @@
               "type": "string"
             },
             "description": "(Optional ) Filter by customer reference",
-            "example": "APITEST"
+            "examples": {
+              "default": {
+                "value": "APITEST"
+              }
+            }
           },
           {
             "name": "uniquePaymentId",
@@ -1589,7 +1954,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the unique payment id provided by the customer when making payment",
-            "example": "UQ1"
+            "examples": {
+              "default": {
+                "value": "UQ1"
+              }
+            }
           },
           {
             "name": "fromProcessedDate",
@@ -1598,7 +1967,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the payments from date",
-            "example": "2000-01-30"
+            "examples": {
+              "default": {
+                "value": "2000-01-30"
+              }
+            }
           },
           {
             "name": "toProcessedDate",
@@ -1607,7 +1980,11 @@
               "type": "string"
             },
             "description": "(Optional) Filter by the payments till date",
-            "example": "2022-01-01"
+            "examples": {
+              "default": {
+                "value": "2022-01-01"
+              }
+            }
           },
           {
             "name": "pageOffset",
@@ -1616,7 +1993,11 @@
               "type": "integer"
             },
             "description": "(Optional) Page offset",
-            "example": "1"
+            "examples": {
+              "default": {
+                "value": "1"
+              }
+            }
           },
           {
             "name": "pageLimit",
@@ -1625,7 +2006,11 @@
               "type": "integer"
             },
             "description": "(Optional) Page limit",
-            "example": "5"
+            "examples": {
+              "default": {
+                "value": "5"
+              }
+            }
           }
         ],
         "responses": {
@@ -1652,7 +2037,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/x-www-form-urlencoded"
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
           },
           {
             "name": "Accept",
@@ -1660,7 +2049,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1686,7 +2079,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1712,7 +2109,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {
@@ -1739,7 +2140,11 @@
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
           }
         ],
         "responses": {

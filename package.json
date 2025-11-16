@@ -13,6 +13,12 @@
     "docs": "bun run serve-docs.ts",
     "diff": "bun run show-diff.ts",
     "help": "bun run show-help.ts",
+    "postman:download": "bun run postman-download.ts",
+    "postman:convert": "bun run postman-to-openapi31.ts",
+    "postman:upload": "bun run postman-upload.ts",
+    "postman:workspaces": "bun run postman-upload.ts --list-workspaces",
+    "postman:collections": "bun run postman-upload.ts --list-collections",
+    "postman:full": "bun run postman-download.ts && bun run postman-to-openapi31.ts",
     "test": "bun test",
     "test:watch": "bun test --watch"
   },
