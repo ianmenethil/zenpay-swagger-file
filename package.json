@@ -12,7 +12,9 @@
     "sdk": "bun run generate-sdk.ts",
     "docs": "bun run serve-docs.ts",
     "diff": "bun run show-diff.ts",
-    "help": "bun run show-help.ts"
+    "help": "bun run show-help.ts",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
   },
   "dependencies": {
     "@scalar/openapi-parser": "^0.23.2",
