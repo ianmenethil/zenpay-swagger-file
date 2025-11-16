@@ -13,15 +13,28 @@
     "docs": "bun run serve-docs.ts",
     "diff": "bun run show-diff.ts",
     "help": "bun run show-help.ts",
+    "compare": "bun run compare-specs.ts",
+    "deep-compare": "bun run deep-compare-specs.ts",
+    "verify": "bun run verify-comparison.ts",
+    "postman:download": "bun run postman-download.ts",
+    "postman:convert": "bun run postman-to-openapi31.ts",
+    "postman:upload": "bun run postman-upload.ts",
+    "postman:workspaces": "bun run postman-upload.ts --list-workspaces",
+    "postman:collections": "bun run postman-upload.ts --list-collections",
+    "postman:list-sections": "bun run postman-extract-section.ts --list",
+    "postman:extract": "bun run postman-extract-section.ts",
+    "postman:full": "bun run postman-download.ts && bun run postman-to-openapi31.ts",
+    "extract:merchant": "bun run extract-merchant-apis.ts",
     "test": "bun test",
     "test:watch": "bun test --watch"
   },
   "dependencies": {
-    "@scalar/openapi-parser": "^0.23.2",
-    "@scalar/api-reference": "^1.39.3"
+    "@scalar/api-reference": "^1.39.3",
+    "@scalar/openapi-parser": "^0.23.2"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "postman-to-openapi": "^1.7.3"
   },
   "keywords": [
     "openapi",

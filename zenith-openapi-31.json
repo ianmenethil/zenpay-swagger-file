@@ -1,0 +1,1836 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Zenith Payments Developer Guide - Merchant APIs",
+    "description": "OpenAPI specification generated from Postman collection: Zenith Payments Developer Guide - Merchant APIs",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.sandbox.travelpay.com.au",
+      "description": "Sandbox Environment"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "## Basic Authentication\n\n[Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the `Authorization` header that contains the word `Basic` followed by a space and a base64-encoded string `username:password`.\n\nZenPay Merchant APIs utilize basic authentication alongside with API-Key for access. Please contact our integration team from [integrations@zenithpayments.com.au](https://mailto:integrations@zenithpayments.com.au) to request access for Merchant APIs.\n\n## Adding a Username/Password and API-Key to the Postman Collection\n\nIn the Postman client, click on the three dots to the right of the collection name to \"View more actions.\"\n\nThen, click \"Edit.\", Click on the \"Variables\" tab and, fill in the required rows;\n\n\\* baseURL  \n\\* Username  \n\\* Password  \n\\* API-Key\n\n<img src=\"https://schooleasypay.com.au/wp-content/uploads/2022/07/MicrosoftTeams-image-1.png\">\n\n# Notes\n\n\\* Please note that variables are case sensitive."
+    },
+    {
+      "name": "BatchPayments",
+      "description": "#### POST: Process Batch Payment\n\nThis endpoint allows merchants to upload and process a batch of payments in a single request by providing a collection of payment entries in JSON format. It returns a response confirming the batch payment creation or any errors encountered.\n\n- **Note**: Ensure the batch payment details are correct to avoid errors or duplicate entries.\n    \n\n#### GET: Fetch Batch Payment Summary\n\nThis endpoint retrieves a summary of a specific batch payment identified by `batchPaymentID`. The summary includes details such as the batch payment status, processing date, and the number of transactions within the batch.\n\n- **Parameters**: `batchPaymentID` (integer, required) - Unique identifier for the batch payment.\n    \n\n#### GET: Fetch Batch Payment Transactions\n\nThis endpoint returns the list of all transactions associated with a specific batch payment identified by `batchPaymentID`. Use this endpoint to get detailed information about each transaction in the batch, including amounts, statuses, and more.\n\n- **Parameters**: `batchPaymentID` (integer, required) - Unique identifier for the batch payment."
+    },
+    {
+      "name": "CardProxies",
+      "description": "#### POST: Create Card Proxy\n\nThis endpoint generates a card proxy (a tokenized representation of card details) to securely process payments. This method is suitable for applications that require secure card tokenization.\n\n- **Note**: Not recommended for software or websites that do not meet a certain level of PCI DSS compliance. For a more secure card tokenization and payment option, refer to our **jQuery Payment Plugin**.\n    \n\n#### GET: Fetch Card Proxy Details\n\nThis endpoint retrieves details of a specific card proxy identified by `cardProxy`. It returns token response details and can be used to verify or manage tokenized cards.\n\n- **Parameters**: `cardProxy` (string, required) - The card proxy identifier for which details are needed.\n    \n\n#### DELETE: Delete Card Proxy\n\nThis endpoint permanently deletes a card proxy from the system. It does not affect any customer who registered using this proxy but ensures that the proxy is no longer valid for future transactions.\n\n- **Parameters**: `cardProxy` (string, required) - The card proxy to delete.\n    \n\n#### GET: Fetch Card Proxy Pricing\n\nThis endpoint calculates and retrieves pricing details for a card proxy based on a given payment amount. It is useful for determining transaction fees before processing a payment.\n\n- **Parameters**:\n    \n    - `cardProxy` (string, required) - The card proxy identifier.\n        \n    - `paymentAmount` (double, required) - The amount for which pricing is to be calculated."
+    },
+    {
+      "name": "Customers",
+      "description": "This API allows you to manage customers.\n\nYou can create customers, fetch customer details and also update customer details."
+    },
+    {
+      "name": "Payments",
+      "description": "# **POST: Create Payment**\n\n- This endpoint allows merchants to initiate a new payment transaction by providing customer details, payment amounts, and other necessary information. It supports both tokenized and direct card payments.\n    \n    ## **Note:** Direct card payments require PCI DSS compliance and are enabled only for specific merchants.\n    \n\n# **GET: Transaction Information**\n\n- These endpoints allow merchants to retrieve detailed information about an existing transaction, including its status, processing date, settlement details, and more. You can query transactions by various identifiers to get real-time information on their processing status."
+    },
+    {
+      "name": "RefundRequests"
+    },
+    {
+      "name": "RequestPays",
+      "description": "This API allows you to manage request pays.\n\nUsing this API you can create new request pay or fetch existing details of request pays."
+    },
+    {
+      "name": "Pre-Auth",
+      "description": "Pre-Authorization allows merchants to authorize a customers card and reserve funds for future transactions without charging the card in the moment.\n\n# GET: Capture PreAuth Card\n\nThis endpoint allows merchants to capture an amount from a created Pre-Auth. This requires the preauthReference generated from the POST: Create Preauth endpoint.\n\n# POST: Create PreAuth\n\nThis endpoint allows merchants to initiate a new Pre-Auth by providing customer details, payment amounts and other necessary information. It supports both tokenized and direct card payments.  \nNote: Direct card payments reuqire PCI DSS compliance and are enabled only for specific merchants.\n\n# GET: Check PreAuth via preauthReference  \nGET: Check PreAuth via CustomerReference\n\nThese endpoints allow merchants to retrieve detailed information about an existing transaction, including its status, processing date and more.\n\n# PUT: Void PreAuth Request\n\nThis endpoint allows for the preauth to be voided or cancelled, not allowing any further payments to be put against the initial value."
+    },
+    {
+      "name": "Diagnostics",
+      "description": "This API allows you to ping ZenPay internal servers.\n\nUsing this API you are able to troubleshoot connection issues and check the ZenPay server status."
+    }
+  ],
+  "paths": {
+    "/v2/batchpayments": {
+      "post": {
+        "tags": [
+          "BatchPayments"
+        ],
+        "summary": "Process Batch Payment",
+        "description": "This method is used to upload batch payments as a collection of JSON and process them.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "examples": [
+                  {
+                    "batchPaymentEntries": [
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "merchantUniquePaymentId": "<string>",
+                        "paymentAccountProxy": "<string>"
+                      },
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "merchantUniquePaymentId": "<string>",
+                        "paymentAccountProxy": "<string>"
+                      }
+                    ],
+                    "merchantUniqueBatchId": "<string>"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/batchpayments/:batchPaymentId": {
+      "get": {
+        "tags": [
+          "BatchPayments"
+        ],
+        "summary": "Fetch Batch Payment Summary by batchPaymentID",
+        "description": "This method returns a summary of a batch payment using the batchPaymentID.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/batchpayments/:batchPaymentId/entries": {
+      "get": {
+        "tags": [
+          "BatchPayments"
+        ],
+        "summary": "Fetch Batch Payment Transactions by batchPaymentId",
+        "description": "This method returns a list of entries in a batch payment.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies": {
+      "post": {
+        "tags": [
+          "CardProxies"
+        ],
+        "summary": "Create Card Proxy",
+        "description": "Generate a card proxy.\n\nNot recommended for software / sites that are not PCI DSS compliant. For a easy and secure card tokenisation and payment option, see our Payment Plugin jQuery.\n\nThis endpoint is locked behind a setting and can only be utilized once it has been enabled by Zenith Payments.",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies/:cardProxy": {
+      "delete": {
+        "tags": [
+          "CardProxies"
+        ],
+        "summary": "Delete Card Proxy",
+        "description": "Delete card proxy permanently from the system. This will not affect any customer, registered using this proxy.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CardProxies"
+        ],
+        "summary": "Fetch Card Proxy Details",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies/:cardProxy/pricing": {
+      "get": {
+        "tags": [
+          "CardProxies"
+        ],
+        "summary": "Fetch Card Proxy Pricing",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          },
+          {
+            "name": "paymentAmount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Required) Payment amount to determine the pricing",
+            "examples": {
+              "default": {
+                "value": "<<double>>"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create customer",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch all Customers based on the filters",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          },
+          {
+            "name": "customerReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer reference",
+            "examples": {
+              "default": {
+                "value": "Ref1"
+              }
+            }
+          },
+          {
+            "name": "customerStatuses",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Customer statuses. Default is all. 0 - Open, 1 - AwaitingEmailVerfication, 2 - AwaitingSignature, 3 - SetUpIncomplete, 4 - Restricted, 5 - Closed, 6 - OnHold",
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
+          },
+          {
+            "name": "fromOpenDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "From Customer open date. Format: yyyy-MM-dd",
+            "examples": {
+              "default": {
+                "value": "2022-05-12"
+              }
+            }
+          },
+          {
+            "name": "toOpenDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "To Customer open date. Format: yyyy-MM-dd",
+            "examples": {
+              "default": {
+                "value": "2022-05-01"
+              }
+            }
+          },
+          {
+            "name": "fromClosedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "From Customer closed date. Format: yyyy-MM-dd",
+            "examples": {
+              "default": {
+                "value": "2020-01-01"
+              }
+            }
+          },
+          {
+            "name": "toClosedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "To Customer closed date. Format: yyyy-MM-dd",
+            "examples": {
+              "default": {
+                "value": "2020-01-01"
+              }
+            }
+          },
+          {
+            "name": "paymentOptions",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Payment options. Default is all. 22 - AutoPay, 23 - EmailReminder, 24 - SmsReminder, 25 - FixedTerm, 26 - BatchPay, 27 - ScheduledPay, 28 - OneOff, 148 - PayID, 149 - BPAY",
+            "examples": {
+              "default": {
+                "value": "22"
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Starting index of the record. An index starts from 0. Default = 0",
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size. Default = 20. Maximum page size allowed = 2000",
+            "examples": {
+              "default": {
+                "value": "200"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch all Customers",
+        "description": "List of all customers.\n\nIt will display all customers regardless of customerStatus. It will include closed customers as well.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch Customer by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/status": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch Customer status by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update the customer status",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/profile": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch Customer profile by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update the customer profile",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/account": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch Customer payment method by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update the customer account",
+        "description": "StartFragment\n\nCustomer Bank/Credit Card account. Use PaymentAccountProxy or CreditCardProxy or BankAccount.  \nIf more than one details are passed, only one detail used as per the following order, 1. PaymentAccountProxy 2. BankAccount 3. CreditCardProxy  \nPreferred option is PaymentAccountProxy\n\nEndFragment",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/paymentOption": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Fetch Customer payment options by customerReference",
+        "description": "PaymentOptions human readable form:\n\nAutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149\n\nPaymentFrequency human readable form:\n\nWeekly: 32; Fortnightly: 33; Monthly: 34; Quarterly: 35; HalfYearly: 36; Yearly: 37; FourWeeks: 38\n\nNotificationMethod human readable form:\n\nNone: 0; Sms: 1; Email: 2",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update the customer payment option",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/customerReference": {
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update the customer reference",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Perform OneOff Payment",
+        "description": "### Important Notice for Using the Direct Card Payment Option:\n\nThis endpoint allows the submission of raw card details (`cardNumber`, `expiryMonth`, `expiryYear`, `cvv`) for processing payments. **However, this method requires a certain level of PCI DSS (Payment Card Industry Data Security Standard) compliance** to ensure the secure handling of sensitive card information. To enhance security and reduce the risks associated with directly managing card data, we strongly recommend using our **Payment Plugin jQuery** for secure card tokenization and payment processing.\n\n**Please note:** This endpoint is restricted and can only be accessed once it has been enabled by Zenith Payments. Ensure you have the necessary permissions and configurations in place before attempting to use this method. For access or further assistance, please contact us at [integrations@zenithpayments.com.au](https://mailto:integrations@zenithpayments.com.au).",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{apiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Fetch all Payments",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          },
+          {
+            "name": "customerReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the customer reference",
+            "examples": {
+              "default": {
+                "value": "Ref1"
+              }
+            }
+          },
+          {
+            "name": "fromProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments from date",
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
+          },
+          {
+            "name": "toProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments to date",
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
+          },
+          {
+            "name": "settlementDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments settlement date",
+            "examples": {
+              "default": {
+                "value": "2018-08-22"
+              }
+            }
+          },
+          {
+            "name": "paymentSettlement",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional) Filter by if the payment is settled to the merchant. \"0\" payment is not settled. \"1\" payment is settled to the merchant",
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
+          },
+          {
+            "name": "transactionTypes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the different transaction types",
+            "examples": {
+              "default": {
+                "value": "null"
+              }
+            }
+          },
+          {
+            "name": "transactionTypes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the different transaction types",
+            "examples": {
+              "default": {
+                "value": "null"
+              }
+            }
+          },
+          {
+            "name": "isRecalled",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "(Optional) Filter by if the payments are in recalled status",
+            "examples": {
+              "default": {
+                "value": "false"
+              }
+            }
+          },
+          {
+            "name": "isRefunded",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "(Optional) Filter by if the payments are in refunded status",
+            "examples": {
+              "default": {
+                "value": "false"
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional)",
+            "examples": {
+              "default": {
+                "value": "0"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional)",
+            "examples": {
+              "default": {
+                "value": "20"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/:paymentReference": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Fetch Payment details by paymentReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/uniqueId/:merchantUniqueId": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Fetch Payment details based on merchant unique reference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/:paymentReference/refundrequests": {
+      "post": {
+        "tags": [
+          "RefundRequests"
+        ],
+        "summary": "Allow the merchant to request a refund for provided payment using payment reference.",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RefundRequests"
+        ],
+        "summary": "Returns all the refund requests details based on payment reference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays/:requestPayId": {
+      "get": {
+        "tags": [
+          "RequestPays"
+        ],
+        "summary": "Api to get the request pay details",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays/:requestPayId/entries": {
+      "get": {
+        "tags": [
+          "RequestPays"
+        ],
+        "summary": "Api to get the request pay entries",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays": {
+      "post": {
+        "tags": [
+          "RequestPays"
+        ],
+        "summary": "Upload request to pay payments as a collection of json and process them",
+        "description": "This API allows you to upload RequestPay payments as a collection of JSON parameters and processes them.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "examples": [
+                  {
+                    "requestPaymentEntries": [
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "firstName": "<string>",
+                        "lastName": "<string>",
+                        "email": "<string>",
+                        "mobile": "0411111111",
+                        "merchantUniquePaymentId": "<string>"
+                      },
+                      {
+                        "customerReference": "<string>",
+                        "paymentAmount": "<double>",
+                        "firstName": "<string>",
+                        "lastName": "<string>",
+                        "email": "<string>",
+                        "mobile": "0411111111",
+                        "merchantUniquePaymentId": "<string>"
+                      }
+                    ],
+                    "merchantUniqueRequestBatchId": "<string>"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/x-www-form-urlencoded"
+              }
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "application/json"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference": {
+      "get": {
+        "tags": [
+          "Pre-Auth"
+        ],
+        "summary": "Check PreAuth via preauthReference",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths": {
+      "get": {
+        "tags": [
+          "Pre-Auth"
+        ],
+        "summary": "Check PreAuth via customerReference",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pre-Auth"
+        ],
+        "summary": "Create PreAuth",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference/captures": {
+      "post": {
+        "tags": [
+          "Pre-Auth"
+        ],
+        "summary": "Capture PreAuth Card",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference/voids": {
+      "put": {
+        "tags": [
+          "Pre-Auth"
+        ],
+        "summary": "Void PreAuth Request",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/diagnostics/ping": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "summary": "Ping",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "default": {
+                "value": "{{ApiKey}}"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
