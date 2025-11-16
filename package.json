@@ -17,11 +17,12 @@
     "test:watch": "bun test --watch"
   },
   "dependencies": {
-    "@scalar/openapi-parser": "^0.23.2",
-    "@scalar/api-reference": "^1.39.3"
+    "@scalar/api-reference": "^1.39.3",
+    "@scalar/openapi-parser": "^0.23.2"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "postman-to-openapi": "^1.7.3"
   },
   "keywords": [
     "openapi",

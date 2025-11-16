@@ -1,0 +1,1756 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Zenith Payments API",
+    "description": "OpenAPI specification generated from Postman collection",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "undefined://{{baseURL}}"
+    }
+  ],
+  "tags": [
+    {
+      "name": "How to get started?",
+      "description": "There will be five stages in your integration\n\n1. Discuss your requirements with our payments specialists\n    \n2. Apply for a sandbox account\n    \n3. Development\n    \n4. Demo\n    \n5. Production Sign Off\n    \n\nTo get started, talk to us about your particular business and technology requirements. Our team of Payment Specialists will ensure you have access to the right solutions that meet your needs.\n\nThey will also assist you with your application for a sandbox account and API credentials.\n\n# Contact Us\n\n- Please email us at [integrations@zenithpayments.com.au](https://integrations@zenithpayments.com.au)\n    \n\n# Getting your API credentials\n\nYour Sandbox API credentials for Merchant APIs will consist of a username, a password and a API-Key.  \nFor Customer APIs, the bearer token is self-generated from the customer portal.\n\nWe are able to provide you with you're very own Sandbox API credentials after our initial requirements meeting with our payment specialists.\n\nYou are able to use your sandbox details with the \"Run in Postman\" link above. Remember to set your desired language in the examples.\n\n# Sandbox URLs\n\nThe below is a list of the different Sandbox environments where you are able to develop, test and experiment using the different ZenPay APIs.\n\n| **Sandbox Environment** | **Link** |\n| --- | --- |\n| TravelPay | [https://api.sandbox.travelpay.com.au](https://apiuat.travelpay.com.au) |\n| TravelPay B2B | [https://api](https://apiuat.travelpay.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.travelpay.com.au](https://apiuat.travelpay.com.au) |\n| School Easy Pay | [https://api](https://apiuat.schooleasypay.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.schooleasypay.com.au](https://apiuat.schooleasypay.com.au) |\n| Childcare Easy Pay | [https://api](https://apiuat.childcareeasypay.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.childcareeasypay.com.au](https://apiuat.childcareeasypay.com.au) |\n| Thoroughbred Payments | [https://api](https://apiuat.thoroughbredpayments.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.thoroughbredpayments.com.au](https://apiuat.thoroughbredpayments.com.au) |\n| Rental Rewards | [https://api](https://apiuat.rentalrewards.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.rentalrewards.com.au](https://apiuat.rentalrewards.com.au) |\n| B2BPay | [https://api](https://apiuat.b2bpay.com.au)[.sandbox](https://apiuat.travelpay.com.au)[.b2bpay.com.au](https://apiuat.b2bpay.com.au) |\n\n# Production / Live URLs\n\nOnce you have completed the process of development and testing, we will run a quick sign off meeting with you. Allowing you to demonstrate your software and the integrations between the two systems, and allowing us to understand the integrations that you have developed.\n\nOnce both parties have signed off we can then proceed to provide live credentials and URLs for production.\n\nPlease reach out to your Account Manager to schedule the integration sign off."
+    },
+    {
+      "name": "PCI Compliance",
+      "description": "Every organization that handles card payments must comply with the Payment Card Industry Data Security Standard (PCI DSS). Annual compliance is mandated by the payment card schemes and banks.\n\n## What is PCI DSS?\n\nPCI DSS is a global standard, helping to protect cardholder data and tackle the growing threat of security breaches. It sets the operational and technical requirements for organizations handling card payments, and for software developers and manufacturers of payment applications and devices.\n\nZenith Payment's entire infrastructure is fully compliant with PCI DSS - we are certified at Level 1, which is the highest level of compliance. We are independently audited annually for compliance by qualified security assessors.\n\n## What this means for you?\n\nWhilst Zenith Payments is a PCI DSS compliant organisation, if your organization does accept card payments then it must also be fully compliant. Non-compliance with PCI DSS could make you responsible for any losses through fraud, and you may also face considerable fines from the card schemes and banks.\n\nThere are four levels of compliance, dependant on how many transactions are processed by your organisation in a year. Find out how your organisation can reach compliance at the [PCI Security Standards Council Website](https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security)"
+    },
+    {
+      "name": "jQuery Payment Plugin",
+      "description": "The ZenPay JQuery plugin allows you to easily make payments or tokenize cards/bank accounts utilising a user-friendly, easy to use UI that is built within the browser. The plugin can be used as an iframe form or can displayed on the webpage in a place of your choosing by embedding the iframe to your webpage.\n\n**jQuery Version 5 is now available in both our Sandbox and Production environments:**\n\n> **❗Please note that after 30 September 2025, plugins on V4 and below will no longer be able to process payments or tokenise cards.** \n  \n\n- If you are currently using jQuery plugin V4, then the main change is to upgrade your hashing from SHA512 to SHA3-512 and update your URL from v4 to v5.  \n    Additionally, there are new optional input parameters available to enable you to customise the display of ‘Customer Name’, ‘Customer Reference’, and ‘Payment Amount’ labels.\n    \n- If you are on V3 please see the migration guide.\n    \n- If you are currently using jQuery plugin V1, V2, we recommend scheduling a session in with our integrations team to talk through the specific upgrade requirements.\n    \n\n**Apple Pay**\n\nThe jQuery Plugin solution now supports Apple Pay. If you are interested in adding this feature as a payment method, you need to pass the Apple Pay parameter “allowApplePayOneOffPayment” and set as “True”. You then need to engage with the Zenith Integrations team to verify your domain.\n\n**Google Pay**\n\nThe jQuery Plugin solution now supports Google Pay. If you are interested in adding this feature as a payment method, you need to pass the Google Pay parameter “allowGooglePayOneOffPayment” and set as “True”."
+    },
+    {
+      "name": "jQuery Payment Plugin > Overview",
+      "description": "## Use Cases\n\nThere are a variety of use cases in which the JQuery plugin can be used in your integration, the below examples are some of the most common use cases where the JQuery plugin works well.\n\n### Shopping Cart\n\nThe JQuery plugin can be used in a shopping cart type of system, through which a customer can add items to their shopping cart and upon checkout of their cart they are able to use the JQuery plugin to make a payment for their purchase. The plugin works great here as it takes very minimal space on the site and expands when the user clicks on the button.\n\n### One-Off Payment\n\nThe JQuery plugin can be used as a one-off payment solution, whereby a customer is able to easily complete a one-off payment to a merchant using the plugin. The customers payment is able to be traced by using a payment reference in a simple, easy way of your choice.\n\n### Card Tokenization\n\nThe JQuery plugin is able to tokenize customer cards and bank accounts, by creating a unique token for the payment method instead of storing the actual card/bank account details in the system, the token is generated and stored securely to uniquely identify the payment method the customer has tokenized. Customers can feel more secure and protected knowing that their card and bank details are kept safe and not stored in the system."
+    },
+    {
+      "name": "jQuery Payment Plugin > JQuery V3 to V5 Migration Guide",
+      "description": "# ZenPay Migration Guide: Version 3 to Version 5\n\nThis guide explains how to migrate your ZenPay integration from v3 to v5, focusing on key changes in hashing, required parameters, and payload structure.\n\nIf you are on an earlier version (v1 or v2), please reach out to our integrations team for assistance by emailing [integrations@zenithpayments.com.au](https://mailto:integrations@zenithpayments.com.au).\n\n> 💡 Please note this example uses travelpay as the program domain. In your own code, use the program domain that's relevant to you \n  \n\n- b2bpay\n    \n- childcareeasypay\n    \n- schooleasypay\n    \n- thoroughbredpayments\n    \n- travelpay\n    \n- rentalrewards\n    \n\n---\n\n## 1\\. Plugin Assets\n\n- **jQuery:** Ensure jQuery v3.7.1 is loaded before ZenPay JS:\n    \n\n``` html\n<script src=\"<https://code.jquery.com/jquery-3.7.1.min.js>\"></script>\n\n ```\n\n- **ZenPay JS (Only use one):**\n    \n\n``` html\nBootstrap v5 (Recommended):\n<comment class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> For Bootstrap 5 please use following            -->\n<script src=\"<https://cdn.travelpay.com.au/js/zenpay.payment.bs5.js>\"></script>\nBootstrap v3 (Not Recommended):\n<comment class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;> For Bootstrap 3, please use following            -->\n<script src=\"<https://cdn.travelpay.com.au/js/zenpay.payment.js>\"></script>\n\n ```\n\n- **ZenPay CSS:**\n    \n\n``` html\n<link rel=\"stylesheet\" href=\"<https://cdn.travelpay.com.au/css/zenpay.payment.css>\">\n\n ```\n\n---\n\n## Official Demo, Documentation, and Full Configuration Reference\n\n- **Official v5 Demo & Docs:** [https://pay.sandbox.travelpay.com.au/demo/](https://pay.sandbox.travelpay.com.au/demo/)\n    \n\nThis page contains:\n\n- Error codes table\n    \n- Input and output parameter tables\n    \n- All available configuration options and usage notes\n    \n- Live demo and code sample\n    \n\n---\n\n## 2\\. Endpoint URL Update\n\n- **v3:**\n    \n\n``` plaintext\nurl: \"<https://payuat.travelpay.com.au/online/v3>\"\n\n ```\n\n- **v5:**\n    \n\n``` plaintext\nurl: \"<https://pay.sandbox.travelpay.com.au/online/v5>\"\n\n ```\n\nUpdate your integration to use the v5 endpoint.\n\nProduction URL remains the same, changing to /v5 (travel pay used as an example below)\n\n``` plaintext\nurl: \"<https://pay.travelpay.com.au/online/v5>\"\n\n ```\n\n---\n\n## 3\\. Fingerprint Hash Algorithm\n\n- **v3:** Used SHA1 for fingerprint generation.\n    \n\n``` javascript\n// v3 (SHA1)\nconst hash = SHA1(apiKey|userName|password|mode|paymentAmount|merchantUniquePaymentId)\n\n ```\n\n**v5:** Uses SHA3-512 for stronger security.\n\n``` javascript\n// v5 (SHA3-512, note the new timestamp field)\nconst hash = SHA3512(apiKey|userName|password|mode|paymentAmount|merchantUniquePaymentId|timestamp)\n\n ```\n\n---\n\n## 4\\. New and Changed Required Parameters\n\n| Parameter | v3 | v4 | v5 (required) |\n| --- | --- | --- | --- |\n| merchantCode | No | No | Yes |\n| customerEmail | No | Yes | Yes |\n| timestamp | No | No | Yes |\n\n**Details:**\n\n- `merchantCode`: Now required in both the payload and endpoint URL.\n    \n- `customerEmail`: Added in v4, required in v5.\n    \n- `timestamp`: New in v5, must be included in both the fingerprint and payload.\n    \n    - Format: `'YYYY-MM-DDTHH:MM:SS'` (UTC ISO-8601).\n        \n\n> **❗Please note that if you or your merchants are expecting payment success confirmation emails, you must now explicitly pass** sendConfirmationEmailToMerchant **as true when calling the plugin to continue receiving these emails after the v5 migration.** \n  \n\n---\n\n## 5\\. Example Migration: Before and After\n\n> **❗Please note that these examples are for demonstration purposes only. In production, always use a secure backend to generate fingerprints and handle sensitive data.** \n  \n> 🛡️ **Important**:  \nAlways use the exact same values for all fingerprint parameters (apiKey, merchantCode, mode, paymentAmount, merchantUniquePaymentId, and especially **timestamp**) in both fingerprint payload and the ZenPay plugin payload.  \nEven a 1-second difference in timestamp will cause a fingerprint mismatch and throw an error during initialization (e.g., error **E08**). \n  \n\n## v1 & v2:\n\nIf you are on older versions of the plugin, please review the example below, or reach out to our integration team with any questions by emailing [integrations@zenithpayments.com.au ](https://mailto:integrations@zenithpayments.com.au) for assistance.\n\n## v3 Example:\n\n``` javascript\n// Create payload for fingerprint\nconst apiKey = \"PUBLIC_API_KEY\";  // Provided by Zenith Payments\nconst userName = \"username\";      // Provided by Zenith Payments\nconst password = \"password\";      // Provided by Zenith Payments\nconst mode = 0;                   // Mode 0: Static Payment - Mode 1: Tokenization - Mode 2: Dynamic Payment - Mode 3: Pre-auth\nconst paymentAmount = 250.00;     // Tip: always use two decimal digits (e.g., 250.00)\nconst merchantUniquePaymentId = crypto.randomUUID(); // Could be anything as long as unique\n// Generate fingerprint using SHA1\nconst fpPayload = `${apiKey}|${userName}|${password}|${mode}|${paymentAmount * 100}|${merchantUniquePaymentId}`;\nconst fingerprint = CryptoJS.SHA1(fpPayload).toString(); \n// Create payload for ZenPay plugin\nconst zpPayload = {\n  url: \"https://payuat.travelpay.com.au/online/v3\",\n  apiKey,                         // Must match value used in fingerprint generation\n  fingerprint,                    // SHA1 fingerprint\n  redirectUrl: \"https://payuat.travelpay.com.au/demo?result\",\n  mode,                           // Must match value used in fingerprint generation\n  customerName: \"Jane Doe\",\n  customerReference: \"INV-991\",\n  merchantUniquePaymentId,        // Must match value used in fingerprint generation\n    paymentAmount // Must match value used in fingerprint generation, but as dollars (e.g., if hash used 1234 then paymentAmount is 12.34)\n};\n// Initialize ZenPay plugin\nconst payment = $.zpPayment({ ...zpPayload });\nconst result = payment.open();    // Use open() for v3\n\n ```\n\n---\n\n## v5 Example:\n\n``` javascript\n// Create payload for fingerprint\nconst apiKey = \"PUBLIC_API_KEY\";            // Provided by Zenith Payments\nconst userName = \"username\";                // Provided by Zenith Payments\nconst password = \"password\";                // Provided by Zenith Payments\nconst merchantCode = \"TPDEMOMERCH\";         // Provided by Zenith Payments - Required in v5\nconst mode = 0;                             // Mode 0: Static Payment - Mode 1: Tokenization - Mode 2: Dynamic Payment - Mode 3: Pre-auth\nconst paymentAmount = 250.00;               // Tip: always use two decimal digits (e.g., 250.00)\nconst merchantUniquePaymentId = crypto.randomUUID(); // Could be anything as long as unique\nconst timestamp = new Date().toISOString().slice(0, 19); // Format: 'YYYY-MM-DDTHH:MM:SS'\n// Generate fingerprint using SHA3-512\nconst fpPayload = `${apiKey}|${userName}|${password}|${mode}|${paymentAmount * 100}|${merchantUniquePaymentId}|${timestamp}`;\nconst fingerprint = sha3_512(fpPayload); \n// Create payload for ZenPay plugin\nconst zpPayload = {\n  url: \"https://pay.sandbox.travelpay.com.au/online/v5\",\n  apiKey,                         // Must match value used in fingerprint generation\n  fingerprint,                    // SHA3-512 fingerprint\n  merchantCode,                   // Provided by Zenith Payments - Required in v5\n  redirectUrl: \"https://pay.sandbox.travelpay.com.au/demo?result\",\n  mode,                           // Must match value used in fingerprint generation\n  customerName: \"Jane Doe\",\n  customerReference: \"INV-991\",\n  merchantUniquePaymentId,        // Must match value used in fingerprint generation\n  paymentAmount,                  // Must match value used in fingerprint generation, but as dollars (e.g., if hash used 1234 then paymentAmount is 12.34)\n  timestamp,                      // Must match value used in fingerprint generation\n  customerEmail: \"jane.doe@example.com\"\n};\n// Initialize ZenPay plugin\nconst payment = $.zpPayment({ ...zpPayload });\nconst result = payment.init();    // Use init() for v5\n\n ```\n\n---\n\n## 6\\. One-Time IDs\n\n- **`merchantUniquePaymentId`** must be unique for every payment request.\n    \n- Once used, it cannot be reused, regardless of payment status.\n    \n\n---\n\n## 7\\. Summary Table: Key Migration Changes\n\n| Change | v3 | v5 (required) |\n| --- | --- | --- |\n| Hash Algorithm | SHA1 | SHA3-512 |\n| Fingerprint Fields | No timestamp | Includes `timestamp` |\n| merchantCode | Not required | Required |\n| customerEmail | Not required | Required (since v4) |\n| timestamp | Not required | Required |\n\n---\n\n## 8\\. Best Practices\n\n- **Never** generate fingerprints or handle backend secrets client-side.\n    \n- Always generate the fingerprint and unique payment ID on your backend.\n    \n- Validate all required fields before initializing the plugin."
+    },
+    {
+      "name": "jQuery Payment Plugin > jQuery Tech Specs and Demo pages",
+      "description": "For all jQuery information and access to our demos, please click follow the relevant below link.\n\nThe demo pages below include:\n\n- Demos of our jQuery Plugin\n    \n- Code Sample to run the jQuery plugin\n    \n- Input Parameters\n    \n- Return Parameters\n    \n- Fingerprinting Information\n    \n- Error codes\n    \n\n| **Program** | **Link** |\n| --- | --- |\n| TravelPay | [https://pay.sandbox.travelpay.com.au/Demo/](https://pay.sandbox.travelpay.com.au/Demo/) |\n| School Easy Pay | [https://pay.sandbox.schooleasypay.com.au/Demo/](https://pay.sandbox.schooleasypay.com.au/Demo/) |\n| Childcare Easy Pay | [https://pay.sandbox.childcareeasypay.com.au/Demo/](https://pay.sandbox.childcareeasypay.com.au/Demo/) |\n| Thoroughbred Payments | [https://pay.sandbox.thoroughbredpayments.com.au/Demo/](https://pay.sandbox.thoroughbredpayments.com.au/Demo/) |\n| Rental Rewards | [https://pay.sandbox.rentalrewards.com.au/Demo/](https://pay.sandbox.rentalrewards.com.au/Demo/) |\n| B2BPay | [https://pay.sandbox.b2bpay.com.au/Demo/](https://pay.sandbox.b2bpay.com.au/Demo/) |\n\nPlease note that to provide a consistent and more stable integration testing environment, we are transitioning all integration activities from the current UAT environment to a dedicated Sandbox environment for all our integration partners.\n\nEffective from Tuesday 27th May, 2025 at 9:00 PM AEST the new testing environment will be accessible at: [https://pay.sandbox.[ProgramDomain].com.au](https://pay.sandbox.[ProgramDomain].com.au)\n\n- There will be no change to your API keys as part of this migration\n    \n- Please prepare your development cycle around this date, as we will no longer support the current UAT environment from the above stated date."
+    },
+    {
+      "name": "jQuery Payment Plugin > Apple Pay",
+      "description": "The jQuery Plugin solution now supports Apple Pay. To set it up, the Zenith Payments team can guide you through the integration process consisting of a few simple steps.\n\n## Integration Process\n\nTo accept Apple Pay payments using the jQuery plugin, you need to follow a few simple steps:\n\n1. The integrator or merchant needs to contact the Zenith Payments Integrations Team with the specific domain URL that they would like to integrate with Apple Pay (e.g., [www.b2bpay.com.au](http://www.b2bpay.com.au))\n    \n2. Zenith Payments will register the provided domain with Apple Pay. (This is a crucial step to ensure the security and proper functioning of the integration).\n    \n3. After the domain is registered, Zenith Payments will provide a file for each domain/merchant. This file is essential for the integration process.\n    \n4. The integrator/merchant must place the provided file in a specific path on their website, ensuring it is publicly accessible. This step is essential for Apple Pay to verify the integration.\n    \n5. Once the file is in place, reach out to the team at Zenith Payments and the team will verify the integration with Apple Pay.\n    \n6. After successful verification, the integration is complete and Apple Pay is ready for use on the website using the jQuery payment plugin."
+    },
+    {
+      "name": "jQuery Payment Plugin > Test Cards",
+      "description": "**Please note that these cards are for Sandbox only.**\n\nCard expiry date is required to be set to a date in the future, name and CVV field values can be sample values for testing purposes. Please check the program that you are building in for the test card numbers.\n\nIf you want to test JCB or Latitude pay cards, please contact the integration team who can facilitate this for you.\n\n## **B2BPay, Childcare EasyPay, Rental Rewards, Throughbred Payments, and TravelPay**\n\n##### General Errors\n\n| **Card Type** | **Test Card Number** | **Transaction Status** |\n| --- | --- | --- |\n| American Express | 3782 8224631 0005 | Success |\n| Visa | 4111 1111 1111 1111 | Success |\n| Visa | 4242 4242 4242 4242 | Failure |\n| Mastercard | 5555 5555 5555 4444 | Success |\n| Mastercard | 5105 1051 0510 5100 | Failure |\n| Union Pay | 6250 9460 0000 0016 | Success |\n| Union Pay | 6250 9470 0000 0014 | Failure |\n\n- Please note that there is no 3DS for tokenization in Sandbox, you can use the failure cards above with a total amount of 65.00 to simulate a failure. This will return the error **Failed: 2003 - The transaction was declined (Test decline) (2003)**. Please ensure that the total amount, including pricing, equals **exactly** $65.00\n    \n\n##### 3DS Simulation\n\n| Card Type | Test Card Number | Result |\n| --- | --- | --- |\n| Visa | 4000 0010 0000 0000 | Frictionless - Fully Authenticated |\n| Visa | 4111 1111 1111 1111 | Frictionless - Fully Authenticated |\n| Mastercard | 5555 5555 5555 4444 | Frictionless - Fully Authenticated |\n| Visa | 4000 0020 0000 0008 | Frictionless - Fully Authenticated |\n| Visa | 4000 0010 0000 0216 | Frictionless - Attempted |\n| Visa | 4000 0020 0000 0016 | Frictionless - Attempted |\n| Visa | 4000 0010 0000 0109 | Challenge |\n| Mastercard | 5000 0010 0000 0007 | Challenge |\n| Visa | 4000 0020 0000 0024 | Challenge |\n| Visa | 4000 0010 0000 0307 | Not Authenticated |\n| Visa | 4000 0020 0000 0032 | Not Authenticated |\n| Visa | 4000 0010 0000 0208 | Rejected |\n| Visa | 4000 0020 0000 0040 | Rejected |\n| Visa | 4000 0030 0000 0006 | Error: Not Enrolled |\n| Visa | 4000 0030 0000 0014 | Error: Network Timeout |\n| Visa | 4000 0030 0000 0022 | Error: Network Error |\n| Visa | 4000 0030 0000 0030 | Error: Invalid card |\n| Visa | 4000 0040 0000 0004 | Error: Access Denied |\n| Visa | 4000 0040 0000 0012 | Error: Transient System Error |\n| Visa | 4000 0040 0000 0020 | Error: Invalid Format |\n| Visa | 4000 0040 0000 0038 | Error: Network Timeout |\n| Visa | 4000 0040 0000 0046 | Error: Network Error |\n| Visa | 4000 0040 0000 0053 | Error: Configuration missing |\n| Visa | 4000 0040 0000 0061 | Error: Configuration incomplete |\n\n## School Easy Pay\n\n| **Card Type** | Test Card Number | **Result** |\n| --- | --- | --- |\n| Mastercard  <br>Visa  <br>American express | 5555 5555 5555 4444  <br>4111 1111 1111 1111  <br>3782 8224 6310 005 | Successful Transaction |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1005  <br>4456 5300 0000 1005  <br>3400 0000 0001 007 | Successful Frictionless Authentication |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1013  <br>4456 5300 0000 1013  <br>3400 0000 0001 015 | Unsuccessful authentication - 006 |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1021  <br>4456 5300 0000 1021  <br>3400 0000 0001 023 | Attempts Processing Frictionless - 004 |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1039  <br>4456 5300 0000 1039  <br>3400 0000 0001 031 | Unavailable Frictionless Authentication - 003 |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1047  <br>4456 5300 0000 1047  <br>3400 0000 0001 049 | Rejected Frictionless |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1088  <br>4456 5300 0000 1088  <br>3400 0000 0001 080 | Bypassed Authentication |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1096  <br>4456 5300 0000 1096  <br>3400 0000 0001 098 | Successful Step-up authentication (Challenge) |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1104  <br>4456 5300 0000 1104  <br>3400 0000 0001 106 | Unsucessful Step-up authentication (Challenge) |\n| Mastercard  <br>Visa  <br>American express | 5200 0000 0000 1112  <br>4456 5300 0000 1112  <br>3400 0000 0001 114 | Unavailable Step-up authentication (Challenge) |"
+    },
+    {
+      "name": "PayID"
+    },
+    {
+      "name": "PayID > Overview",
+      "description": "PayID is a faster payment method for bank account payments.\n\nCustomers can make PayID payments from within their bank account application or online banking portal by using a unique PayID identifier. Customers then enter the PayID (which is an email address) and a PayID description to make a payment to the merchant.\n\nPayID is a great alternative to EFT as merchants gain extra security by not having to provide their BSB and Bank Account details.\n\n#### Benefits to Merchants\n\n- Quick and easy new way to pay.\n- Instant approval with no subsequent failures.\n- Secure – no need to give out bank details (like with EFT) which prevent frauds and unauthorised debits\n- Cleared Funds in your bank account by lunchtime the next banking day.\n- Always the correct reference regardless of what the customer enters \\*with ‘Customer’ PayID Type\\*\n- Fast – easy to use, real time payment processing.\n- Easy – Customer pays via their existing bank APP / website.\n- Visible – payments immediately appear in the payment history.\n- Always On – operates 24/7 365.\n    \n\n#### Benefits to Customers\n\n- Easy – pay through your existing Bank App/website\n- No cost to you\n- Merchant knows you have paid immediately\n- Merchant gets your transaction funds quickly\n- Secure, modern, payment method\n    \n\nZenith Payments supports three different types of PayID levels. More details about each of the different PayID types can be found below.\n\n**Summary of PayID Types**\n\n|  | **Program PayID** | **Customer PayID** | **Merchant PayID** |\n| --- | --- | --- | --- |\n| **PayID Type**  <br>  <br>  <br>  <br>**Example:**  <br> | Every merchant in the program has the same PayID email address.  <br>  <br>pay@travelpay.com.au  <br> | Every customer in the program has a unique PayID email address.  <br>  <br>john_12345678@travelpay.com.au | Every merchant in the program has a different PayID email address.  <br>  <br>@travelpay.com.au  <br> |\n| **Suitable For** | Most merchants wanting to quickly implement PayID. | Ongoing payments when customers may be inclined to enter the wrong reference when they pay. | One-off transactions / invoice payments  <br> |\n| **Customer profile and CML Required?  <br>(Customer-Merchant Link)**  <br> | Yes | Yes | No |\n| **PayID Description the customer needs to enter** | PayID Description the customer needs to enter | The customer can enter whatever reference they like. | Reference that was provided by the merchant on the invoice, etc.  <br> |\n| **Customer Reference used in reports (Reconciliation, etc.)** | The Customer Reference that is stored in the Customer’s profile for that merchant.  <br> | The Customer Reference that is stored in the Customer’s profile for that merchant. | 'Description/Message’ field the Customer enters in their Bank App/Site when paying |\n| **Additional Reference  <br>used in reports**  <br> | ‘Description/Message’ field the Customer enters in their Bank App/Site when paying | ‘Description/Message’ field the Customer enters in their Bank App/Site when paying | ‘Reference’ field the Customer enters in their Bank App/Site when paying |\n| **Advantages  <br>** | Easy to implement.  <br>  <br> | The merchant always receives the stored Customer Reference even if the customer enters the wrong reference when paying. | Easy to use – customer pays just like they would with EFT.  <br>  <br>Easy to implement – merchant just adds their PayID to their invoice template. |\n\n## Merchant Level\n\nMerchant Level PayID provides the merchant with a unique PayID email address that they can put on their invoices or send to customers so that their customers can use to make a payment to that merchant.\n\n#### Use Cases\n\n- One-off transactions\n- Ad hoc Invoice payments\n    \n\n#### How it Works?\n\n- PayID email address specifies the merchant in ZenPay. (i.e. (merchantcode)@b2bpay.com.au)\n- Does not require a customer profile to work (No CML is required)\n- The PayID reference is generated upon creation and is provided by the merchant\n- Customer enters in the correct reference as specified by the merchant to assist the merchant with reconciliation)\n    \n\n#### How does a Merchant create a PayID Email Address?\n\nFor this type of integration, PayID is created by the Zenith Support staff for the requested merchant/s.\n\n#### How does a customer make a PayID payment?\n\nThe user makes a payment from their banking app via their mobile device or PC. User enters the PayID email, in return the banking app will display the PayID name for the merchant.\n\nThe user enters description and message (reference) which are captured and attached to payment. \"CustomerReference\" and \"AdditionalReference\" parameters are used for capturing this information.\n\nMore information coming soon...\n\n## Customer Level\n\nComing Soon...\n\n## Program Level\n\nComing Soon..."
+    },
+    {
+      "name": "API Overview",
+      "description": "Welcome to ZenPay's REST API for online payment services.\n\nOur REST API enables you to integrate your business software with ZenPay's payment processing and management solutions. Adhering to a RESTful architecture it gives you a fast, flexible and scalable integration solution.\n\n## What's available?\n\n### Merchant API\n\n| Endpoint | Description |\n| --- | --- |\n| Batch Payments | Manage Batch Payments. You can create or fetch batch payments. |\n| Card Proxies (Tokenization) | Manage card proxies. Please note that this POST endpoint is locked behind a setting and can only be accessed after it's been enabled by Zenith Payments. |\n| Customers | Manage customers |\n| Payments | Manage Payments. You can create or fetch one-off payments. |\n| Request Pays | Manage request to pays.You can create or fetch request pays. |\n| Diagnostics | System Diagnostics |\n\n### Customer API\n\n| Endpoint | Description |\n| --- | --- |\n| Payments | Manage Payments. You can create or fetch one-off payments. |\n| Diagnostics | System Diagnostics |"
+    },
+    {
+      "name": "API Overview > Error Codes",
+      "description": "ZenPay uses standard HTTP response codes to indicate the success or failure of an API request.\n\nIn general \"status codes\" in the `2XX` range indicate success.\n\nWhereas, \"status codes\" in the `4XX` range indicate a client-side error, which means that there was a failure in the information provided (e.g., a missing parameter, unauthorized access etc.).\n\n\"Status codes\" in the `5XX` range indicate an error with Zenith Payment's internal servers (Which happens very rarely).\n\nIf the response code is not `2XX`, it means the operation failed somehow and you may  \nneed to take action accordingly. You can check the response (which will be in JSON format)  \nfor a field called **`message`** which briefly explains the error reported.\n\n| Status Code | **Error** | Explanation |\n| --- | --- | --- |\n| 400 | Bad Request | The request was unacceptable, often due to missing a required parameter. |\n| 401 | Unauthorized | No valid API key provided. |\n| 402 | Request Failure | The request has failed, however the variables were valid. |\n| 403 | Forbidden | The API key does not have the the right permissions to perform the request. |\n| 404 | Not Found | The requested resource doesn't exist. |\n| 429 | Too Many Requests | The API request limit is exceeded. Please see section Rate Limiting for more info. |\n| 5XX | Server Error | ZenPay servers have failed to process your request. (Rare, however you can contact support anytime). |"
+    },
+    {
+      "name": "Webhooks and Callbacks",
+      "description": "Zenith Payments provides outbound notifications so that integrators can be informed of payment results.\n\nThere are two technical delivery mechanisms:\n\n- **Webhooks** – Merchant-wide notifications configured once by Zenith. These are event-based: whenever a transaction belonging to the merchant changes status (across any channel or payment method), Zenith fires a webhook. They are dispatched on a scheduler/timer that evaluates transaction states and posts updates.\n    \n- **Callbacks(jQuery Only)** – Transaction-specific notifications only available in the **jQuery Payment Plugin**. If the integrator includes a `callbackUrl` in the plugin payload, Zenith posts the transaction result to that URL after processing.\n    \n\n**Key differences**\n\n| Aspect | Webhooks | Callbacks (jQuery plugin only) |\n| --- | --- | --- |\n| Scope | Merchant-wide (all transactions) | Single transaction (initiated by plugin) |\n| Trigger | Any payment status change | Immediately when upstream processing completes (response received) |\n| Configuration | Set up once by Zenith on merchant acct | Passed as `callbackUrl` in plugin payload |\n| Delivery | Event-based, timer-driven POST | Asynchronous POST after processing |\n| Availability | All channels / methods | jQuery plugin only, not APIs |\n\n> Use **Webhooks** for backend reconciliation and settlement tracking.  \nUse **Callbacks** if you need immediate, per-transaction acknowledgement when using the plugin. \n  \n\n# Webhooks\n\nWebhooks are merchant-wide, event-based notifications configured at the merchant account level by Zenith.\n\nOnce a webhook endpoint is registered, Zenith will POST JSON payloads whenever the status of any transaction for that merchant changes. This includes all payment methods.\n\n**Requirements and Characteristics**\n\n- **Merchant-wide** – Any transaction initiated under the merchant account is eligible.\n    \n- **Event-based** – Fired when transaction status changes (e.g. from Pending to Successful).\n    \n- **Timer-driven** – A scheduled job evaluates transactions and dispatches events.\n    \n- **Channel-agnostic** – All payment methods trigger the same webhook mechanism.\n    \n- **Stable HTTPS POST endpoint** – Must be reachable from Zenith's servers.\n    \n\n### Webhook Payload Fields\n\n| Field | Type | Notes |\n| --- | --- | --- |\n| `Version` | number | Payload version number. |\n| `Event` | string | Event type (e.g. `New`, `Update`). |\n| `PayloadType` | string | Type of payload delivered (e.g. `Payment, Customer`). |\n| `PaymentReference` | string | Unique payment reference assigned by Zenith. |\n| `CustomerName` | string | null |\n| `CustomerReference` | string | Reference provided by the merchant. |\n| `PaymentStatus` | number | Numeric status code. |\n| `PaymentStatusDisplay` | string | Human-readable payment status. |\n| `BaseAmount` | number | Base amount before fees. |\n| `FundsToMerchant` | number | Net amount payable to the merchant. |\n| `CustomerFee` | number | Fee charged to the customer. |\n| `MerchantFee` | number | Fee charged to the merchant. |\n| `PaymentAmount` | number | Total amount of the transaction. |\n| `AccountOrCardNo` | string | Masked account or card number. |\n| `PaymentMethod` | number | Numeric code for the payment method. |\n| `PaymentMethodDisplay` | string | Human-readable payment method. |\n| `PaymentCardType` | number | Numeric code for the card type. |\n| `PaymentCardTypeDisplay` | string | Human-readable card type. |\n| `SubCardType` | string | null |\n| `SubtCardTypeDisplay` | string | null (Field name is misspelled, this is not an error in documentation) |\n| `ProcessingDateTime` | string | UTC ISO-8601 datetime (`yyyy-MM-ddTHH:mm:ss`). |\n| `SettlementDate` | string | UTC ISO-8601 date (`yyyy-MM-dd`). |\n| `ProcessorReference` | string | Reference from the processor/gateway. |\n| `IsPaymentSettledToMerchant` | boolean | Indicates if the payment has been settled. |\n| `MerchantUniquePaymentId` | string | null |\n| `MerchantCode` | string | Merchant identifier. |\n| `AdditionalReference` | string | null |\n| `PaymentSource` | number | Numeric source identifier. |\n| `PaymentSourceDispaly` | string | Field name is misspelled, this is not an error in documentation |\n| `IsPaymentRecalled` | boolean | Indicates if the payment has been recalled. |\n| `IsPaymentRefunded` | boolean | Indicates if the payment has been refunded. |\n\n## **Webhook Payload Example**\n\n``` json\n{\n  \"Version\": 1,\n  \"Event\": \"New\",\n  \"PayloadType\": \"Payment\",\n  \"Payload\": {\n    \"PaymentReference\": \"210768\",\n    \"CustomerName\": null,\n    \"CustomerReference\": \"1\",\n    \"PaymentStatus\": 3,\n    \"PaymentStatusDisplay\": \"Successful\",\n    \"BaseAmount\": 155.08,\n    \"FundsToMerchant\": 155.08,\n    \"CustomerFee\": 4,\n    \"MerchantFee\": 0,\n    \"PaymentAmount\": 159.08,\n    \"AccountOrCardNo\": \"411111XXXXXX1111\",\n    \"PaymentMethod\": 0,\n    \"PaymentMethodDisplay\": \"Credit / Debit Card\",\n    \"PaymentCardType\": 1,\n    \"PaymentCardTypeDisplay\": \"Visa - International Cards\",\n    \"SubCardType\": null,\n    \"SubtCardTypeDisplay\": null,\n    \"ProcessingDateTime\": \"2025-08-27T22:08:14\",\n    \"SettlementDate\": \"2025-08-28\",\n    \"ProcessorReference\": \"2a41cff0e84ee15f8b42\",\n    \"IsPaymentSettledToMerchant\": false,\n    \"MerchantUniquePaymentId\": null,\n    \"MerchantCode\": \"1337\",\n    \"AdditionalReference\": null,\n    \"PaymentSource\": 39,\n    \"PaymentSourceDispaly\": \"Api Tokenised Payment\",\n    \"IsPaymentRecalled\": false,\n    \"IsPaymentRefunded\": false\n  }\n}\n\n ```\n\n# Callbacks (jQuery Plugin Only)\n\nCallbacks are only supported in the **jQuery Payment Plugin** and are not available in the REST API.\n\nWhen a `callbackUrl` parameter is included in the plugin payload, Zenith will POST the transaction result to that URL after the payment is processed.\n\n**Requirements and Characteristics**\n\n- **Transaction-specific** – The callback applies only to the transaction in which the `callbackUrl` was supplied.\n    \n- **Asynchronous** – Delivery occurs in the background after Zenith finishes processing, not as a browser redirect.\n    \n- **Integrator-controlled** – The integrator decides the callback destination via the `callbackUrl` option.\n    \n- **Not merchant-wide** – Callbacks do not notify on other transactions; for that, use webhooks.\n    \n- **HTTPS POST endpoint** – Must expose a secure endpoint that is reachable from Zenith.\n    \n- **Asynchronous handling** – Must accept POSTs that may arrive seconds after the browser flow completes.\n    \n- **Validation** – Should validate the `validationCode` (SHA3-512) for integrity before trusting the payload.\n    \n\n## Callback Payload Fields\n\n| Field | Type | Notes |\n| --- | --- | --- |\n| `paymentReference` | string | Unique payment reference assigned by Zenith. |\n| `customerName` | string | Name of the customer. |\n| `customerReference` | string | Reference provided by the merchant. |\n| `paymentStatus` | number | Numeric status code of the payment. |\n| `paymentStatusString` | string | Human-readable payment status (e.g. “Successful”). |\n| `baseAmount` | number | Base transaction amount before fees. |\n| `fundsToMerchant` | number | Net amount payable to the merchant. |\n| `accountOrCardNo` | string | Masked account or card number. |\n| `paymentAccount` | string | Payment account type (e.g. `Card`, `Bank`). |\n| `processingDate` | string | UTC ISO-8601 datetime (`yyyy-MM-ddTHH:mm:ss[.fff]`). |\n| `settlementDate` | string | UTC ISO-8601 datetime (`yyyy-MM-ddTHH:mm:ss`). |\n| `processorReference` | string | Reference from the processor/gateway. |\n| `isPaymentSettledToMerchant` | boolean | Indicates if the payment has been settled to the merchant. |\n| `failureCode` | string | Failure code if unsuccessful, otherwise empty. |\n| `failureReason` | string | Failure reason if unsuccessful, otherwise empty. |\n| `paymentCard` | string | Card brand (e.g. MasterCard, Visa). |\n| `merchantUniquePaymentId` | string | Unique ID supplied by the merchant for the payment. |\n| `merchantCode` | string | Merchant identifier code. |\n| `transactionSource` | number | Numeric identifier for the source channel. |\n| `transactionSourceString` | string | Human-readable source channel (e.g. plugin or API). |\n| `customerFee` | number | Fee charged to the customer. |\n| `processedAmount` | number | Total processed amount including fees. |\n| `cardCategory` | string | Category of the card (e.g. Domestic, International). |\n| `cardInformationSaved` | boolean | Indicates whether the card information was stored for tokenisation. |\n| `validationCode` | string | SHA3-512 hash for payload integrity validation. |\n\n## **Callback Payload Example**\n\n``` json\n{\n  \"response\": {\n    \"paymentReference\": \"95408\",\n    \"customerName\": \"Leah Adria\",\n    \"customerReference\": \"a12b1926-811f-411c-b10a-1b330cc50d3b\",\n    \"paymentStatus\": 3,\n    \"paymentStatusString\": \"Successful\",\n    \"baseAmount\": 635.72,\n    \"fundsToMerchant\": 635.72,\n    \"accountOrCardNo\": \"555555XXXXXX4444\",\n    \"paymentAccount\": \"Card\",\n    \"processingDate\": \"2025-08-27T21:48:59.447\",\n    \"settlementDate\": \"2025-08-29T00:00:00\",\n    \"processorReference\": \"ddb3a3436cbc7d77c241\",\n    \"isPaymentSettledToMerchant\": false,\n    \"failureCode\": \"\",\n    \"failureReason\": \"\",\n    \"paymentCard\": \"MasterCard\",\n    \"merchantUniquePaymentId\": \"35917c6c-ee6b-4e52-866b-bea51841e796\",\n    \"merchantCode\": \"1337\",\n    \"transactionSource\": 36,\n    \"transactionSourceString\": \"Public_Customer_OnlineOneOffPayment\",\n    \"customerFee\": 63.57,\n    \"processedAmount\": 699.29,\n    \"cardCategory\": \"International Cards\",\n    \"cardInformationSaved\": false\n  },\n  \"validationCode\": \"1dbe5ddcc72b8207e839da42308d0596cbbb72e5bf7074520ec885e3c615bb519848fce4a0c073a9a7e6544854338cab9c0c87bc8c82c54bb3706a91c21a7410\"\n}\n\n ```"
+    },
+    {
+      "name": "Merchant APIs",
+      "description": "## Zenith Payments Merchant APIs\n\nThe ZenPay merchant APIs allow merchants to complete a variety of tasks via API including managing batch payments, creating and managing card proxies, managing customers, managing payments, managing request to pays (RTP) and running diagnostics."
+    },
+    {
+      "name": "Merchant APIs > Authentication",
+      "description": "## Basic Authentication\n\n[Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the `Authorization` header that contains the word `Basic` followed by a space and a base64-encoded string `username:password`.\n\nZenPay Merchant APIs utilize basic authentication alongside with API-Key for access. Please contact our integration team from [integrations@zenithpayments.com.au](https://mailto:integrations@zenithpayments.com.au) to request access for Merchant APIs.\n\n## Adding a Username/Password and API-Key to the Postman Collection\n\nIn the Postman client, click on the three dots to the right of the collection name to \"View more actions.\"\n\nThen, click \"Edit.\", Click on the \"Variables\" tab and, fill in the required rows;\n\n\\* baseURL  \n\\* Username  \n\\* Password  \n\\* API-Key\n\n<img src=\"https://schooleasypay.com.au/wp-content/uploads/2022/07/MicrosoftTeams-image-1.png\">\n\n# Notes\n\n\\* Please note that variables are case sensitive."
+    },
+    {
+      "name": "Merchant APIs > BatchPayments",
+      "description": "#### POST: Process Batch Payment\n\nThis endpoint allows merchants to upload and process a batch of payments in a single request by providing a collection of payment entries in JSON format. It returns a response confirming the batch payment creation or any errors encountered.\n\n- **Note**: Ensure the batch payment details are correct to avoid errors or duplicate entries.\n    \n\n#### GET: Fetch Batch Payment Summary\n\nThis endpoint retrieves a summary of a specific batch payment identified by `batchPaymentID`. The summary includes details such as the batch payment status, processing date, and the number of transactions within the batch.\n\n- **Parameters**: `batchPaymentID` (integer, required) - Unique identifier for the batch payment.\n    \n\n#### GET: Fetch Batch Payment Transactions\n\nThis endpoint returns the list of all transactions associated with a specific batch payment identified by `batchPaymentID`. Use this endpoint to get detailed information about each transaction in the batch, including amounts, statuses, and more.\n\n- **Parameters**: `batchPaymentID` (integer, required) - Unique identifier for the batch payment."
+    },
+    {
+      "name": "Merchant APIs > CardProxies",
+      "description": "#### POST: Create Card Proxy\n\nThis endpoint generates a card proxy (a tokenized representation of card details) to securely process payments. This method is suitable for applications that require secure card tokenization.\n\n- **Note**: Not recommended for software or websites that do not meet a certain level of PCI DSS compliance. For a more secure card tokenization and payment option, refer to our **jQuery Payment Plugin**.\n    \n\n#### GET: Fetch Card Proxy Details\n\nThis endpoint retrieves details of a specific card proxy identified by `cardProxy`. It returns token response details and can be used to verify or manage tokenized cards.\n\n- **Parameters**: `cardProxy` (string, required) - The card proxy identifier for which details are needed.\n    \n\n#### DELETE: Delete Card Proxy\n\nThis endpoint permanently deletes a card proxy from the system. It does not affect any customer who registered using this proxy but ensures that the proxy is no longer valid for future transactions.\n\n- **Parameters**: `cardProxy` (string, required) - The card proxy to delete.\n    \n\n#### GET: Fetch Card Proxy Pricing\n\nThis endpoint calculates and retrieves pricing details for a card proxy based on a given payment amount. It is useful for determining transaction fees before processing a payment.\n\n- **Parameters**:\n    \n    - `cardProxy` (string, required) - The card proxy identifier.\n        \n    - `paymentAmount` (double, required) - The amount for which pricing is to be calculated."
+    },
+    {
+      "name": "Merchant APIs > Customers",
+      "description": "This API allows you to manage customers.\n\nYou can create customers, fetch customer details and also update customer details."
+    },
+    {
+      "name": "Merchant APIs > Payments",
+      "description": "# **POST: Create Payment**\n\n- This endpoint allows merchants to initiate a new payment transaction by providing customer details, payment amounts, and other necessary information. It supports both tokenized and direct card payments.\n    \n    ## **Note:** Direct card payments require PCI DSS compliance and are enabled only for specific merchants.\n    \n\n# **GET: Transaction Information**\n\n- These endpoints allow merchants to retrieve detailed information about an existing transaction, including its status, processing date, settlement details, and more. You can query transactions by various identifiers to get real-time information on their processing status."
+    },
+    {
+      "name": "Merchant APIs > RefundRequests"
+    },
+    {
+      "name": "Merchant APIs > RequestPays",
+      "description": "This API allows you to manage request pays.\n\nUsing this API you can create new request pay or fetch existing details of request pays."
+    },
+    {
+      "name": "Merchant APIs > Pre-Auth",
+      "description": "Pre-Authorization allows merchants to authorize a customers card and reserve funds for future transactions without charging the card in the moment.\n\n# GET: Capture PreAuth Card\n\nThis endpoint allows merchants to capture an amount from a created Pre-Auth. This requires the preauthReference generated from the POST: Create Preauth endpoint.\n\n# POST: Create PreAuth\n\nThis endpoint allows merchants to initiate a new Pre-Auth by providing customer details, payment amounts and other necessary information. It supports both tokenized and direct card payments.  \nNote: Direct card payments reuqire PCI DSS compliance and are enabled only for specific merchants.\n\n# GET: Check PreAuth via preauthReference  \nGET: Check PreAuth via CustomerReference\n\nThese endpoints allow merchants to retrieve detailed information about an existing transaction, including its status, processing date and more.\n\n# PUT: Void PreAuth Request\n\nThis endpoint allows for the preauth to be voided or cancelled, not allowing any further payments to be put against the initial value."
+    },
+    {
+      "name": "Merchant APIs > Diagnostics",
+      "description": "This API allows you to ping ZenPay internal servers.\n\nUsing this API you are able to troubleshoot connection issues and check the ZenPay server status."
+    },
+    {
+      "name": "Customer APIs",
+      "description": "## Zenith Payments Customer APIs\n\nThe ZenPay customer APIs allow customers to complete a variety of tasks via API including managing authentication, managing payments and running diagnostics."
+    },
+    {
+      "name": "Customer APIs > Authentication",
+      "description": "## Bearer Authentication\n\nBearer authentication (also called token authentication) is an [HTTP authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) that involves security tokens called bearer tokens.\n\nZenPay Customer APIs utilize bearer authentication for access. To generate a bearer token from ZenPay, please log into the customer portal and generate a token under your profile.\n\n## Generating an Access Token\n\nLog into the customer portal.\n\nNavigate to Profile > Generate Token\n\n## Adding an Access Token to the Postman Collection\n\nIn the Postman client, click on the three dots to the right of the collection name to \"View more actions.\"\n\nThen, click \"Edit\", Click on the \"Variables\" tab and, fill in the required rows;\n\n*   baseURL\n*   customerCode\n*   bearerToken\n    \n\n![](https://schooleasypay.com.au/wp-content/uploads/2022/05/Variables.png)\n\n# Notes\n\n*   Please note that variables are case sensitive."
+    },
+    {
+      "name": "Customer APIs > Payments"
+    },
+    {
+      "name": "Customer APIs > Diagnostics",
+      "description": "Start here to test your credentials."
+    }
+  ],
+  "paths": {
+    "/v2/batchpayments": {
+      "post": {
+        "tags": [
+          "Merchant APIs > BatchPayments"
+        ],
+        "summary": "Process Batch Payment",
+        "description": "This method is used to upload batch payments as a collection of JSON and process them.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "batchPaymentEntries": [
+                    {
+                      "customerReference": "<string>",
+                      "paymentAmount": "<double>",
+                      "merchantUniquePaymentId": "<string>",
+                      "paymentAccountProxy": "<string>"
+                    },
+                    {
+                      "customerReference": "<string>",
+                      "paymentAmount": "<double>",
+                      "merchantUniquePaymentId": "<string>",
+                      "paymentAccountProxy": "<string>"
+                    }
+                  ],
+                  "merchantUniqueBatchId": "<string>"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/batchpayments/:batchPaymentId": {
+      "get": {
+        "tags": [
+          "Merchant APIs > BatchPayments"
+        ],
+        "summary": "Fetch Batch Payment Summary by batchPaymentID",
+        "description": "This method returns a summary of a batch payment using the batchPaymentID.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/batchpayments/:batchPaymentId/entries": {
+      "get": {
+        "tags": [
+          "Merchant APIs > BatchPayments"
+        ],
+        "summary": "Fetch Batch Payment Transactions by batchPaymentId",
+        "description": "This method returns a list of entries in a batch payment.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies": {
+      "post": {
+        "tags": [
+          "Merchant APIs > CardProxies"
+        ],
+        "summary": "Create Card Proxy",
+        "description": "Generate a card proxy.\n\nNot recommended for software / sites that are not PCI DSS compliant. For a easy and secure card tokenisation and payment option, see our Payment Plugin jQuery.\n\nThis endpoint is locked behind a setting and can only be utilized once it has been enabled by Zenith Payments.",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies/:cardProxy": {
+      "delete": {
+        "tags": [
+          "Merchant APIs > CardProxies"
+        ],
+        "summary": "Delete Card Proxy",
+        "description": "Delete card proxy permanently from the system. This will not affect any customer, registered using this proxy.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Merchant APIs > CardProxies"
+        ],
+        "summary": "Fetch Card Proxy Details",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/cardproxies/:cardProxy/pricing": {
+      "get": {
+        "tags": [
+          "Merchant APIs > CardProxies"
+        ],
+        "summary": "Fetch Card Proxy Pricing",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          },
+          {
+            "name": "paymentAmount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Required) Payment amount to determine the pricing",
+            "example": "<<double>>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers": {
+      "post": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Create customer",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch all Customers based on the filters",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          },
+          {
+            "name": "customerReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer reference",
+            "example": "Ref1"
+          },
+          {
+            "name": "customerStatuses",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Customer statuses. Default is all. 0 - Open, 1 - AwaitingEmailVerfication, 2 - AwaitingSignature, 3 - SetUpIncomplete, 4 - Restricted, 5 - Closed, 6 - OnHold",
+            "example": "0"
+          },
+          {
+            "name": "fromOpenDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "From Customer open date. Format: yyyy-MM-dd",
+            "example": "2022-05-12"
+          },
+          {
+            "name": "toOpenDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "To Customer open date. Format: yyyy-MM-dd",
+            "example": "2022-05-01"
+          },
+          {
+            "name": "fromClosedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "From Customer closed date. Format: yyyy-MM-dd",
+            "example": "2020-01-01"
+          },
+          {
+            "name": "toClosedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "To Customer closed date. Format: yyyy-MM-dd",
+            "example": "2020-01-01"
+          },
+          {
+            "name": "paymentOptions",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Payment options. Default is all. 22 - AutoPay, 23 - EmailReminder, 24 - SmsReminder, 25 - FixedTerm, 26 - BatchPay, 27 - ScheduledPay, 28 - OneOff, 148 - PayID, 149 - BPAY",
+            "example": "22"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Starting index of the record. An index starts from 0. Default = 0",
+            "example": "0"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page size. Default = 20. Maximum page size allowed = 2000",
+            "example": "200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch all Customers",
+        "description": "List of all customers.\n\nIt will display all customers regardless of customerStatus. It will include closed customers as well.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch Customer by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/status": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch Customer status by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Update the customer status",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/profile": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch Customer profile by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Update the customer profile",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/account": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch Customer payment method by customerReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Update the customer account",
+        "description": "StartFragment\n\nCustomer Bank/Credit Card account. Use PaymentAccountProxy or CreditCardProxy or BankAccount.  \nIf more than one details are passed, only one detail used as per the following order, 1. PaymentAccountProxy 2. BankAccount 3. CreditCardProxy  \nPreferred option is PaymentAccountProxy\n\nEndFragment",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/paymentOption": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Fetch Customer payment options by customerReference",
+        "description": "PaymentOptions human readable form:\n\nAutoPay: 22; EmailReminder: 23; SmsReminder: 24; FixedTerm: 25; BatchPay: 26; ScheduledPay: 27; OneOff: 28; PayID: 148; BPAY: 149\n\nPaymentFrequency human readable form:\n\nWeekly: 32; Fortnightly: 33; Monthly: 34; Quarterly: 35; HalfYearly: 36; Yearly: 37; FourWeeks: 38\n\nNotificationMethod human readable form:\n\nNone: 0; Sms: 1; Email: 2",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Update the customer payment option",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/customers/:customerReference/customerReference": {
+      "put": {
+        "tags": [
+          "Merchant APIs > Customers"
+        ],
+        "summary": "Update the customer reference",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments": {
+      "post": {
+        "tags": [
+          "Merchant APIs > Payments"
+        ],
+        "summary": "Perform OneOff Payment",
+        "description": "### Important Notice for Using the Direct Card Payment Option:\n\nThis endpoint allows the submission of raw card details (`cardNumber`, `expiryMonth`, `expiryYear`, `cvv`) for processing payments. **However, this method requires a certain level of PCI DSS (Payment Card Industry Data Security Standard) compliance** to ensure the secure handling of sensitive card information. To enhance security and reduce the risks associated with directly managing card data, we strongly recommend using our **Payment Plugin jQuery** for secure card tokenization and payment processing.\n\n**Please note:** This endpoint is restricted and can only be accessed once it has been enabled by Zenith Payments. Ensure you have the necessary permissions and configurations in place before attempting to use this method. For access or further assistance, please contact us at [integrations@zenithpayments.com.au](https://mailto:integrations@zenithpayments.com.au).",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Merchant APIs > Payments"
+        ],
+        "summary": "Fetch all Payments",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          },
+          {
+            "name": "customerReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the customer reference",
+            "example": "Ref1"
+          },
+          {
+            "name": "fromProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments from date",
+            "example": "2018-08-22"
+          },
+          {
+            "name": "toProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments to date",
+            "example": "2018-08-22"
+          },
+          {
+            "name": "settlementDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments settlement date",
+            "example": "2018-08-22"
+          },
+          {
+            "name": "paymentSettlement",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional) Filter by if the payment is settled to the merchant. \"0\" payment is not settled. \"1\" payment is settled to the merchant",
+            "example": "0"
+          },
+          {
+            "name": "transactionTypes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the different transaction types",
+            "example": "null"
+          },
+          {
+            "name": "transactionTypes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the different transaction types",
+            "example": "null"
+          },
+          {
+            "name": "isRecalled",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "(Optional) Filter by if the payments are in recalled status",
+            "example": "false"
+          },
+          {
+            "name": "isRefunded",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "(Optional) Filter by if the payments are in refunded status",
+            "example": "false"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional)",
+            "example": "0"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional)",
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/:paymentReference": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Payments"
+        ],
+        "summary": "Fetch Payment details by paymentReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/uniqueId/:merchantUniqueId": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Payments"
+        ],
+        "summary": "Fetch Payment details based on merchant unique reference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/payments/:paymentReference/refundrequests": {
+      "post": {
+        "tags": [
+          "Merchant APIs > RefundRequests"
+        ],
+        "summary": "Allow the merchant to request a refund for provided payment using payment reference.",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Merchant APIs > RefundRequests"
+        ],
+        "summary": "Returns all the refund requests details based on payment reference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays/:requestPayId": {
+      "get": {
+        "tags": [
+          "Merchant APIs > RequestPays"
+        ],
+        "summary": "Api to get the request pay details",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays/:requestPayId/entries": {
+      "get": {
+        "tags": [
+          "Merchant APIs > RequestPays"
+        ],
+        "summary": "Api to get the request pay entries",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/requestpays": {
+      "post": {
+        "tags": [
+          "Merchant APIs > RequestPays"
+        ],
+        "summary": "Upload request to pay payments as a collection of json and process them",
+        "description": "This API allows you to upload RequestPay payments as a collection of JSON parameters and processes them.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "requestPaymentEntries": [
+                    {
+                      "customerReference": "<string>",
+                      "paymentAmount": "<double>",
+                      "firstName": "<string>",
+                      "lastName": "<string>",
+                      "email": "<string>",
+                      "mobile": "0411111111",
+                      "merchantUniquePaymentId": "<string>"
+                    },
+                    {
+                      "customerReference": "<string>",
+                      "paymentAmount": "<double>",
+                      "firstName": "<string>",
+                      "lastName": "<string>",
+                      "email": "<string>",
+                      "mobile": "0411111111",
+                      "merchantUniquePaymentId": "<string>"
+                    }
+                  ],
+                  "merchantUniqueRequestBatchId": "<string>"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Pre-Auth"
+        ],
+        "summary": "Check PreAuth via preauthReference",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Pre-Auth"
+        ],
+        "summary": "Check PreAuth via customerReference",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Merchant APIs > Pre-Auth"
+        ],
+        "summary": "Create PreAuth",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference/captures": {
+      "post": {
+        "tags": [
+          "Merchant APIs > Pre-Auth"
+        ],
+        "summary": "Capture PreAuth Card",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/preauths/:preauthReference/voids": {
+      "put": {
+        "tags": [
+          "Merchant APIs > Pre-Auth"
+        ],
+        "summary": "Void PreAuth Request",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v2/diagnostics/ping": {
+      "get": {
+        "tags": [
+          "Merchant APIs > Diagnostics"
+        ],
+        "summary": "Ping",
+        "parameters": [
+          {
+            "name": "api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{ApiKey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v3/:customerCode/payments": {
+      "get": {
+        "tags": [
+          "Customer APIs > Payments"
+        ],
+        "summary": "Fetch all Payments",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "paymentReference",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional) Filter by payment reference",
+            "example": "45066"
+          },
+          {
+            "name": "customerReference",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional ) Filter by customer reference",
+            "example": "APITEST"
+          },
+          {
+            "name": "uniquePaymentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the unique payment id provided by the customer when making payment",
+            "example": "UQ1"
+          },
+          {
+            "name": "fromProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments from date",
+            "example": "2000-01-30"
+          },
+          {
+            "name": "toProcessedDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(Optional) Filter by the payments till date",
+            "example": "2022-01-01"
+          },
+          {
+            "name": "pageOffset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional) Page offset",
+            "example": "1"
+          },
+          {
+            "name": "pageLimit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "(Optional) Page limit",
+            "example": "5"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer APIs > Payments"
+        ],
+        "summary": "Process Payment",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/x-www-form-urlencoded"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v3/:customerCode/payments/:paymentReference": {
+      "get": {
+        "tags": [
+          "Customer APIs > Payments"
+        ],
+        "summary": "Fetch Payment by paymentReference",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v3/:customerCode/uniquePaymentId/:uniquePaymentId": {
+      "get": {
+        "tags": [
+          "Customer APIs > Payments"
+        ],
+        "summary": "Fetch Payment by uniquePaymentID",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v3/diagnostics/ping": {
+      "get": {
+        "tags": [
+          "Customer APIs > Diagnostics"
+        ],
+        "summary": "Ping",
+        "description": "Check server date and time.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
