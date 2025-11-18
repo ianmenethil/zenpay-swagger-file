@@ -15,6 +15,7 @@
     "help": "bun run show-help.ts",
     "compare": "bun run compare-specs.ts",
     "deep-compare": "bun run deep-compare-specs.ts",
+    "comprehensive-diff": "bun run comprehensive-diff.ts",
     "verify": "bun run verify-comparison.ts",
     "normalize": "bun run normalize-and-diff.ts",
     "postman:download": "bun run postman-download.ts",

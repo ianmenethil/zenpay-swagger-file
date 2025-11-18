@@ -170,6 +170,33 @@ const TOOLS: Tool[] = [
       required: ["sessionId"],
     },
   },
+  {
+    name: "comprehensive_diff",
+    description:
+      "Perform comprehensive field-by-field comparison of two OpenAPI specifications. Compares ALL fields including info, servers, paths, operations, parameters, request bodies, responses, schemas, security, tags, and more. Returns categorized differences (critical/important/informational) with 100% accuracy.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        spec1: {
+          type: "string",
+          description: "Path to first OpenAPI spec file (default: openapi.json)",
+        },
+        spec2: {
+          type: "string",
+          description: "Path to second OpenAPI spec file (default: openapi-merchant-apis.json)",
+        },
+        format: {
+          type: "string",
+          enum: ["console", "json", "markdown"],
+          description: "Output format (default: console)",
+        },
+        output: {
+          type: "string",
+          description: "Output file path (optional, if not provided outputs to console)",
+        },
+      },
+    },
+  },
 ];
 
 // Helper function to run bun commands
@@ -339,6 +366,26 @@ async function handleTravelPayGetSession(args: any): Promise<string> {
   return `✅ Payment session retrieved\n\nSession ID: ${result.id}\nAmount: ${result.amount} ${result.currency}\nStatus: ${result.status}\nEnvironment: ${environment}\n\nFull response:\n${JSON.stringify(result, null, 2)}`;
 }
 
+async function handleComprehensiveDiff(args: any): Promise<string> {
+  const scriptArgs: string[] = [];
+
+  if (args.spec1) {
+    scriptArgs.push(`--spec1=${args.spec1}`);
+  }
+  if (args.spec2) {
+    scriptArgs.push(`--spec2=${args.spec2}`);
+  }
+  if (args.format) {
+    scriptArgs.push(`--format=${args.format}`);
+  }
+  if (args.output) {
+    scriptArgs.push(`--output=${args.output}`);
+  }
+
+  const { stdout, stderr } = await runBunScript("comprehensive-diff.ts", scriptArgs);
+  return `🔍 Comprehensive diff complete\n\n${stdout}\n${stderr}`;
+}
+
 // Main server setup
 const server = new Server(
   {
@@ -385,6 +432,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         break;
       case "travelpay_get_session":
         result = await handleTravelPayGetSession(args || {});
+        break;
+      case "comprehensive_diff":
+        result = await handleComprehensiveDiff(args || {});
         break;
       default:
         throw new Error(`Unknown tool: ${name}`);
