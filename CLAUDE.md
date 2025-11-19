@@ -663,6 +663,59 @@ bun run postman:convert
 bun run postman:extract
 ```
 
+### Task 8: Complete Postman vs TravelPay Comparison (100% Coverage)
+
+```bash
+# Full end-to-end comparison (downloads everything fresh)
+bun run compare:full
+
+# Use cached versions (faster, no downloads)
+bun run compare:full:cached
+
+# Compare merchant APIs only
+bun run compare:full:merchant
+
+# Custom output file
+bun run compare-postman-travelpay.ts --output=my-report.md
+```
+
+**What it does:**
+- 🔄 Downloads latest Postman collection (Zenpay/Zenith)
+- 🔄 Converts Postman → OpenAPI 3.1 automatically
+- 🔄 Downloads latest TravelPay API specification
+- 🔍 Runs **100% comprehensive field-by-field comparison**
+- 📊 Categorizes differences (critical/important/informational)
+- 📄 Generates detailed markdown report with recommendations
+
+**Output Report Includes:**
+- Executive summary with operation/schema counts
+- 🔴 Critical differences (structure/compatibility)
+- 🟡 Important differences (documentation/usability)
+- ⚪ Informational differences (minor)
+- Actionable recommendations
+
+**Example Output:**
+```
+📊 Summary:
+   Total Differences: 644
+   🔴 Critical: 59
+   🟡 Important: 224
+   ⚪ Informational: 361
+
+📈 Coverage:
+   Postman Operations: 35
+   TravelPay Operations: 39
+   Postman Schemas: 0
+   TravelPay Schemas: 59
+```
+
+**When to use:**
+- ✅ Before making changes to API specifications
+- ✅ To identify missing documentation in TravelPay
+- ✅ To find schema/structure mismatches
+- ✅ Weekly API sync validation
+- ✅ Before releases to ensure specs match
+
 ---
 
 ## Testing & Quality
@@ -825,6 +878,16 @@ bun run sdk
 # Serve Docs
 bun run docs
 
+# Postman vs TravelPay Comparison (100% Coverage)
+bun run compare:full                    # Fresh download + full comparison
+bun run compare:full:cached             # Use cached files (faster)
+bun run compare:full:merchant           # Merchant APIs only
+
+# Postman Tools
+bun run postman:download                # Download from Postman
+bun run postman:convert                 # Convert to OpenAPI
+bun run postman:full                    # Download + convert
+
 # Help
 bun run help
 ```
@@ -833,7 +896,13 @@ bun run help
 
 **This file must be read before working with this codebase. It contains critical validation protocols and conventions.**
 
-**Last Updated:** 2025-11-16
-**Version:** 2.0.0
+**Last Updated:** 2025-11-19
+**Version:** 2.1.0
 **Status:** Production Ready
 **Quality Score:** 2/100 → Target: 85/100
+
+**What's New in v2.1.0:**
+- ✨ Added unified Postman vs TravelPay comparison tool with 100% field coverage
+- 📊 Automated end-to-end workflow (download → convert → compare → report)
+- 🎯 Smart categorization (critical/important/informational differences)
+- ⚡ Cache support for faster subsequent runs
